@@ -1,11 +1,13 @@
-import {Route, Routes, RouterProvider} from 'react-router-dom';
-
-import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
-import router from './routes';
-const queryClient = new QueryClient();
+import {Provider} from 'react-redux';
+import Home from './pages/home';
+import store from './redux/store';
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <Home />
+    </Provider>
+  );
 }
 
 export default App;
