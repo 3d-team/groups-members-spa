@@ -25,6 +25,8 @@ export const userSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     setName: (state, action: PayloadAction<string>) => {
+      console.log('@DUKE_userSlice_setName');
+
       state.data.name = action.payload;
     },
     setAge: (state, action: PayloadAction<number>) => {

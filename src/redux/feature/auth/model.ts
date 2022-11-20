@@ -1,4 +1,4 @@
 export interface AuthorizeModel {
-  isLogedIn: boolean;
+  isLoggedIn: boolean;
   token: string;
 }

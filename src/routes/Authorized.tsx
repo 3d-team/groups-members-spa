@@ -4,10 +4,13 @@ import Home from '@/pages/Home';
 import {Route, Routes} from 'react-router-dom';
 
 const Authorized = () => {
+  console.log('@DUKE_Authorized');
+
   return (
     <Routes>
       <Route path="/" element={<RootPage />}>
         <Route index element={<Home />} />
+        <Route path="login" element={<ErrorPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>
