@@ -1,12 +1,14 @@
 import {Provider} from 'react-redux';
-import Home from './pages/Home';
-import store from './redux/store';
+import {PersistGate} from 'redux-persist/integration/react';
+import AppState from './redux/store';
 import RootRouterProvider from './routes';
 
 function App() {
   return (
-    <Provider store={store}>
-      <RootRouterProvider />
+    <Provider store={AppState.store}>
+      <PersistGate persistor={AppState.persistor}>
+        <RootRouterProvider />
+      </PersistGate>
     </Provider>
   );
 }

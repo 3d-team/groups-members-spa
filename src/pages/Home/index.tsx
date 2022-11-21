@@ -15,6 +15,11 @@ export default function Home() {
   };
 
   const dispatcher = useAppDispatch();
+
+  const submitLoggout = () => {
+    dispatcher(authActions.logout());
+  };
+
   if (!isLoggedIn) {
     return (
       // <div>
@@ -28,5 +33,10 @@ export default function Home() {
       </div>
     );
   }
-  return <div>Welcome Home: You have logged in</div>;
+  return (
+    <div>
+      <h2>Welcome Home: You have logged in</h2>
+      <button onClick={submitLoggout}>Log out</button>
+    </div>
+  );
 }

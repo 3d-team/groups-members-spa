@@ -33,6 +33,10 @@ export const authSlice = createSlice({
       console.log('@DUKE_Redux_loginSuccessed');
       state.isLoggedIn = true;
     },
+    logout: state => {
+      console.log('@DUKE_Redux_logout');
+      state.isLoggedIn = false;
+    },
   },
 
   // The `extraReducers` field lets the slice handle actions defined elsewhere,

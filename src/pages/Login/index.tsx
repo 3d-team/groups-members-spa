@@ -1,7 +1,6 @@
-import {useAppDispatch, useAppSelector} from '@/redux';
+import {useAppDispatch} from '@/redux';
 import {authActions} from '@/redux/feature/auth/slice';
 import {useState} from 'react';
-import {useSelector} from 'react-redux';
 import {Navigate} from 'react-router-dom';
 
 export default function Login() {
@@ -17,7 +16,7 @@ export default function Login() {
   return (
     <div>
       <button onClick={submitLogin}>Login</button>
-      {token && <Navigate to={'/'} state={token} replace />}
+      {token && <Navigate to={'/'} state={'abc'} replace />}
     </div>
   );
 }
