@@ -29,7 +29,7 @@ export default function Home() {
       //   <Link to={'/register'}>Register</Link>
       // </div>
       <div>
-        <button onClick={submitLogin}>login</button>
+        <button onClick={submitLogin}>Login</button>
       </div>
     );
   }

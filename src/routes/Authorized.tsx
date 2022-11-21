@@ -10,7 +10,6 @@ const Authorized = () => {
     <Routes>
       <Route path="/" element={<RootPage />}>
         <Route index element={<Home />} />
-        <Route path="login" element={<ErrorPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>
