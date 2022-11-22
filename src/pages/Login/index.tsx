@@ -1,7 +1,6 @@
-import UserApi from '@/api/userApi';
 import {useAppDispatch} from '@/redux';
 import {authActions} from '@/redux/feature/auth/slice';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {Navigate} from 'react-router-dom';
 
 export default function Login() {

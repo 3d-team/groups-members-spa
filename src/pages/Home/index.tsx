@@ -5,9 +5,6 @@ import { useEffect } from 'react';
 
 export default function Home() {
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
-  const userData = useAppSelector(state=>state.user.data)
-  console.log('@DUKE_userData', userData);
-  
 
   const submitLogin = async () => {
     dispatcher(authActions.loginSucceed());
