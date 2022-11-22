@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 // import { RootState, AppThunk } from '../../app/store';
-import User from '@/api/user';
+import UserApi from '@/api/userApi';
 import {UserState} from './models';
 
 const initialState: UserState = {
@@ -13,8 +13,8 @@ const initialState: UserState = {
 // will call the thunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched. Thunks are
 // typically used to make async requests.
-export const getUserById = createAsyncThunk('counter/fetchCount', async (id: string) => {
-  const response = await User.getUserById(id);
+export const getUserById = createAsyncThunk('counter/fetchCount', async (id: number) => {
+  const response = await UserApi.getUserById(id);
   // The value we return becomes the `fulfilled` action payload
   return response;
 });
