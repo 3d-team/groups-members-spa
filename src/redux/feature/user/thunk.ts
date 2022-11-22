@@ -1,11 +1,9 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import UserApi from '@/api/userApi';
-import { UserModel, UserState } from '@/models/user';
+import { UserState } from '@/models/user';
 
 const getUserById = createAsyncThunk('user/fetchUserById', async (id: number) => {
   const response = await UserApi.getUserById(id);
-  console.log('@DUKE_getUserByIdTHUNK ', response);
-  
   // The value we return becomes the `fulfilled` action payload
   return response;
 });

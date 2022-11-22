@@ -1,5 +1,5 @@
 import {useAppSelector} from '@/redux';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 import Authorized from './Authorized';
 import UnAuthorized from './UnAuthorized';
 
