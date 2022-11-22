@@ -1,11 +1,11 @@
-import {createBrowserRouter, RouterProvider, Route} from 'react-router-dom';
-import Error from '@/pages/error';
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <div>Home</div>,
-    errorElement: <Error />,
-  },
-]);
+import {useAppSelector} from '@/redux';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import Authorized from './Authorized';
+import UnAuthorized from './UnAuthorized';
 
-export default router;
+const RootRouterProvider = () => {
+  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
+  return <BrowserRouter>{isLoggedIn ? <Authorized /> : <UnAuthorized />}</BrowserRouter>;
+};
+
+export default RootRouterProvider;

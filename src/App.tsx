@@ -1,11 +1,16 @@
-import {Route, Routes, RouterProvider} from 'react-router-dom';
-
-import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
-import router from './routes';
-const queryClient = new QueryClient();
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
+import AppState from './redux/store';
+import RootRouterProvider from './routes';
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={AppState.store}>
+      <PersistGate persistor={AppState.persistor}>
+        <RootRouterProvider />
+      </PersistGate>
+    </Provider>
+  );
 }
 
 export default App;
