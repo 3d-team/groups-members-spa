@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 // import { RootState, AppThunk } from '../../app/store';
 import UserApi from '@/api/userApi';
-import {UserState} from './models';
+import {UserState} from '@/models/user';
 
 const initialState: UserState = {
   data: {id: '1', name: 'Tram Huu Duc', age: 21, dob: '20-11-2000'},

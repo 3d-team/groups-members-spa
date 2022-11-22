@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 // import { RootState, AppThunk } from '../../app/store';
-import {AuthorizeModel} from './model';
+import {AuthorizeModel} from '@/models/auth';
 
 const initialState: AuthorizeModel = {
   isLoggedIn: false,
@@ -26,11 +26,11 @@ export const authSlice = createSlice({
     setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
     },
-    setisLoggedIn: (state, action: PayloadAction<boolean>) => {
+    setIsLoggedIn: (state, action: PayloadAction<boolean>) => {
       state.isLoggedIn = action.payload;
     },
-    loginSuccessed: state => {
-      console.log('@DUKE_Redux_loginSuccessed');
+    loginSucceed: state => {
+      console.log('@DUKE_Redux_loginSucceed');
       state.isLoggedIn = true;
     },
     logout: state => {
