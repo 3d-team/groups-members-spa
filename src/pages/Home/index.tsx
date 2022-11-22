@@ -1,10 +1,13 @@
-import UserApi from '@/api/userApi';
 import {useAppDispatch, useAppSelector} from '@/redux';
 import {authActions} from '@/redux/feature/auth/slice';
+import UserThunks from '@/redux/feature/user/thunk';
 import { useEffect } from 'react';
 
 export default function Home() {
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
+  const userData = useAppSelector(state=>state.user.data)
+  console.log('@DUKE_userData', userData);
+  
 
   const submitLogin = async () => {
     dispatcher(authActions.loginSucceed());
@@ -17,7 +20,8 @@ export default function Home() {
   };
 
   const getUserById = async (id:number) => {
-    const data = await UserApi.getUserById(id);
+    // const data = await UserApi.getUserById(id);
+    dispatcher(UserThunks.getUserById(3));
   }
 
   useEffect(()=>{
