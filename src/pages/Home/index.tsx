@@ -3,10 +3,10 @@ import {authActions} from '@/redux/feature/auth/slice';
 import {Link, useLocation} from 'react-router-dom';
 
 export default function Home() {
-  const location = useLocation();
+  // const location = useLocation();
 
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
-  console.log('@DUKE_location', location.state);
+  // console.log('@DUKE_location', location.state);
 
   const submitLogin = async () => {
     // setTimeout(() => {
