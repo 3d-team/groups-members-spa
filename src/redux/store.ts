@@ -3,10 +3,6 @@ import rootReducer, {combinedReducer} from './root_reducer';
 import {persistStore, persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-// const store = configureStore({
-//   reducer: rootReducer,
-// });
-
 const persistConfig = {
   key: 'root',
   storage,

@@ -6,8 +6,6 @@ import Register from '@/pages/Register';
 import {Route, Routes} from 'react-router-dom';
 
 const UnAuthorized = () => {
-  console.log('@DUKE__UN__Authorized');
-
   return (
     <Routes>
       <Route path="/" element={<RootPage />}>

@@ -18,7 +18,6 @@ export default function Home() {
 
   const getUserById = async (id:number) => {
     const data = await UserApi.getUserById(id);
-    console.log('@DUKE__Data', data);
   }
 
   useEffect(()=>{

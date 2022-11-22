@@ -30,11 +30,9 @@ export const authSlice = createSlice({
       state.isLoggedIn = action.payload;
     },
     loginSucceed: state => {
-      console.log('@DUKE_Redux_loginSucceed');
       state.isLoggedIn = true;
     },
     logout: state => {
-      console.log('@DUKE_Redux_logout');
       state.isLoggedIn = false;
     },
   },

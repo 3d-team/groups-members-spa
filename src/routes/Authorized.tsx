@@ -5,8 +5,6 @@ import Rooms from '@/pages/Roms';
 import {Route, Routes} from 'react-router-dom';
 
 const Authorized = () => {
-  console.log('@DUKE_Authorized');
-
   return (
     <Routes>
       <Route path="/" element={<RootPage />}>
