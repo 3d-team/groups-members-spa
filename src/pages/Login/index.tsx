@@ -14,11 +14,9 @@ export default function Login() {
     }, 3000);
   };
 
-  
-
   return (
     <div>
-      <button onClick={submitLogin}>Login</button>
+      <button onClick={submitLogin}>Logidn</button>
       {token && <Navigate to={'/'} state={'abc'} replace />}
     </div>
   );
