@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -16,7 +16,9 @@ import {useMemo, useState} from 'react';
 import {useAppDispatch} from '@/redux';
 import {authActions} from '@/redux/feature/auth/slice';
 import useStyles from './styles';
-import {GoogleLogo} from '@/assets/svgs';
+import {FacebookLogo, GoogleLogo} from '@/assets/svgs';
+import clsx from 'clsx';
+import {Link} from 'react-router-dom';
 
 const Login = () => {
   const classes = useStyles();
@@ -90,23 +92,20 @@ const Login = () => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
+              <Link to={'/'}>Forgot password?</Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+              <Link to={'/register'}>{"Don't have an account? Sign Up"}</Link>
             </Grid>
           </Grid>
         </form>
-        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+        <Button type="submit" fullWidth variant="contained" className={clsx(classes.googleBtn)}>
           <img src={GoogleLogo} alt="Google_Logo" />
-          Sign-In with Google
+          <p className={classes.textBtn}>Sign in with Google</p>
         </Button>
-        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-          Sign-In with Facebook
+        <Button type="submit" fullWidth variant="contained" className={classes.facebookBtn}>
+          <img src={FacebookLogo} alt="Google_Logo" width={24} />
+          <p className={classes.textBtn}>Sign in with Facebook</p>
         </Button>
       </div>
       <Box mt={8}>

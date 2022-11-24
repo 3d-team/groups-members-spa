@@ -1,6 +1,7 @@
 import LogoApp from './_raw/logo.svg';
 import GoogleLogo from './_raw/google.svg';
 import MicrosoftLogo from './_raw/microsoft.svg';
+import FacebookLogo from './_raw/facebook.svg';
 
 import ArrowDropDown from './_raw/ArrowDropDown.svg';
 import Check from './_raw/Check.svg';
@@ -54,6 +55,7 @@ export {
   LogoApp,
   GoogleLogo,
   MicrosoftLogo,
+  FacebookLogo,
   EditIcon,
   CheerEmoji,
   ClapEmoji,
