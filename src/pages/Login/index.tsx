@@ -11,11 +11,12 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Copyright from '@/components/Copyright';
-import { useFormik } from 'formik';
-import { useMemo, useState } from 'react';
-import { useAppDispatch } from '@/redux';
-import { authActions } from '@/redux/feature/auth/slice';
+import {useFormik} from 'formik';
+import {useMemo, useState} from 'react';
+import {useAppDispatch} from '@/redux';
+import {authActions} from '@/redux/feature/auth/slice';
 import useStyles from './styles';
+import {GoogleLogo} from '@/assets/svgs';
 
 const Login = () => {
   const classes = useStyles();
@@ -30,7 +31,7 @@ const Login = () => {
     };
   }, []);
 
-    const submitLogin = async () => {
+  const submitLogin = async () => {
     setTimeout(() => {
       setToken('user-1');
       dispatcher(authActions.loginSucceed());
@@ -83,17 +84,8 @@ const Login = () => {
             value={formik.values.password}
             onChange={formik.handleChange}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
+          <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+          <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
             Sign In
           </Button>
           <Grid container>
@@ -109,14 +101,19 @@ const Login = () => {
             </Grid>
           </Grid>
         </form>
+        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+          <img src={GoogleLogo} alt="Google_Logo" />
+          Sign-In with Google
+        </Button>
+        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+          Sign-In with Facebook
+        </Button>
       </div>
       <Box mt={8}>
         <Copyright />
       </Box>
     </Container>
   );
-}
+};
 
 export default Login;
-
-
