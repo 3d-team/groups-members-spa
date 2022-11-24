@@ -2,7 +2,7 @@ import {Outlet} from 'react-router-dom';
 
 export default function RootPage() {
   return (
-    <div style={{padding: '64px'}}>
+    <div>
       <Outlet />
     </div>
   );
