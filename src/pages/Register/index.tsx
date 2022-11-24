@@ -60,7 +60,7 @@ const Register = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Register
         </Typography>
         <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
           <TextField
