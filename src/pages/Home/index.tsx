@@ -1,7 +1,7 @@
 import {useAppDispatch, useAppSelector} from '@/redux';
 import {authActions} from '@/redux/feature/auth/slice';
 import UserThunks from '@/redux/feature/user/thunk';
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 
 export default function Home() {
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
@@ -16,14 +16,14 @@ export default function Home() {
     dispatcher(authActions.logout());
   };
 
-  const getUserById = async (id:number) => {
+  const getUserById = async (id: number) => {
     // const data = await UserApi.getUserById(id);
     dispatcher(UserThunks.getUserById(3));
-  }
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     getUserById(1);
-  }, [])
+  }, []);
 
   if (!isLoggedIn) {
     return (
