@@ -1,9 +1,8 @@
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
-
-const Copyright = () => {
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+const Copyright = (props: any) => {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
         Your Website
@@ -12,6 +11,6 @@ const Copyright = () => {
       {'.'}
     </Typography>
   );
-}
+};
 
 export default Copyright;

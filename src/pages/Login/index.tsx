@@ -14,14 +14,16 @@ import {useFormik} from 'formik';
 import {useMemo, useState} from 'react';
 import {useAppDispatch} from '@/redux';
 import {authActions} from '@/redux/feature/auth/slice';
-import useStyles from './styles';
-import {FacebookLogo, GoogleLogo} from '@/assets/svgs';
-import clsx from 'clsx';
 import {Link} from 'react-router-dom';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {FacebookLogo, GoogleLogo} from '@/assets/svgs';
+import useStyles from './styles';
+
+const theme = createTheme();
+// import theme from '@/theme';
 
 const Login = () => {
   const classes = useStyles();
-
   const [token, setToken] = useState<string | null>(null);
   const dispatcher = useAppDispatch();
 
@@ -49,68 +51,75 @@ const Login = () => {
   });
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={formik.values.email}
-            onChange={formik.handleChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-          />
-          <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-          <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-            Sign In
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}>
+          <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+            <LockOutlinedIcon />
+          </Avatar>
+
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+
+          <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{mt: 1}}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              value={formik.values.email}
+              onChange={formik.handleChange}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+            />
+            <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+            <Button type="submit" fullWidth variant="contained" color="primary" sx={{mt: 3, mb: 2, p: 2}}>
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link to={'/'}>Forgot password?</Link>
+              </Grid>
+              <Grid item>
+                <Link to={'/register'}>{"Don't have an account? Sign Up"}</Link>
+              </Grid>
+            </Grid>
+          </Box>
+
+          <Button type="submit" fullWidth variant="contained" color="inherit" sx={{mt: 4, mb: 2}}>
+            <img src={GoogleLogo} alt="Google_Logo" />
+            <p className={classes.textBtn}>Sign in with Google</p>
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link to={'/'}>Forgot password?</Link>
-            </Grid>
-            <Grid item>
-              <Link to={'/register'}>{"Don't have an account? Sign Up"}</Link>
-            </Grid>
-          </Grid>
-        </form>
-        <Button type="submit" fullWidth variant="contained" className={clsx(classes.googleBtn)}>
-          <img src={GoogleLogo} alt="Google_Logo" />
-          <p className={classes.textBtn}>Sign in with Google</p>
-        </Button>
-        <Button type="submit" fullWidth variant="contained" className={classes.facebookBtn}>
-          <img src={FacebookLogo} alt="Google_Logo" width={24} />
-          <p className={classes.textBtn}>Sign in with Facebook</p>
-        </Button>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
+          <Button type="submit" fullWidth variant="contained" color="inherit" sx={{mt: 2, mb: 2}}>
+            <img src={FacebookLogo} alt="Google_Logo" width={24} />
+            <p className={classes.textBtn}>Sign in with Facebook</p>
+          </Button>
+        </Box>
+        <Copyright sx={{mt: 8, mb: 4}} />
+      </Container>
+    </ThemeProvider>
   );
 };
 
