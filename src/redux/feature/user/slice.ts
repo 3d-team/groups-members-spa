@@ -3,7 +3,7 @@ import {UserState} from '@/models/user';
 import { userExtraReducers } from './thunk';
 
 const initialState: UserState = {
-  data: {id: '1', name: 'Tram Huu Duc', age: 21, dob: '20-11-2000'},
+  data: {id: '1', name: 'Tram Huu Duc', email: 'thduc@gmail.com', age: 21, dob: '20-11-2000'},
   status: 'idle',
 };
 
