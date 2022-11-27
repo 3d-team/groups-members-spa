@@ -16,7 +16,7 @@ import { useStyles } from "./style";
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
-export default function Drawer() {
+export default function Navbar() {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false, 
