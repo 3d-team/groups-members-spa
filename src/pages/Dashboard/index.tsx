@@ -28,7 +28,7 @@ export default function Dashboard() {
           {classes.map((individualClass) => (
             <ClassCard
               creatorName={individualClass.creatorName}
-              name={individualClass.name}
+              name={individualClass.className}
               subjectName={individualClass.subjectName}
               id={individualClass.id}
             />

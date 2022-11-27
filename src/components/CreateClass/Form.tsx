@@ -5,8 +5,7 @@ import {dialogActions} from '@/redux/feature/dialog/slice';
 const Form = () => {
   const [className, setClassName] = useState("");
   const [Section, setSection] = useState("");
-  const [Room, setRoom] = useState("");
-  const [Subject, setSubject] = useState("");
+  const [subjectName, setSubjectName] = useState("");
 
   const addClass = () => {
 
@@ -40,16 +39,8 @@ const Form = () => {
           label="Subject"
           className="form__input"
           variant="filled"
-          value={Subject}
-          onChange={(e) => setSubject(e.target.value)}
-        />
-        <TextField
-          id="filled-basic"
-          label="Room"
-          className="form__input"
-          variant="filled"
-          value={Room}
-          onChange={(e) => setRoom(e.target.value)}
+          value={subjectName}
+          onChange={(e) => setSubjectName(e.target.value)}
         />
       </div>
       <DialogActions>
