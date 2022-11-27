@@ -139,7 +139,7 @@ const Register = () => {
             />
 
             <Button type="submit" fullWidth variant="contained" color="primary" sx={{mt: 1, mb: 2, p: 1.5}}>
-              Sign In
+              Register
             </Button>
             <Grid container>
               <Grid item xs>
