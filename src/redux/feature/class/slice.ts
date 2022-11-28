@@ -1,14 +1,14 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {ClassState} from '@/models/class';
-import { classExtraReducers } from './thunk';
+import {classExtraReducers} from './thunk';
 
 const initialState: ClassState = {
-  data: { id: '1', className: 'PTUDWNC19', creatorName: 'Nguyen Van A', subjectName: 'Phát triển ứng dụng web nâng cao'},
+  data: {id: '1', className: 'PTUDWNC19', creatorName: 'Nguyen Van A', subjectName: 'Phát triển ứng dụng web nâng cao'},
   status: 'idle',
 };
 
 export const classSlice = createSlice({
-  name: 'counter',
+  name: 'class',
   initialState,
   reducers: {
     setClassName: (state, action: PayloadAction<string>) => {
@@ -22,7 +22,7 @@ export const classSlice = createSlice({
     },
   },
 
-  extraReducers: classExtraReducers
+  extraReducers: classExtraReducers,
 });
 
 export const ClassActions = classSlice.actions;

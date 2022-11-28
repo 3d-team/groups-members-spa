@@ -1,14 +1,14 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {UserState} from '@/models/user';
-import { userExtraReducers } from './thunk';
+import {UserModel, UserState} from '@/models/user';
+import {userExtraReducers} from './thunk';
 
 const initialState: UserState = {
-  data: {id: '1', name: 'Tram Huu Duc', email: 'thduc@gmail.com', age: 21, dob: '20-11-2000'},
+  data: {id: '1', name: 'Tram Huu Duc', mssv: '19120484', email: 'thduc@gmail.com', age: 21, dob: '20-11-2000'},
   status: 'idle',
 };
 
 export const userSlice = createSlice({
-  name: 'counter',
+  name: 'user',
   initialState,
   reducers: {
     setName: (state, action: PayloadAction<string>) => {
@@ -20,9 +20,12 @@ export const userSlice = createSlice({
     setDob: (state, action: PayloadAction<string>) => {
       state.data.dob = action.payload;
     },
+    updateProfileUser: (state, action: PayloadAction<UserModel>) => {
+      state.data = action.payload;
+    },
   },
 
-  extraReducers: userExtraReducers
+  extraReducers: userExtraReducers,
 });
 
 export const UserActions = userSlice.actions;

@@ -1,13 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
-    createClassDialog: false,
-    joinClassDialog: false,
-    inviteDialog: false,
+  createClassDialog: false,
+  joinClassDialog: false,
+  inviteDialog: false,
 };
 
 export const dialogSlice = createSlice({
-  name: 'counter',
+  name: 'dialog',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
@@ -15,17 +15,17 @@ export const dialogSlice = createSlice({
       state.createClassDialog = true;
     },
     openJoinClassDialog: state => {
-        state.joinClassDialog = true;
-      },
+      state.joinClassDialog = true;
+    },
     closeCreateClassDialog: state => {
       state.createClassDialog = false;
     },
     closeJoinClassDialog: state => {
-        state.joinClassDialog = false;
-      },
+      state.joinClassDialog = false;
+    },
     openInviteDialog: state => {
-        state.inviteDialog = true;
-      },
+      state.inviteDialog = true;
+    },
     closeInviteDialog: state => {
       state.inviteDialog = false;
     },
