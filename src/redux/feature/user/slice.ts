@@ -22,6 +22,7 @@ export const userSlice = createSlice({
     },
     updateProfileUser: (state, action: PayloadAction<UserModel>) => {
       state.data = action.payload;
+      console.log('@DUKE)_createSlice_updateProfileUser');
     },
   },
 
