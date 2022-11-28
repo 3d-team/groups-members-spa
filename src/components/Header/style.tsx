@@ -8,11 +8,13 @@ export const useStyles = makeStyles({
     marginRight: 1,
     color: "black",
   },
-  title: {
+  title1: {
     fontSize: "1.38rem",
-    color: "#5f6368",
     marginLeft: "5px",
     cursor: "pointer",
+  },
+  title2: {
+    fontSize: "0.38rem",
   },
   appBar: {
     backgroundColor: "white",
@@ -26,6 +28,9 @@ export const useStyles = makeStyles({
   headerWrapper: {
     display: "flex",
     alignItems: "center",
+  },
+  headerClass:{
+    position: "relative",
   },
   header__wrapper__right: {
     display: "flex",

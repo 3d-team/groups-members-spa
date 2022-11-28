@@ -14,7 +14,7 @@ import "./style.css";
 export default function Class() {
 
   const sampleData: ClassModel = {
-    id: '123zxcasd',
+    id: '12',
     className: '19PTUDWNC',
     creatorName: 'Nguyen Huy Khanh',
     subjectName: 'Phát triển ứng dụng web nâng cao',
@@ -24,15 +24,19 @@ export default function Class() {
   const [classData, setClassData] = useState<ClassModel>(sampleData);
   const { classId } = useParams();
 
-  //Get Class
+  //Get Class 
+
   const handleClickInvite = () => {
     dispatcher(dialogActions.openInviteDialog());
   };
 
+  const copyInviteLink = () =>{
+    //bla bla 
+  }
 
   return (
     <>
-      <Navbar />
+      <Navbar classData={classData} />
       <div className="main">
         <div className="main__wrapper">
           <div className="main__content">
@@ -55,7 +59,7 @@ export default function Class() {
                   <Button variant="contained" size="small" color="success" onClick={handleClickInvite}>
                     Invite
                   </Button>
-                  <IconButton aria-label="copy link">
+                  <IconButton aria-label="copy link" onClick={copyInviteLink}>
                     <LinkIcon />
                   </IconButton>
                 </div>
