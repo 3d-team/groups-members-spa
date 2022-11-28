@@ -23,7 +23,7 @@ const InvitationDialog = () => {
     const inviteEmail = () => {
 
         //Call backend
-        //dialogActions.closeInviteDialog();
+        dispatcher(dialogActions.closeInviteDialog());
       };
 
     return (
@@ -32,16 +32,16 @@ const InvitationDialog = () => {
                 onClose={() => handleClose()}
                 aria-labelledby="customized-dialog-title"
                 open={inviteDialog}
-                maxWidth="xs"
+                maxWidth="lg"
                 className="form__dialog"
             >
                 <div className="form">
-                    <p className="class__title">Create Class</p>
+                    <p className="class__title">Invite group member by email</p>
 
                     <div className="form__inputs">
                         <TextField
                             id="filled-basic"
-                            label="Class Name (required)"
+                            label="Email"
                             className="form__input"
                             variant="filled"
                             value={email}

@@ -26,8 +26,7 @@ export default function Class() {
 
   //Get Class
   const handleClickInvite = () => {
-    //handleClose();
-    dispatcher(dialogActions.closeInviteDialog());
+    dispatcher(dialogActions.openInviteDialog());
   };
 
 
@@ -80,8 +79,8 @@ export default function Class() {
             </div>
           </div>
         </div>
+        <InvitationDialog/>
       </div>
-      <InvitationDialog/>
     </>
   );
 }

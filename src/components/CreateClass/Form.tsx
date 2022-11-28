@@ -1,16 +1,19 @@
 import { Button, DialogActions, TextField } from "@mui/material";
 import React, { useState } from "react";
 import {dialogActions} from '@/redux/feature/dialog/slice';
+import {useAppDispatch} from '@/redux';
 
 const Form = () => {
   const [className, setClassName] = useState("");
   const [Section, setSection] = useState("");
   const [subjectName, setSubjectName] = useState("");
 
+  const dispatcher = useAppDispatch();
+
   const addClass = () => {
 
     //Call backend
-    //dialogActions.closeCreateClassDialog();
+    dispatcher(dialogActions.closeCreateClassDialog());
   };
 
   return (
