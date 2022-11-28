@@ -1,4 +1,4 @@
-import axiosClient from "./axiosClient";
+import axiosClient from './axiosClient';
 
 class ClassApi {
   static async getAll() {
@@ -9,7 +9,6 @@ class ClassApi {
     const url = `/class/${id}`;
     return axiosClient.get(url);
   }
-
 }
 
 export default ClassApi;

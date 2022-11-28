@@ -38,7 +38,7 @@ const Login = () => {
     setTimeout(() => {
       setToken('user-1');
       dispatcher(authActions.loginSucceed());
-    }, 3000);
+    }, 0);
   };
 
   const formik = useFormik({
