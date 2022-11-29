@@ -48,6 +48,7 @@ export const useStyles = makeStyles({
     position: 'absolute',
     right: 0,
     zIndex: 100,
+    width: 100,
   },
   option: {
     color: '#000',
@@ -56,5 +57,6 @@ export const useStyles = makeStyles({
     '&:hover': {
       backgroundColor: '#ccc',
     },
+    textAlign: 'center'
   },
 });

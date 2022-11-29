@@ -43,7 +43,7 @@ const MyProfile = () => {
             {editting ? (
               <>
                 <Button type="submit" variant="contained" sx={{mr: 2}} onClick={() => formik.handleSubmit()}>
-                  Submit
+                  Update
                 </Button>
                 <Button type="button" variant="outlined" onClick={() => setEditting(false)}>
                   Cancel
