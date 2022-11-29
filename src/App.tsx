@@ -6,9 +6,9 @@ import RootRouterProvider from './routes';
 function App() {
   return (
     <Provider store={AppState.store}>
-      <PersistGate persistor={AppState.persistor}>
-        <RootRouterProvider />
-      </PersistGate>
+      {/* <PersistGate persistor={AppState.persistor}> */}
+      <RootRouterProvider />
+      {/* </PersistGate> */}
     </Provider>
   );
 }

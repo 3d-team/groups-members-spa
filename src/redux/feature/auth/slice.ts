@@ -7,7 +7,7 @@ const initialState: AuthorizeModel = {
 };
 
 export const authSlice = createSlice({
-  name: 'counter',
+  name: 'auth',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {

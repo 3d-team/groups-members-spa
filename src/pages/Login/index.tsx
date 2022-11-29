@@ -38,7 +38,7 @@ const Login = () => {
     setTimeout(() => {
       setToken('user-1');
       dispatcher(authActions.loginSucceed());
-    }, 3000);
+    }, 0);
   };
 
   const formik = useFormik({
@@ -108,11 +108,11 @@ const Login = () => {
             </Grid>
           </Box>
 
-          <Button type="submit" fullWidth variant="contained" color="inherit" sx={{mt: 4, mb: 2}}>
+          <Button fullWidth variant="contained" color="inherit" sx={{mt: 4, mb: 2}}>
             <img src={GoogleLogo} alt="Google_Logo" />
             <p className={classes.textBtn}>Sign in with Google</p>
           </Button>
-          <Button type="submit" fullWidth variant="contained" color="inherit" sx={{mt: 2, mb: 2}}>
+          <Button fullWidth variant="contained" color="inherit" sx={{mt: 2, mb: 2}}>
             <img src={FacebookLogo} alt="Google_Logo" width={24} />
             <p className={classes.textBtn}>Sign in with Facebook</p>
           </Button>
