@@ -1,0 +1,99 @@
+.room-member__container {
+    max-width: 800px;
+    margin: auto;
+    padding-bottom: 40px
+}
+
+.room-member__title {
+    font-weight: 400;
+    font-size: 32px;
+    padding: 15px 10px;
+    border-bottom: 1px #aaa solid
+}
+
+.room-member__item {
+    padding: 10px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    transition: all .2s
+}
+
+.room-member__item span {
+    margin-left: 15px;
+    position: relative;
+    top: -2px
+}
+
+.room-member__students {
+    position: relative;
+    margin-top: 20px
+}
+
+.room-member__students--count {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translate(0%, -50%);
+    font-weight: 500;
+    display: flex;
+    align-items: center
+}
+
+.room-member__students--count span {
+    margin-right: 10px
+}
+
+.room-member__students--icons {
+    cursor: pointer
+}
+
+.card-student {
+    padding: 10px 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    justify-content: space-between;
+    border: 1px #d4d0d0 solid;
+    margin-bottom: 10px
+}
+
+.card-student span {
+    margin-left: 15px;
+    position: relative;
+    top: -2px
+}
+
+.card-student:hover {
+    background-color: #e7bda4
+}
+
+.card-student__left {
+    display: flex;
+    align-items: center
+}
+
+.card-student__right {
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    transition: all .3s;
+    position: relative
+}
+
+.card-student__right:hover {
+    background: #d39a59
+}
+
+.popover-body {
+    padding: 0 !important
+}
+
+.card-student__item {
+    display: block;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all .2s;
+    min-width: 150px !important
+}
