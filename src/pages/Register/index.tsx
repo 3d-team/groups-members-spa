@@ -16,6 +16,8 @@ import {authActions} from '@/redux/feature/auth/slice';
 import {Link} from 'react-router-dom';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 
+import axios from 'axios';
+
 const theme = createTheme();
 
 const Register = () => {
@@ -33,11 +35,26 @@ const Register = () => {
     };
   }, []);
 
-  const submitLogin = async () => {
+  const submitLogin = async (values : any) => {
+    let userId = "";
+    await axios.post( 
+      'http://localhost:8080/api/register',
+      {
+        email: values.email,
+        password: values.password,
+        retype: values.password,
+        studentId: values.mssv,
+        fullName: values.fullname
+      },
+      {
+        headers: {"Access-Control-Allow-Origin": "*"}
+      }
+    ).then(response => userId = response.data).catch(console.log);
+
     setTimeout(() => {
-      setToken('user-1');
-      dispatcher(authActions.loginSucceed());
-    }, 3000);
+      console.log("New User ID: ", userId);
+      window.location.href = "/";
+    }, 700);
   };
 
   const formik = useFormik({
@@ -45,7 +62,7 @@ const Register = () => {
     onSubmit: values => {
       console.log('@DUKE__onSubmit', values);
       formik.setValues(initialValues);
-      submitLogin();
+      submitLogin(values);
     },
   });
 

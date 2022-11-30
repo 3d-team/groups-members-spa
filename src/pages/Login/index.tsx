@@ -19,6 +19,8 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {FacebookLogo, GoogleLogo} from '@/assets/svgs';
 import useStyles from './styles';
 
+import axios from 'axios';
+
 const theme = createTheme();
 // import theme from '@/theme';
 
@@ -34,11 +36,21 @@ const Login = () => {
     };
   }, []);
 
-  const submitLogin = async () => {
-    setTimeout(() => {
-      setToken('user-1');
+  const submitLogin = (values : any) => {
+    axios.post( 
+      'http://localhost:8080/api/login',
+      {
+        email: values.email,
+        password: values.password
+      },
+      {
+        headers: {"Access-Control-Allow-Origin": "*"}
+      }
+    ).then(response => {
+      console.log(response.data);
+      dispatcher(authActions.setToken(response.data));
       dispatcher(authActions.loginSucceed());
-    }, 0);
+    }).catch(console.log);
   };
 
   const formik = useFormik({
@@ -46,7 +58,7 @@ const Login = () => {
     onSubmit: values => {
       console.log('@DUKE__onSubmit', values);
       formik.setValues(initialValues);
-      submitLogin();
+      submitLogin(values);
     },
   });
 
@@ -108,12 +120,13 @@ const Login = () => {
             </Grid>
           </Box>
 
-          <Button fullWidth variant="contained" color="inherit" sx={{mt: 4, mb: 2}}>
+          <Button fullWidth variant="contained" color="inherit" sx={{mt: 4, mb: 2}} 
+            href="http://localhost:8080/oauth2/authorization/google">
             <img src={GoogleLogo} alt="Google_Logo" />
             <p className={classes.textBtn}>Sign in with Google</p>
           </Button>
           <Button fullWidth variant="contained" color="inherit" sx={{mt: 2, mb: 2}}>
-            <img src={FacebookLogo} alt="Google_Logo" width={24} />
+            <img src={FacebookLogo} alt="Facebook_logo" width={24} />
             <p className={classes.textBtn}>Sign in with Facebook</p>
           </Button>
         </Box>

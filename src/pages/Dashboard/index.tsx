@@ -1,13 +1,22 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Navbar from '@/components/Navbar/Navbar';
 import ClassCard from '@/components/ClassCard/ClassCard';
 import {ClassModel} from '@/models/class';
 import Grid from '@mui/material/Grid';
+import axios from 'axios';
+import AppState from '@/redux/store';
 
 export default function Dashboard() {
   const [classes, setClasses] = useState<ClassModel[]>([]);
 
-  //Get class
+  const state = AppState.store.getState();
+  const token = state.auth.token;
+  console.log(token);
+  axios.get('http://localhost:8080/api/groups', { 
+    headers:{
+      Authorization : `Bearer ${token}`
+    } 
+    }).then(console.log).catch(console.log);
 
   return (
     <>
@@ -28,7 +37,7 @@ export default function Dashboard() {
       )}
 
       <Grid container direction="row" justifyContent="flex-start" alignItems="center" px={5}>
-        <ClassCard creatorName="zxczxc" name="zxczxc" subjectName="zxczxc" id="12" />
+        <ClassCard creatorName="Test" name="Test" subjectName="Test" id="12" />
       </Grid>
     </>
   );
