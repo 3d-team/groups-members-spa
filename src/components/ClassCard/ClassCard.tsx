@@ -7,18 +7,18 @@ type Props = {
   name: string;
   creatorName: string;
   subjectName: string;
-  id: string;
+  uuid: string;
 };
 
-function ClassCard({name, creatorName, subjectName, id}: Props) {
+function ClassCard({name, creatorName, subjectName, uuid}: Props) {
   const navigate = useNavigate();
 
   const goToClass = () => {
-    navigate(`/class/${id}`);
+    navigate(`/class/${uuid}`);
   };
 
   return (
-    <div className="classCard" style={{marginRight: 30, marginBottom: 30}} onClick={goToClass}>
+    <div className="classCard" style={{marginRight: 30, marginBottom: 30}} onClick={goToClass} key={uuid}>
       <div className="classCard__upper">
         <div className="classCard__className">{name}</div>
         <div className="classCard__subjectName">{subjectName}</div>

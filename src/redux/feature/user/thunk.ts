@@ -1,6 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import UserApi from '@/api/userApi';
 import { UserState } from '@/models/user';
+import axiosClient from '@/api/axiosClient';
 
 const getUserById = createAsyncThunk('user/fetchUserById', async (id: number) => {
   const response = await UserApi.getUserById(id);
@@ -13,6 +14,18 @@ const getUserList = createAsyncThunk('user/getUserList', async () => {
     // The value we return becomes the `fulfilled` action payload
     return response;
 });
+
+const getProfile = createAsyncThunk('user/getProfile', async () => {
+  const URL = '/api/profile';
+  const response = await axiosClient.get(URL);
+  return response;
+});
+
+const updateProfile = createAsyncThunk('user/updateProfile',async (data: any) => {
+  const URL = '/api/profile';
+  const response = await axiosClient.post(URL, data);
+  return response;
+})
 
 
 export const userExtraReducers = (builder: any)=>{
@@ -30,7 +43,9 @@ export const userExtraReducers = (builder: any)=>{
 
 const UserThunks = {
     getUserById,
-    getUserList
+    getUserList,
+    getProfile,
+    updateProfile
 }
 
 export default UserThunks;

@@ -16,6 +16,8 @@ import {authActions} from '@/redux/feature/auth/slice';
 import {Link} from 'react-router-dom';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 
+import axios from 'axios';
+
 const theme = createTheme();
 
 const Register = () => {
@@ -27,17 +29,30 @@ const Register = () => {
       email: '',
       password: '',
       confirmPassword: '',
-      mssv: '',
-      fullname: '',
-      yearBorn: 2001,
+      studentId: '',
+      fullName: '',
+      dob: new Date(),
     };
   }, []);
 
-  const submitLogin = async () => {
+  const submitLogin = async (values : any) => {
+    let userId = "";
+    await axios.post( 
+      'http://localhost:8080/api/register',
+      {
+        email: values.email,
+        password: values.password,
+        retype: values.password,
+        studentId: values.studentId,
+        fullName: values.fullName
+      }
+    ).then(response => userId = response.data).catch(console.log);
+
+    alert("Register successfully!");
     setTimeout(() => {
-      setToken('user-1');
-      dispatcher(authActions.loginSucceed());
-    }, 3000);
+      console.log("New User ID: ", userId);
+      window.location.href = "/";
+    }, 700);
   };
 
   const formik = useFormik({
@@ -45,7 +60,7 @@ const Register = () => {
     onSubmit: values => {
       console.log('@DUKE__onSubmit', values);
       formik.setValues(initialValues);
-      submitLogin();
+      submitLogin(values);
     },
   });
 
@@ -107,11 +122,11 @@ const Register = () => {
               margin="normal"
               required
               fullWidth
-              name="mssv"
+              name="studentId"
               label="Mã số sinh viên"
               type="text"
-              id="mssv"
-              value={formik.values.mssv}
+              id="studentId"
+              value={formik.values.studentId}
               onChange={formik.handleChange}
             />
             <TextField
@@ -119,22 +134,22 @@ const Register = () => {
               margin="normal"
               required
               fullWidth
-              name="fullname"
+              name="fullName"
               label="Fullname"
               type="text"
-              id="fullname"
-              value={formik.values.fullname}
+              id="fullName"
+              value={formik.values.fullName}
               onChange={formik.handleChange}
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="yearBorn"
-              label="Year Born"
+              name="dob"
+              label="Date Of Birth"
               type="number"
-              id="year_born"
-              value={formik.values.yearBorn}
+              id="dob"
+              value={formik.values.dob}
               onChange={formik.handleChange}
             />
 

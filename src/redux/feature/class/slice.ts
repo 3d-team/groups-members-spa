@@ -3,7 +3,17 @@ import {ClassState} from '@/models/class';
 import {classExtraReducers} from './thunk';
 
 const initialState: ClassState = {
-  data: {id: '1', className: 'PTUDWNC19', creatorName: 'Nguyen Van A', subjectName: 'Phát triển ứng dụng web nâng cao'},
+  data: {
+    uuid: '',
+    name: '',
+    ownerId: '',
+    subject: '',
+    description: '',
+    coOwnerIds: [],
+    memberIds: [],
+    room: '',
+    section: ''
+  },
   status: 'idle',
 };
 
@@ -12,13 +22,13 @@ export const classSlice = createSlice({
   initialState,
   reducers: {
     setClassName: (state, action: PayloadAction<string>) => {
-      state.data.className = action.payload;
+      state.data.name = action.payload;
     },
-    setCreatorName: (state, action: PayloadAction<string>) => {
-      state.data.creatorName = action.payload;
+    setOwnerId: (state, action: PayloadAction<string>) => {
+      state.data.ownerId = action.payload;
     },
     setSubjectName: (state, action: PayloadAction<string>) => {
-      state.data.subjectName = action.payload;
+      state.data.subject = action.payload;
     },
   },
 

@@ -2,6 +2,7 @@ import { Button, DialogActions, TextField } from "@mui/material";
 import React, { useState } from "react";
 import {dialogActions} from '@/redux/feature/dialog/slice';
 import {useAppDispatch} from '@/redux';
+import ClassThunks from "@/redux/feature/class/thunk";
 
 const Form = () => {
   const [className, setClassName] = useState("");
@@ -12,7 +13,12 @@ const Form = () => {
 
   const addClass = () => {
 
-    //Call backend
+    const data = {
+      name: className,
+      section: Section,
+      subject: subjectName
+    };
+    dispatcher(ClassThunks.addClass(data));
     dispatcher(dialogActions.closeCreateClassDialog());
   };
 
