@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar/Navbar';
 import {UserModel} from '@/models/user';
 import {useAppDispatch, useAppSelector} from '@/redux';
 import {UserActions} from '@/redux/feature/user/slice';
+import UserThunks from '@/redux/feature/user/thunk';
 import {Box, Button, TextField} from '@mui/material';
 import {useFormik} from 'formik';
 import {useEffect, useMemo, useState} from 'react';
@@ -25,11 +26,11 @@ const MyProfile = () => {
     onSubmit: values => {
       formik.setValues(values);
       dispatcher(UserActions.updateProfileUser(values));
-      console.log('@DUKE_Submit', formik.values.name);
+      dispatcher(UserThunks.updateProfile(values))
+      console.log('@DUKE_Submit', formik.values.fullName);
       setEditting(false);
     },
   });
-  console.log('@DUKE_Submit', formik.values.name);
 
   return (
     <>
@@ -59,21 +60,21 @@ const MyProfile = () => {
             id="outlined-basic"
             label="Student Id"
             disabled={!editting}
-            defaultValue={data.mssv}
+            defaultValue={data.studentId}
             sx={{m: 2, width: '70%'}}
             onChange={formik.handleChange}
-            value={formik.values.mssv}
-            name="mssv"
+            value={formik.values.studentId}
+            name="studentId"
           />
           <TextField
             id="outlined-basic"
             label="Fullname"
             disabled={!editting}
-            defaultValue={data.name}
+            defaultValue={data.fullName}
             sx={{m: 2, width: '70%'}}
             onChange={formik.handleChange}
-            value={formik.values.name}
-            name="name"
+            value={formik.values.fullName}
+            name="fullName"
           />
           <TextField
             id="outlined-basic"

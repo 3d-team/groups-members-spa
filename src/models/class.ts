@@ -1,8 +1,13 @@
 export interface ClassModel {
-    id: string;
-    className: string;
-    creatorName: string;
-    subjectName: string;
+    uuid: string;
+    name: string;
+    ownerId: string;
+    subject: string;
+    description: string;
+    coOwnerIds: string[];
+    memberIds: string[];
+    room: string;
+    section: string;
 }
 
 export interface ClassState {

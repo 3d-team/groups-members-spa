@@ -47,11 +47,11 @@ const Header = ({children, classData}: Props) => {
   };
 
   const handleClickNews = () => {
-    navigate(`/class/${classData?.id}`);
+    navigate(`/class/${classData?.uuid}`);
   };
 
   const handleClickMembers = () => {
-    navigate(`/class/${classData?.id}/member`);
+    navigate(`/class/${classData?.uuid}/member`);
   };
 
   const handleViewProfile = () => {
@@ -74,9 +74,9 @@ const Header = ({children, classData}: Props) => {
                 {children}
                 <div className={classes.headerClass}>
                   <Typography variant="h6" className={classes.title1}>
-                    {classData.className}
+                    {classData.name}
                   </Typography>
-                  <h6 style={{margin: 0}}>{classData.subjectName}</h6>
+                  <h6 style={{margin: 0}}>{classData.subject}</h6>
                 </div>
               </div>
               <div>

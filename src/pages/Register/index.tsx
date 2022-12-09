@@ -29,9 +29,9 @@ const Register = () => {
       email: '',
       password: '',
       confirmPassword: '',
-      mssv: '',
-      fullname: '',
-      yearBorn: 2001,
+      studentId: '',
+      fullName: '',
+      dob: new Date(),
     };
   }, []);
 
@@ -43,14 +43,12 @@ const Register = () => {
         email: values.email,
         password: values.password,
         retype: values.password,
-        studentId: values.mssv,
-        fullName: values.fullname
-      },
-      {
-        headers: {"Access-Control-Allow-Origin": "*"}
+        studentId: values.studentId,
+        fullName: values.fullName
       }
     ).then(response => userId = response.data).catch(console.log);
 
+    alert("Register successfully!");
     setTimeout(() => {
       console.log("New User ID: ", userId);
       window.location.href = "/";
@@ -124,11 +122,11 @@ const Register = () => {
               margin="normal"
               required
               fullWidth
-              name="mssv"
+              name="studentId"
               label="Mã số sinh viên"
               type="text"
-              id="mssv"
-              value={formik.values.mssv}
+              id="studentId"
+              value={formik.values.studentId}
               onChange={formik.handleChange}
             />
             <TextField
@@ -136,22 +134,22 @@ const Register = () => {
               margin="normal"
               required
               fullWidth
-              name="fullname"
+              name="fullName"
               label="Fullname"
               type="text"
-              id="fullname"
-              value={formik.values.fullname}
+              id="fullName"
+              value={formik.values.fullName}
               onChange={formik.handleChange}
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="yearBorn"
-              label="Year Born"
+              name="dob"
+              label="Date Of Birth"
               type="number"
-              id="year_born"
-              value={formik.values.yearBorn}
+              id="dob"
+              value={formik.values.dob}
               onChange={formik.handleChange}
             />
 

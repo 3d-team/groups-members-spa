@@ -1,10 +1,10 @@
 export interface UserModel {
-  id: string;
-  name: string;
+  uuid: string;
+  fullName: string;
   email: string;
   age: number;
   dob: string;
-  mssv: string;
+  studentId: string;
 }
 
 export interface UserState {

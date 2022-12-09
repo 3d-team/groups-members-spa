@@ -37,20 +37,16 @@ const Login = () => {
   }, []);
 
   const submitLogin = (values : any) => {
-    axios.post( 
-      'http://localhost:8080/api/login',
-      {
-        email: values.email,
-        password: values.password
-      },
-      {
-        headers: {"Access-Control-Allow-Origin": "*"}
-      }
-    ).then(response => {
-      console.log(response.data);
-      dispatcher(authActions.setToken(response.data));
-      dispatcher(authActions.loginSucceed());
-    }).catch(console.log);
+    const payload = {
+      email: values.email,
+      password: values.password
+    };
+    axios.post('http://localhost:8080/api/login', payload)
+        .then(response => {
+          dispatcher(authActions.setToken(response.data));
+          dispatcher(authActions.loginSucceed());
+        })
+        .catch(console.log);
   };
 
   const formik = useFormik({

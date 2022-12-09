@@ -66,7 +66,7 @@ const JoinClass = () => {
                 <Avatar src="" />
                 <div className="joinClass__loginText">
                   <div className="joinClass__loginName">
-                    {loggedInUser?.name}
+                    {loggedInUser?.fullName}
                   </div>
                   <div className="joinClass__loginEmail">
                     {loggedInUser?.email}

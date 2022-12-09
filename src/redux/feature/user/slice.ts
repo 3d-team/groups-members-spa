@@ -3,7 +3,7 @@ import {UserModel, UserState} from '@/models/user';
 import {userExtraReducers} from './thunk';
 
 const initialState: UserState = {
-  data: {id: '1', name: 'Tram Huu Duc', mssv: '19120484', email: 'thduc@gmail.com', age: 21, dob: '20-11-2000'},
+  data: {uuid: '', fullName: '', studentId: '', email: '', age: -1, dob: ''},
   status: 'idle',
 };
 
@@ -12,7 +12,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setName: (state, action: PayloadAction<string>) => {
-      state.data.name = action.payload;
+      state.data.fullName = action.payload;
     },
     setAge: (state, action: PayloadAction<number>) => {
       state.data.age = action.payload;

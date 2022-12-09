@@ -1,21 +1,24 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios"
 
+import AppState from '@/redux/store';
+
 const axiosClient = axios.create({
-    baseURL: 'https://jsonplaceholder.typicode.com',
+    baseURL: 'http://localhost:8080/',
     headers: {
         'Content-Type': 'application/json',
     },
 });
 
-
-// Add a request interceptor!
+// const state = AppState.store.getState();
 axiosClient.interceptors.request.use((config: AxiosRequestConfig) => {
-    // Do something before request is sent!
-    // token
+    const token = localStorage.getItem('token');
+    config.headers = config.headers ?? {};
+    config.headers.Authorization = (token) ? `Bearer ${token}` : '';
     return config;
 }, 
 (error) => {
     // Do something with request error
+    console.log(error);
     return Promise.reject(error);
 });
 
