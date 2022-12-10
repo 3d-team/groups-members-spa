@@ -12,9 +12,10 @@ const initialState: ClassState = {
     coOwnerIds: [],
     memberIds: [],
     room: '',
-    section: ''
+    section: '',
   },
   status: 'idle',
+  classList: [],
 };
 
 export const classSlice = createSlice({
@@ -29,6 +30,12 @@ export const classSlice = createSlice({
     },
     setSubjectName: (state, action: PayloadAction<string>) => {
       state.data.subject = action.payload;
+    },
+    addClass: (state, action: PayloadAction<any>) => {
+      state.classList = [...state.classList, action.payload];
+    },
+    setClassList: (state, action: PayloadAction<any>) => {
+      state.classList = action.payload;
     },
   },
 
