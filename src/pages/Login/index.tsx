@@ -36,17 +36,18 @@ const Login = () => {
     };
   }, []);
 
-  const submitLogin = (values : any) => {
+  const submitLogin = (values: any) => {
     const payload = {
       email: values.email,
-      password: values.password
+      password: values.password,
     };
-    axios.post('http://localhost:8080/api/login', payload)
-        .then(response => {
-          dispatcher(authActions.setToken(response.data));
-          dispatcher(authActions.loginSucceed());
-        })
-        .catch(console.log);
+    axios
+      .post('http://localhost:8080/api/login', payload)
+      .then(response => {
+        dispatcher(authActions.setToken(response.data));
+        dispatcher(authActions.loginSucceed());
+      })
+      .catch(console.log);
   };
 
   const formik = useFormik({
@@ -57,6 +58,10 @@ const Login = () => {
       submitLogin(values);
     },
   });
+
+  const loginByGoogle = () => {
+    window.open('http://localhost:8080/oauth2/authorization/google');
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -116,8 +121,7 @@ const Login = () => {
             </Grid>
           </Box>
 
-          <Button fullWidth variant="contained" color="inherit" sx={{mt: 4, mb: 2}} 
-            href="http://localhost:8080/oauth2/authorization/google">
+          <Button fullWidth variant="contained" color="inherit" sx={{mt: 4, mb: 2}} onClick={loginByGoogle}>
             <img src={GoogleLogo} alt="Google_Logo" />
             <p className={classes.textBtn}>Sign in with Google</p>
           </Button>

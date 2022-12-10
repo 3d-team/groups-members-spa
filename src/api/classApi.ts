@@ -1,9 +1,8 @@
 import axiosClient from './axiosClient';
 import AppState from '@/redux/store';
-import { ClassModel } from '@/models/class';
+import {ClassModel} from '@/models/class';
 
 class ClassApi {
-
   constructor() {}
 
   static async all() {

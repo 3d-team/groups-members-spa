@@ -13,7 +13,7 @@ import {useFormik} from 'formik';
 import {useMemo, useState} from 'react';
 import {useAppDispatch} from '@/redux';
 import {authActions} from '@/redux/feature/auth/slice';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 
 import axios from 'axios';
@@ -21,8 +21,7 @@ import axios from 'axios';
 const theme = createTheme();
 
 const Register = () => {
-  const [token, setToken] = useState<string | null>(null);
-  const dispatcher = useAppDispatch();
+  const navigate = useNavigate();
 
   const initialValues = useMemo(() => {
     return {
@@ -35,30 +34,28 @@ const Register = () => {
     };
   }, []);
 
-  const submitLogin = async (values : any) => {
-    let userId = "";
-    await axios.post( 
-      'http://localhost:8080/api/register',
-      {
+  const submitLogin = async (values: any) => {
+    let userId = '';
+    await axios
+      .post('http://localhost:8080/api/register', {
         email: values.email,
         password: values.password,
         retype: values.password,
         studentId: values.studentId,
-        fullName: values.fullName
-      }
-    ).then(response => userId = response.data).catch(console.log);
+        fullName: values.fullName,
+      })
+      .then(response => (userId = response.data))
+      .catch(console.log);
 
-    alert("Register successfully!");
+    alert('Register successfully!');
     setTimeout(() => {
-      console.log("New User ID: ", userId);
-      window.location.href = "/";
+      navigate('/');
     }, 700);
   };
 
   const formik = useFormik({
     initialValues,
     onSubmit: values => {
-      console.log('@DUKE__onSubmit', values);
       formik.setValues(initialValues);
       submitLogin(values);
     },
