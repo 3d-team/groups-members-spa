@@ -1,20 +1,20 @@
-import { useParams } from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import Navbar from '@/components/Navbar/Navbar';
-import { ClassModel } from '@/models/class';
-import { useEffect, useState } from 'react';
-import { Avatar } from '@mui/material';
+import {ClassModel} from '@/models/class';
+import {useEffect, useRef, useState} from 'react';
+import {Avatar} from '@mui/material';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import LinkIcon from '@mui/icons-material/Link';
-import { useAppDispatch } from '@/redux';
-import { dialogActions } from '@/redux/feature/dialog/slice';
+import {useAppDispatch} from '@/redux';
+import {dialogActions} from '@/redux/feature/dialog/slice';
 import InvitationDialog from '@/components/InvitationDialog/InvitationDialog';
-import "./style.css";
+import './style.css';
 import ClassThunks from '@/redux/feature/class/thunk';
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
+import {DialogRef} from '@/components/models';
 
 export default function Class() {
-
   const sampleData: ClassModel = {
     uuid: '12',
     name: '19PTUDWNC',
@@ -24,31 +24,30 @@ export default function Class() {
     coOwnerIds: [],
     memberIds: [],
     room: '',
-    section: ''
-  }
+    section: '',
+  };
+  const dialogRef = useRef<DialogRef>(null);
 
   const dispatcher = useAppDispatch();
   const [classData, setClassData] = useState<any>(sampleData);
-  const { classId } = useParams();
+  const {classId} = useParams();
 
   async function fetchClassInfo() {
-    const id: string = classId ? classId : "";
+    const id: string = classId ? classId : '';
     const response = await dispatcher(ClassThunks.getClassById(id));
     console.log(response.payload);
     setClassData(response.payload);
   }
-  
+
   useEffect(() => {
     fetchClassInfo();
   }, []);
 
   const handleClickInvite = () => {
-    dispatcher(dialogActions.openInviteDialog());
+    dialogRef.current?.show();
   };
 
-  const copyInviteLink = () =>{
-    //bla bla 
-  }
+  const copyInviteLink = () => {};
 
   return (
     <>
@@ -62,12 +61,8 @@ export default function Class() {
                 <div className="main__emptyStyles" />
               </div>
               <div className="main__text">
-                <h1 className="main__heading main__overflow">
-                  {classData?.name}
-                </h1>
-                <div className="main__section main__overflow">
-                  {classData?.subject}
-                </div>
+                <h1 className="main__heading main__overflow">{classData?.name}</h1>
+                <div className="main__section main__overflow">{classData?.subject}</div>
                 <div className="main__wrapper2">
                   <em className="main__code">* Class Code</em>
                   <div className="main__id">{classData?.uuid}</div>
@@ -100,7 +95,7 @@ export default function Class() {
             </div>
           </div>
         </div>
-        <InvitationDialog/>
+        <InvitationDialog ref={dialogRef} />
       </div>
     </>
   );

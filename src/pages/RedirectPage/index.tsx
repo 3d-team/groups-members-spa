@@ -3,6 +3,7 @@ import {useNavigate, useSearchParams} from 'react-router-dom';
 
 import {useAppDispatch} from '@/redux';
 import {authActions} from '@/redux/feature/auth/slice';
+import CenterContainer from '@/components/CenterContainer';
 
 export default function RedirectPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,11 +17,14 @@ export default function RedirectPage() {
     dispatcher(authActions.setToken(tokenValue));
     dispatcher(authActions.loginSucceed());
     navigate('/');
-  }, 3000);
+  }, 1500);
 
   return (
-    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
+    // <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
+    //   <CircularProgress />
+    // </div>
+    <CenterContainer>
       <CircularProgress />
-    </div>
+    </CenterContainer>
   );
 }

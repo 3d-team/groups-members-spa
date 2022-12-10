@@ -26,7 +26,6 @@ const theme = createTheme();
 
 const Login = () => {
   const classes = useStyles();
-  const [token, setToken] = useState<string | null>(null);
   const dispatcher = useAppDispatch();
 
   const initialValues = useMemo(() => {
@@ -53,14 +52,13 @@ const Login = () => {
   const formik = useFormik({
     initialValues,
     onSubmit: values => {
-      console.log('@DUKE__onSubmit', values);
       formik.setValues(initialValues);
       submitLogin(values);
     },
   });
 
   const loginByGoogle = () => {
-    window.open('http://localhost:8080/oauth2/authorization/google');
+    window.open('http://localhost:8080/oauth2/authorization/google', '_self');
   };
 
   return (

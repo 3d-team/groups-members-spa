@@ -27,7 +27,6 @@ const MyProfile = () => {
       formik.setValues(values);
       dispatcher(UserActions.updateProfileUser(values));
       dispatcher(UserThunks.updateProfile(values));
-      console.log('@DUKE_Submit', formik.values.fullName);
       setEditting(false);
     },
   });
