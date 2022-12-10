@@ -3,7 +3,7 @@ import {UserModel, UserState} from '@/models/user';
 import {userExtraReducers} from './thunk';
 
 const initialState: UserState = {
-  data: {uuid: '', fullName: '', studentId: '', email: '', age: -1, dob: ''},
+  data: {uuid: '', fullName: '', studentId: '', email: '', age: 0, dob: ''},
   status: 'idle',
 };
 
@@ -22,7 +22,6 @@ export const userSlice = createSlice({
     },
     updateProfileUser: (state, action: PayloadAction<UserModel>) => {
       state.data = action.payload;
-      console.log('@DUKE)_createSlice_updateProfileUser');
     },
   },
 

@@ -5,7 +5,7 @@ import {UserActions} from '@/redux/feature/user/slice';
 import UserThunks from '@/redux/feature/user/thunk';
 import {Box, Button, TextField} from '@mui/material';
 import {useFormik} from 'formik';
-import {useEffect, useMemo, useState} from 'react';
+import {useMemo, useState} from 'react';
 
 import {useStyles} from './styles';
 
@@ -26,8 +26,7 @@ const MyProfile = () => {
     onSubmit: values => {
       formik.setValues(values);
       dispatcher(UserActions.updateProfileUser(values));
-      dispatcher(UserThunks.updateProfile(values))
-      console.log('@DUKE_Submit', formik.values.fullName);
+      dispatcher(UserThunks.updateProfile(values));
       setEditting(false);
     },
   });

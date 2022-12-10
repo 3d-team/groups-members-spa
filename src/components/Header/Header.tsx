@@ -56,7 +56,6 @@ const Header = ({children, classData}: Props) => {
 
   const handleViewProfile = () => {
     navigate('/myprofile');
-    console.log('@DUKE__Classroom');
   };
 
   const handleLogout = () => {

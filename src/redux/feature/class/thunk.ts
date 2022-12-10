@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import ClassApi from '@/api/classApi';
-import { ClassModel, ClassState } from '@/models/class';
+import {ClassModel, ClassState} from '@/models/class';
 import axiosClient from '@/api/axiosClient';
 
 const getClassById = createAsyncThunk('class/fetchClassById', async (id: string) => {
@@ -9,8 +9,8 @@ const getClassById = createAsyncThunk('class/fetchClassById', async (id: string)
 });
 
 const getAllClasses = createAsyncThunk('class/getAllClasses', async () => {
-    const response = await ClassApi.all();
-    return response;
+  const response = await ClassApi.all();
+  return response;
 });
 
 const getAllMembers = createAsyncThunk('class/getAllMembers', async (id: string) => {
@@ -23,10 +23,12 @@ const getAllCoOwners = createAsyncThunk('class/getAllCoOwners', async (id: strin
   return response;
 });
 
-const addClass = createAsyncThunk('class/addClass', async (data: any) => {
-  const response = await ClassApi.addClass(data);
-  return response;
-});
+// const addClass = createAsyncThunk('class/addClass', async (data: any) => {
+//   const response = await ClassApi.addClass(data);
+//   console.log('@DUKE)))__addClass respone: ', response);
+
+//   return response;
+// });
 
 const kickMember = createAsyncThunk('class/kickMember', async (payload: any) => {
   const URL = `/api/groups/${payload.classId}/members/${payload.uuid}`;
@@ -40,53 +42,65 @@ const kickCoOwner = createAsyncThunk('class/kickMember', async (payload: any) =>
   return response;
 });
 
-const setCoOwner = createAsyncThunk('class/setCoOwner',async (payload: any) => {
+const setCoOwner = createAsyncThunk('class/setCoOwner', async (payload: any) => {
   const URL = `/api/groups/${payload.classId}/co-owners`;
   const data = Array(1).fill(payload.uuid);
   const response = await axiosClient.post(URL, data);
   return response;
-})
+});
 
 export const classExtraReducers = (builder: any) => {
-    builder
-      .addCase(getClassById.pending, (state: ClassState) => {
-        state.status = 'loading';
-      })
-      .addCase(getClassById.fulfilled, (state: ClassState, action: any) => {
-        state.status = 'idle';
-      })
-      .addCase(getClassById.rejected, (state: ClassState) => {
-        state.status = 'failed';
-      })
-      .addCase(getAllMembers.pending, (state: ClassState) => {
-        state.status = 'loading';
-      })
-      .addCase(getAllMembers.fulfilled, (state: ClassState, action: any) => {
-        state.status = 'idle';
-      })
-      .addCase(getAllMembers.rejected, (state: ClassState) => {
-        state.status = 'failed';
-      })
-      .addCase(getAllCoOwners.pending, (state: ClassState) => {
-        state.status = 'loading';
-      })
-      .addCase(getAllCoOwners.fulfilled, (state: ClassState, action: any) => {
-        state.status = 'idle';
-      })
-      .addCase(getAllCoOwners.rejected, (state: ClassState) => {
-        state.status = 'failed';
-      });
-}
+  builder
+    .addCase(getClassById.pending, (state: ClassState) => {
+      state.status = 'loading';
+    })
+    .addCase(getClassById.fulfilled, (state: ClassState, action: any) => {
+      state.status = 'idle';
+    })
+    .addCase(getClassById.rejected, (state: ClassState) => {
+      state.status = 'failed';
+    })
+    .addCase(getAllMembers.pending, (state: ClassState) => {
+      state.status = 'loading';
+    })
+    .addCase(getAllMembers.fulfilled, (state: ClassState, action: any) => {
+      state.status = 'idle';
+    })
+    .addCase(getAllMembers.rejected, (state: ClassState) => {
+      state.status = 'failed';
+    })
+    .addCase(getAllCoOwners.pending, (state: ClassState) => {
+      state.status = 'loading';
+    })
+    .addCase(getAllCoOwners.fulfilled, (state: ClassState, action: any) => {
+      state.status = 'idle';
+    })
+    .addCase(getAllCoOwners.rejected, (state: ClassState) => {
+      state.status = 'failed';
+    });
+  // .addCase(addClass.pending, (state: ClassState) => {
+  //   state.status = 'loading';
+  // })
+  // .addCase(addClass.fulfilled, (state: ClassState, action: any) => {
+  //   state.status = 'idle';
+  //   console.log('@DUKE__action.payload', action);
+
+  //   // state.classList = [...state.classList, ...action.payload];
+  // })
+  // .addCase(addClass.rejected, (state: ClassState) => {
+  //   state.status = 'loading';
+  // });
+};
 
 const ClassThunks = {
-    getClassById,
-    getAllClasses,
-    getAllMembers,
-    getAllCoOwners,
-    addClass,
-    kickMember,
-    setCoOwner,
-    kickCoOwner
-}
+  getClassById,
+  getAllClasses,
+  getAllMembers,
+  getAllCoOwners,
+  // addClass,
+  kickMember,
+  setCoOwner,
+  kickCoOwner,
+};
 
 export default ClassThunks;

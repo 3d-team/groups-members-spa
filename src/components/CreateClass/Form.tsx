@@ -1,24 +1,26 @@
-import { Button, DialogActions, TextField } from "@mui/material";
-import React, { useState } from "react";
+import {Button, DialogActions, TextField} from '@mui/material';
+import React, {useState} from 'react';
 import {dialogActions} from '@/redux/feature/dialog/slice';
 import {useAppDispatch} from '@/redux';
-import ClassThunks from "@/redux/feature/class/thunk";
+import ClassThunks from '@/redux/feature/class/thunk';
+import ClassApi from '@/api/classApi';
+import {ClassActions} from '@/redux/feature/class/slice';
 
 const Form = () => {
-  const [className, setClassName] = useState("");
-  const [Section, setSection] = useState("");
-  const [subjectName, setSubjectName] = useState("");
+  const [className, setClassName] = useState('');
+  const [Section, setSection] = useState('');
+  const [subjectName, setSubjectName] = useState('');
 
   const dispatcher = useAppDispatch();
 
-  const addClass = () => {
-
+  const addClass = async () => {
     const data = {
       name: className,
       section: Section,
-      subject: subjectName
+      subject: subjectName,
     };
-    dispatcher(ClassThunks.addClass(data));
+    ClassApi.addClass(data);
+    dispatcher(ClassActions.addClass(data));
     dispatcher(dialogActions.closeCreateClassDialog());
   };
 
@@ -33,23 +35,16 @@ const Form = () => {
           className="form__input"
           variant="filled"
           value={className}
-          onChange={(e) => setClassName(e.target.value)}
+          onChange={e => setClassName(e.target.value)}
         />
-        <TextField
-          id="filled-basic"
-          label="Section"
-          className="form__input"
-          variant="filled"
-          value={Section}
-          onChange={(e) => setSection(e.target.value)}
-        />
+        <TextField id="filled-basic" label="Section" className="form__input" variant="filled" value={Section} onChange={e => setSection(e.target.value)} />
         <TextField
           id="filled-basic"
           label="Subject"
           className="form__input"
           variant="filled"
           value={subjectName}
-          onChange={(e) => setSubjectName(e.target.value)}
+          onChange={e => setSubjectName(e.target.value)}
         />
       </div>
       <DialogActions>
