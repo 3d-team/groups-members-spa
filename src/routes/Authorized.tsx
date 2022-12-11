@@ -10,7 +10,7 @@ import SlideEditor from '@/pages/SlideEditor';
 const Authorized = () => {
   return (
     <Routes>
-      <Route path="/" element={<Dashboard />}>
+      <Route path="/" element={<SlideEditor />}>
         <Route index element={<Dashboard />} />
         <Route path="/class/:classId" element={<Class />} />
         <Route path="/class/:classId/member" element={<Member />} />

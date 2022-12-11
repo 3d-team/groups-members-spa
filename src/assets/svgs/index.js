@@ -64,6 +64,7 @@ export {
   InsightfulEmoji,
   LikeEmoji,
   LoveEmoji,
+  ChevronLeft,
 
   // custom
   HomeIcon,

@@ -1,15 +1,17 @@
 .container {
-    background-color: #ccc;
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
 .topContainer {
-    height: 6vh;
-    width: 100%;
-    background-color: blueviolet;
-    align-self: flex-start;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 8px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
 }
 
 .bodyContainer {
@@ -17,22 +19,25 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
+    height: 100%;
 }
 
 .leftContainer {
-    height: 100px;
+    height: 100%;
     flex-grow: 2;
+    max-width: 200px;
     background-color: #0f0;
 }
 
 .centerContainer {
-    height: 100px;
+    height: 100%;
     flex-grow: 5;
     background-color: #ff0;
 }
 
 .rightContainer {
-    height: 100px;
+    height: 100%;
     flex-grow: 3;
+    max-width: 400px;
     background-color: #f00;
 }
