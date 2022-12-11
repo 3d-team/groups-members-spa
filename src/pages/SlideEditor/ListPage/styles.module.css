@@ -1,38 +1,35 @@
 .container {
     background-color: #fff;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    flex-direction: column;
-    flex-grow: 1;
+    width: 100%;
 }
 
-.button {
-    background-color: #fff;
+
+.button{
     display: flex;
+    justify-content: space-between;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
-    background-color: #008CBA;
+    width: 100%;
+    background-color: rgb(20, 86, 204);
     color: #fff;
-    font-size: larger;
+    border: 1px solid rgb(20, 86, 204);
     padding: 6px 12px;
-    border-radius: 8px;
-    border: 1px solid #008CBA;
+    font-size: large;
 }
 
 .button:hover {
-    background-color: #fff;
+    background-color: rgba(20, 86, 204, 0.3);
     color: black;
 }
 
-.backBtn {
-    padding-right: 16px;
-}
-
 .title {
-    font-size: x-large;
-    text-decoration: none;
-    font-weight: 500;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 8px 0;
+    font-size: large;
 }
