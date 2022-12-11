@@ -8,16 +8,22 @@ export default function Header() {
   const onBackPress = () => {
     navigate('/');
   };
+
   return (
     <div className={styles.container}>
       <button className={clsx(styles.button, styles.backBtn)} onClick={onBackPress}>
         <ChevronLeft />
         Back
       </button>
-      <h6 className={styles.title}>Khảo sát ý kiến sinh viên về lịch vấn đáp</h6>
-      <button className={styles.button} onClick={onBackPress}>
-        Save
-      </button>
+      <h6 className={styles.title}>Tiêu đề: Khảo sát ý kiến sinh viên về lịch vấn đáp</h6>
+      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <button className={styles.button} onClick={onBackPress}>
+          Save
+        </button>
+        <button className={styles.button} onClick={onBackPress}>
+          Present
+        </button>
+      </div>
     </div>
   );
 }

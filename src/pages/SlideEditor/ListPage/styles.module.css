@@ -1,3 +1,7 @@
+* {
+    -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 .container {
     background-color: #fff;
     display: flex;
@@ -5,6 +9,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    position: relative;
+    height: calc(100vh - 45px);
 }
 
 .button{
@@ -32,3 +38,22 @@
     padding: 8px 0;
     font-size: large;
 }
+
+.listCardCtn {
+    flex: 1;
+    overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.listCardCtn::-webkit-scrollbar {
+    display: none;
+}
+
+.listCard {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+
