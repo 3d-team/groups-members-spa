@@ -95,6 +95,15 @@ const ToolSide = () => {
               + Add option
             </button>
           </div>
+
+          <div>
+            <input className={styles.radioBtn} type="radio" id="bar-chart" name="fav_language" value="barchart" />
+            <label htmlFor="bar-chart">Bar chart</label>
+            <br />
+            <br />
+            <input className={styles.radioBtn} type="radio" id="pie-chart" name="fav_language" value="piechart" />
+            <label htmlFor="pie-chart">Pie chart</label>
+          </div>
         </div>
       </div>
       <button className={styles.button}>
