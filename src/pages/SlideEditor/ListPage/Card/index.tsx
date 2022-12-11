@@ -1,21 +1,16 @@
-import {MultipleChoiceModel, PageModel, TemplatePage} from '@/models/page';
+import {PageModel, TemplatePage} from '@/models/page';
 import {BarChart, BubbleChart, Delete} from '@mui/icons-material';
 import clsx from 'clsx';
-import Default from '../../Template/Default';
-import MultipleChoice from '../../Template/MultipleChoice';
 import styles from './styles.module.css';
 
 interface Props {
   data: PageModel;
+  isSelected: boolean;
+  onSelect: () => void;
+  onDelete: () => void;
 }
 
-export default function Card({data}: Props) {
-  const mockdata: PageModel = {
-    title: 'Are you oke right now?',
-    backgroundImage: 'https://wallpaper.dog/large/5447432.jpg',
-    type: 'multiple-choice',
-  };
-
+export default function Card({data, isSelected = false, onSelect, onDelete}: Props) {
   const isActive = true;
 
   const renderIcon = (type: TemplatePage) => {
@@ -28,24 +23,16 @@ export default function Card({data}: Props) {
   };
 
   return (
-    <div className={clsx([styles.container, isActive && styles.isCurrentActive])}>
+    <div className={clsx([styles.container, isSelected && styles.isCurrentActive])}>
       {/* Brief Content */}
 
       <div className={styles.cardCtn}>
-        {renderIcon(mockdata.type)}
-        <p className={styles.title}>{mockdata.title}</p>
+        {renderIcon(data.type)}
+        <p className={styles.title}>{data.title}</p>
         {/* Action Container */}
         <div className={styles.actionCtn}>
-          <button
-            className={clsx(styles.outerButton, styles.button)}
-            onClick={() => {
-              console.log('@DUKE__choosed');
-            }}></button>
-          <button
-            className={clsx(styles.innerButton, styles.button)}
-            onClick={() => {
-              console.log('@DUKE__delete');
-            }}>
+          <button className={clsx(styles.outerButton, styles.button)} onClick={onSelect}></button>
+          <button className={clsx(styles.innerButton, styles.button)} onClick={onDelete}>
             <Delete />
           </button>
         </div>

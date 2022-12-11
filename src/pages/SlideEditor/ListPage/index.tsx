@@ -1,24 +1,18 @@
 import {TemplatePage} from '@/models/page';
 import {AddCircle} from '@mui/icons-material';
 import clsx from 'clsx';
-import React from 'react';
+import React, {useState} from 'react';
 import Card from './Card';
 import styles from './styles.module.css';
 
-const ListPage = () => {
-  const list: any[] = [
-    'default',
-    'multiple-choice',
-    'multiple-choice',
-    'multiple-choice',
-    'multiple-choice',
-    'multiple-choice',
-    'multiple-choice',
-    'multiple-choice',
-    'multiple-choice',
-    'multiple-choice',
-    'multiple-choice',
-  ];
+interface Props {
+  listPage: any[];
+  onSelect: (index: number) => void;
+  onDelete: (index: number) => void;
+  selectedIndex: number;
+}
+
+const ListPage = ({listPage, onSelect, onDelete, selectedIndex = 0}: Props) => {
   return (
     <div className={styles.container}>
       <p className={styles.title}>List pages</p>
@@ -26,8 +20,20 @@ const ListPage = () => {
       <div className={styles.listCardCtn}>
         <div className={styles.listCard}>
           {/* List pages */}
-          {list.map((item, index) => {
-            return <Card data={item} key={index} />;
+          {listPage.map((item, index) => {
+            return (
+              <Card
+                data={item}
+                isSelected={selectedIndex === index}
+                key={index}
+                onSelect={() => {
+                  onSelect(index);
+                }}
+                onDelete={() => {
+                  onDelete(index);
+                }}
+              />
+            );
           })}
         </div>
       </div>
