@@ -5,11 +5,12 @@ import Class from '@/pages/Class';
 import Member from '@/pages/Member';
 import {Route, Routes} from 'react-router-dom';
 import MyProfile from '@/pages/MyProfile';
+import SlideEditor from '@/pages/SlideEditor';
 
 const Authorized = () => {
   return (
     <Routes>
-      <Route path="/" element={<RootPage />}>
+      <Route path="/" element={<Dashboard />}>
         <Route index element={<Dashboard />} />
         <Route path="/class/:classId" element={<Class />} />
         <Route path="/class/:classId/member" element={<Member />} />

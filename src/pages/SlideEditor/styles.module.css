@@ -1,0 +1,38 @@
+.container {
+    background-color: #ccc;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.topContainer {
+    height: 6vh;
+    width: 100%;
+    background-color: blueviolet;
+    align-self: flex-start;
+}
+
+.bodyContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.leftContainer {
+    height: 100px;
+    flex-grow: 2;
+    background-color: #0f0;
+}
+
+.centerContainer {
+    height: 100px;
+    flex-grow: 5;
+    background-color: #ff0;
+}
+
+.rightContainer {
+    height: 100px;
+    flex-grow: 3;
+    background-color: #f00;
+}
