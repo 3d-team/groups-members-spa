@@ -9,10 +9,11 @@ interface Props {
   listPage: any[];
   onSelect: (index: number) => void;
   onDelete: (index: number) => void;
+  addNewPage: () => void;
   selectedIndex: number;
 }
 
-const ListPage = ({listPage, onSelect, onDelete, selectedIndex = 0}: Props) => {
+const ListPage = ({listPage, addNewPage, onSelect, onDelete, selectedIndex = 0}: Props) => {
   return (
     <div className={styles.container}>
       <p className={styles.title}>List pages</p>
@@ -37,7 +38,7 @@ const ListPage = ({listPage, onSelect, onDelete, selectedIndex = 0}: Props) => {
           })}
         </div>
       </div>
-      <button className={styles.button}>
+      <button className={styles.button} onClick={addNewPage}>
         <AddCircle />
         <p>Add new slide</p>
         <div></div>

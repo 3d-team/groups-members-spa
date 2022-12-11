@@ -7,25 +7,25 @@ import styles from './styles.module.css';
 
 const defaultPage: PageModel = {
   type: 'default',
-  title: 'Hello everyone',
+  title: 'Hello Everyone',
   backgroundImage: '',
 };
 
 const multipleChoicePage: MultipleChoiceModel = {
   type: 'multiple-choice',
-  title: 'Are your ready?',
+  title: 'Are you ready?',
   backgroundImage: '',
   options: [
-    {title: 'A', value: 2},
-    {title: 'B', value: 7},
-    {title: 'C', value: 5},
+    {title: 'Yes', value: 0},
+    {title: 'No', value: 0},
   ],
 };
 
-const listPage: any[] = [defaultPage, multipleChoicePage];
+const mocklistPage: any[] = [defaultPage, multipleChoicePage];
 
 const SlideEditor = () => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [listPage, setListPage] = useState<any[]>([]);
 
   const onSelectedPage = (index: number) => {
     console.log('@DUKE__onSelectedPage--', index);
@@ -34,6 +34,21 @@ const SlideEditor = () => {
 
   const onDeletePage = (index: number) => {
     console.log('@DUKE__onDeletePage--', index);
+  };
+
+  const addNewMultipleChoicePage = () => {
+    const newItem: MultipleChoiceModel = {
+      type: 'multiple-choice',
+      title: 'Are you ready?',
+      backgroundImage: '',
+      options: [
+        {title: 'Yes', value: 0},
+        {title: 'No', value: 0},
+      ],
+    };
+    setListPage(prev => {
+      return [...prev, newItem];
+    });
   };
 
   return (
@@ -45,7 +60,7 @@ const SlideEditor = () => {
       {/* Body */}
       <div className={styles.bodyContainer}>
         <div className={styles.leftContainer}>
-          <ListPage listPage={listPage} onSelect={onSelectedPage} onDelete={onDeletePage} selectedIndex={selectedIndex} />
+          <ListPage listPage={listPage} addNewPage={addNewMultipleChoicePage} onSelect={onSelectedPage} onDelete={onDeletePage} selectedIndex={selectedIndex} />
         </div>
         <div className={styles.centerContainer}></div>
         <div className={styles.rightContainer}></div>
