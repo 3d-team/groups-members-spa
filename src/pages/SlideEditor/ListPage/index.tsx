@@ -6,7 +6,7 @@ import Card from './Card';
 import styles from './styles.module.css';
 
 const ListPage = () => {
-  const list: TemplatePage[] = [
+  const list: any[] = [
     'default',
     'multiple-choice',
     'multiple-choice',
@@ -27,7 +27,7 @@ const ListPage = () => {
         <div className={styles.listCard}>
           {/* List pages */}
           {list.map((item, index) => {
-            return <Card template={item} key={index} />;
+            return <Card data={item} key={index} />;
           })}
         </div>
       </div>

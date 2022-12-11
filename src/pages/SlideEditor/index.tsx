@@ -19,10 +19,6 @@ const SlideEditor = () => {
         <div className={styles.centerContainer}></div>
         <div className={styles.rightContainer}></div>
       </div>
-      {/* Top action: New slide button, import button */}
-      {/* Left slide: list of mini slide*/}
-      {/* Center: current slide */}
-      {/* Rigth action:  */}
     </div>
   );
 };

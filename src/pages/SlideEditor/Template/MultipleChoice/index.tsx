@@ -1,6 +1,11 @@
-import React from 'react';
 import styles from './styles.module.css';
+import {ChartType, MultipleChoiceModel} from '@/models/page';
 
-export default function MultipleChoice() {
+interface Props {
+  data: MultipleChoiceModel | undefined;
+  typeChart: ChartType;
+}
+
+export default function MultipleChoice({data, typeChart}: Props) {
   return <div className={styles.container}>MultipleChoice</div>;
 }
