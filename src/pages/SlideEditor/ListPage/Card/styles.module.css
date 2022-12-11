@@ -43,15 +43,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    display: flex;
     flex-direction: row-reverse;
     align-items: flex-start;
     background-color: transparent;
+    display: flex;
 }
 
-.actionCtn:hover{
-    background-color: rgba(0,0,0,0.9);
-}
 
 .button{
     border: 0 solid #00000000;
@@ -77,4 +74,14 @@
     background-color: #ccc;
     border-radius: 4px;
     padding-top: 4px;
+    display: none;
+}
+
+.actionCtn:hover {
+    display: flex;
+    background-color: rgba(255,255,255,0.5);
+}
+
+.actionCtn:hover .innerButton {
+    display: block;
 }

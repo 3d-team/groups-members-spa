@@ -29,11 +29,12 @@ export default function Card({data}: Props) {
 
   return (
     <div className={clsx([styles.container, isActive && styles.isCurrentActive])}>
-      {/* brief content */}
+      {/* Brief Content */}
 
       <div className={styles.cardCtn}>
         {renderIcon(mockdata.type)}
         <p className={styles.title}>{mockdata.title}</p>
+        {/* Action Container */}
         <div className={styles.actionCtn}>
           <button
             className={clsx(styles.outerButton, styles.button)}
