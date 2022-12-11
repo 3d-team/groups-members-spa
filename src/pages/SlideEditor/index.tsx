@@ -1,9 +1,11 @@
 import CenterContainer from '@/components/CenterContainer';
-import {MultipleChoiceModel, PageModel} from '@/models/page';
+import {MockMultipleChoice, MultipleChoiceModel, PageModel} from '@/models/page';
+import Helper from '@/ultilities/Helper';
 import React, {useState} from 'react';
 import Header from './Header';
 import ListPage from './ListPage';
 import styles from './styles.module.css';
+import ToolSide from './ToolSide';
 
 const defaultPage: PageModel = {
   type: 'default',
@@ -25,7 +27,7 @@ const mocklistPage: any[] = [defaultPage, multipleChoicePage];
 
 const SlideEditor = () => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const [listPage, setListPage] = useState<any[]>([]);
+  const [listPage, setListPage] = useState<any[]>(mocklistPage);
 
   const onSelectedPage = (index: number) => {
     console.log('@DUKE__onSelectedPage--', index);
@@ -33,21 +35,13 @@ const SlideEditor = () => {
   };
 
   const onDeletePage = (index: number) => {
-    console.log('@DUKE__onDeletePage--', index);
+    console.log('@DUKE__onDeletePage--', listPage);
+    setListPage(Helper.removeItemByIndex(listPage, index));
   };
 
   const addNewMultipleChoicePage = () => {
-    const newItem: MultipleChoiceModel = {
-      type: 'multiple-choice',
-      title: 'Are you ready?',
-      backgroundImage: '',
-      options: [
-        {title: 'Yes', value: 0},
-        {title: 'No', value: 0},
-      ],
-    };
     setListPage(prev => {
-      return [...prev, newItem];
+      return [...prev, MockMultipleChoice];
     });
   };
 
@@ -63,7 +57,9 @@ const SlideEditor = () => {
           <ListPage listPage={listPage} addNewPage={addNewMultipleChoicePage} onSelect={onSelectedPage} onDelete={onDeletePage} selectedIndex={selectedIndex} />
         </div>
         <div className={styles.centerContainer}></div>
-        <div className={styles.rightContainer}></div>
+        <div className={styles.rightContainer}>
+          <ToolSide />
+        </div>
       </div>
     </div>
   );

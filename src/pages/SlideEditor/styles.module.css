@@ -22,7 +22,6 @@
 }
 
 .leftContainer {
-    flex-grow: 2;
     max-width: 200px;
     display: flex;
     justify-content: center;
@@ -31,13 +30,12 @@
 
 .centerContainer {
     height: 100%;
-    flex-grow: 5;
     background-color: #e0e0e0;
+    flex: 1;
 }
 
 .rightContainer {
     height: 100%;
-    flex-grow: 3;
-    max-width: 400px;
+    width: 400px;
     border-left: 1px solid #e0e0e0
 }

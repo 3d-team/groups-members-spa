@@ -13,3 +13,14 @@ export interface OptionModel {
 export interface MultipleChoiceModel extends PageModel {
   options: OptionModel[];
 }
+
+export const MockMultipleChoice: MultipleChoiceModel = {
+  type: 'multiple-choice',
+  title: '',
+  backgroundImage: '',
+  options: [
+    {title: '', value: 0},
+    {title: '', value: 0},
+    {title: '', value: 0},
+  ],
+};

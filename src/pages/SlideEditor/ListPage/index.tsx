@@ -1,7 +1,4 @@
-import {TemplatePage} from '@/models/page';
 import {AddCircle} from '@mui/icons-material';
-import clsx from 'clsx';
-import React, {useState} from 'react';
 import Card from './Card';
 import styles from './styles.module.css';
 
