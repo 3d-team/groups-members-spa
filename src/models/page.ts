@@ -7,7 +7,7 @@ export interface PageModel {
 }
 
 export interface OptionModel {
-  title: string;
+  name: string;
   value: number;
 }
 export interface MultipleChoiceModel extends PageModel {
@@ -19,8 +19,8 @@ export const MockMultipleChoice: MultipleChoiceModel = {
   title: '',
   backgroundImage: '',
   options: [
-    {title: '', value: 0},
-    {title: '', value: 0},
-    {title: '', value: 0},
+    {name: '', value: 0},
+    {name: '', value: 0},
+    {name: '', value: 0},
   ],
 };

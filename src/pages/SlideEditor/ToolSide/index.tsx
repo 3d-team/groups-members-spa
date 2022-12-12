@@ -20,7 +20,7 @@ const ToolSide = () => {
   const onChangeOptionTitle = (text: string, index: number) => {
     setData(prev => {
       const newOptions = [...prev.options];
-      newOptions[index].title = text;
+      newOptions[index].name = text;
       return {
         ...prev,
         options: newOptions,
@@ -41,7 +41,7 @@ const ToolSide = () => {
     setData(prev => {
       return {
         ...prev,
-        options: [...prev.options, {title: '', value: 0}],
+        options: [...prev.options, {name: '', value: 0}],
       };
     });
   };
@@ -74,7 +74,7 @@ const ToolSide = () => {
                     <input
                       className={styles.inputText}
                       placeholder={`Option ${index + 1}`}
-                      value={item.title}
+                      value={item.name}
                       type={'text'}
                       onChange={e => {
                         onChangeOptionTitle(e.target.value, index);

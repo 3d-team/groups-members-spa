@@ -15,6 +15,7 @@
 }
 
 .isCurrentActive {
+    border: 1px solid rgb(20, 86, 204);
     border-left: 8px solid rgb(20, 86, 204);
 }
 

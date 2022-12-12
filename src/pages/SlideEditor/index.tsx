@@ -19,8 +19,8 @@ const multipleChoicePage: MultipleChoiceModel = {
   title: 'Are you ready?',
   backgroundImage: '',
   options: [
-    {title: 'Yes', value: 0},
-    {title: 'No', value: 0},
+    {name: 'Yes', value: 0},
+    {name: 'No', value: 0},
   ],
 };
 
@@ -58,7 +58,7 @@ const SlideEditor = () => {
           <ListPage listPage={listPage} addNewPage={addNewMultipleChoicePage} onSelect={onSelectedPage} onDelete={onDeletePage} selectedIndex={selectedIndex} />
         </div>
         <div className={styles.centerContainer}>
-          <PreviewSlide data={MockMultipleChoice}/>
+          <PreviewSlide data={MockMultipleChoice} />
         </div>
         <div className={styles.rightContainer}>
           <ToolSide />
