@@ -1,6 +1,6 @@
 * {
     -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+    scrollbar-width: none;  /* Firefox */
 }
 .container {
     background-color: #fff;
