@@ -1,4 +1,4 @@
-import {ChartType, MockMultipleChoice, MultipleChoiceModel} from '@/models/page';
+import {ChartType, MockMultipleChoice, MultipleChoiceModel, OptionModel} from '@/models/page';
 import CustomBarChart from './CustomBarChart';
 import CustomPieChart from './CustomPieChart';
 import styles from './styles.module.css';
@@ -8,12 +8,12 @@ interface Props {
 }
 
 const PreviewSlide = ({data = MockMultipleChoice, type = 'pie-chart'}: Props) => {
-  const renderChart = (type: ChartType) => {
+  const renderChart = (type: ChartType, data: OptionModel[]) => {
     switch (type) {
       case 'bar-chart':
-        return <CustomBarChart />;
+        return <CustomBarChart data={data} />;
       case 'pie-chart':
-        return <CustomPieChart />;
+        return <CustomPieChart data={data} />;
       default:
         return <></>;
     }
@@ -26,7 +26,7 @@ const PreviewSlide = ({data = MockMultipleChoice, type = 'pie-chart'}: Props) =>
           <div className={styles.questionCtn}>
             <p className={styles.question}>Chọn ngày vấn đáp đi mấy đứa!</p>
           </div>
-          <div className={styles.chartCtn}>{renderChart(type)}</div>
+          <div className={styles.chartCtn}>{renderChart(type, data.options)}</div>
         </div>
       </div>
     </div>

@@ -2,13 +2,12 @@ import {OptionModel} from '@/models/page';
 import {ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, LabelList, Label} from 'recharts';
 
 interface Props {
-  data?: OptionModel[];
+  data: OptionModel[];
 }
 
 const renderCustomizedLabel = (props: any) => {
   const {x, y, width, height, value} = props;
   const radius = 16;
-  console.log('@DUKE__', value);
 
   return (
     <g>
@@ -44,8 +43,7 @@ export default function CustomBarChart({
           bottom: 5,
         }}>
         {/* <CartesianGrid strokeDasharray="3 3" /> */}
-        <XAxis dataKey="name" />
-        {/* <YAxis /> */}
+        <XAxis dataKey="name" stroke="#fff" />
         <Tooltip />
         <Legend />
         <Bar dataKey="value" fill="#e8710a" name="Rating">

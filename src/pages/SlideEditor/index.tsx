@@ -1,5 +1,5 @@
 import CenterContainer from '@/components/CenterContainer';
-import {MockMultipleChoice, MultipleChoiceModel, PageModel} from '@/models/page';
+import {ChartType, MockMultipleChoice, MultipleChoiceModel, PageModel} from '@/models/page';
 import Helper from '@/ultilities/Helper';
 import React, {useState} from 'react';
 import Header from './Header';
@@ -29,6 +29,7 @@ const mocklistPage: any[] = [defaultPage, multipleChoicePage];
 const SlideEditor = () => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [listPage, setListPage] = useState<any[]>(mocklistPage);
+  const [typeChart, setTypeChart] = useState<ChartType>('bar-chart');
 
   const onSelectedPage = (index: number) => {
     console.log('@DUKE__onSelectedPage--', index);
@@ -58,7 +59,7 @@ const SlideEditor = () => {
           <ListPage listPage={listPage} addNewPage={addNewMultipleChoicePage} onSelect={onSelectedPage} onDelete={onDeletePage} selectedIndex={selectedIndex} />
         </div>
         <div className={styles.centerContainer}>
-          <PreviewSlide data={MockMultipleChoice} />
+          <PreviewSlide data={listPage[selectedIndex]} type={typeChart} />
         </div>
         <div className={styles.rightContainer}>
           <ToolSide />
