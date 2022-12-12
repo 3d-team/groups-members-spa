@@ -3,6 +3,7 @@ import {createSlice} from '@reduxjs/toolkit';
 const initialState = {
   createClassDialog: false,
   joinClassDialog: false,
+  createPresentationDialog: false,
   inviteDialog: false,
 };
 
@@ -23,6 +24,13 @@ export const dialogSlice = createSlice({
     closeJoinClassDialog: state => {
       state.joinClassDialog = false;
     },
+    openCreatePresentationDialog: state => {
+      state.createPresentationDialog = true;
+    },
+    closeCreatePresentationDialog: state => {
+      state.createPresentationDialog = false;
+    },
+
     openInviteDialog: state => {
       state.inviteDialog = true;
     },
