@@ -5,8 +5,7 @@ import UnAuthorized from './UnAuthorized';
 
 const RootRouterProvider = () => {
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
-  // return <BrowserRouter>{isLoggedIn ? <Authorized /> : <UnAuthorized />}</BrowserRouter>;
-  return <BrowserRouter>{<Authorized />}</BrowserRouter>;
+  return <BrowserRouter>{isLoggedIn ? <Authorized /> : <UnAuthorized />}</BrowserRouter>;
 };
 
 export default RootRouterProvider;
