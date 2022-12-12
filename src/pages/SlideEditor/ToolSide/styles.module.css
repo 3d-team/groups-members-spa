@@ -117,11 +117,8 @@
 
 .addOptionBtn:active {
     background-color: rgba(20, 86, 204, 0.5);
-
 }
 
 .radioBtn {
-    padding: 4px;
-    background-color: aqua;
     margin-right: 8px;
 }

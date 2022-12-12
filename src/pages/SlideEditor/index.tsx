@@ -4,6 +4,7 @@ import Helper from '@/ultilities/Helper';
 import React, {useState} from 'react';
 import Header from './Header';
 import ListPage from './ListPage';
+import PreviewSlide from './PreviewSlide';
 import styles from './styles.module.css';
 import ToolSide from './ToolSide';
 
@@ -56,7 +57,9 @@ const SlideEditor = () => {
         <div className={styles.leftContainer}>
           <ListPage listPage={listPage} addNewPage={addNewMultipleChoicePage} onSelect={onSelectedPage} onDelete={onDeletePage} selectedIndex={selectedIndex} />
         </div>
-        <div className={styles.centerContainer}></div>
+        <div className={styles.centerContainer}>
+          <PreviewSlide data={MockMultipleChoice}/>
+        </div>
         <div className={styles.rightContainer}>
           <ToolSide />
         </div>
