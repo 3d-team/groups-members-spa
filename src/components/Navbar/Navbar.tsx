@@ -39,6 +39,10 @@ export default function Navbar({classData}: NavbarProps) {
     navigate(`/`);
   };
 
+  const goToPresentation = () => {
+    navigate(`/presentation`);
+  };
+
   const toggleDrawer = (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (event && event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
       return;
@@ -62,8 +66,8 @@ export default function Navbar({classData}: NavbarProps) {
             <ListItemText primary="Dashboard" />
           </ListItemButton>
         </ListItem>
-        <ListItem key="dashboard" disablePadding>
-          <ListItemButton onClick={goToDashboard}>
+        <ListItem key="presentation" disablePadding>
+          <ListItemButton onClick={goToPresentation}>
             <ListItemIcon>
               <SlideshowIcon />
             </ListItemIcon>

@@ -2,19 +2,25 @@ import {Button, Checkbox, Dialog, DialogActions, TextField, Typography} from '@m
 import React, {useState} from 'react';
 import {useAppSelector, useAppDispatch} from '@/redux';
 import {dialogActions} from '@/redux/feature/dialog/slice';
+import PresentationApi from '@/api/presentationApi';
+import {PresentationActions} from '@/redux/feature/presentation/slice';
 
 const CreatePresentation = () => {
   const dialog = useAppSelector(state => state.dialog.createPresentationDialog);
-  const [name, setName] = useState('');
+  const [namePresentation, setName] = useState('');
   const dispatcher = useAppDispatch();
 
   const handleClose = () => {
     dispatcher(dialogActions.closeCreatePresentationDialog());
   };
 
-  const inviteEmail = () => {
-    //
+  const createPresentation = async () => {
 
+    const data = {
+      name: namePresentation,
+    };
+    PresentationApi.addPresentation(data);
+    dispatcher(PresentationActions.addPresentation(data));
     dispatcher(dialogActions.closeCreatePresentationDialog());
   };
 
@@ -22,16 +28,16 @@ const CreatePresentation = () => {
     <div>
       <Dialog onClose={() => handleClose()} aria-labelledby="customized-dialog-title" open={dialog} maxWidth="lg" className="form__dialog">
         <div className="form">
-          <p className="class__title">Create new presentation</p>
+          <p className="Presentation__title">Create new presentation</p>
 
           <div className="form__inputs">
-            <TextField id="filled-basic" label="Presentation name" className="form__input" variant="filled" value={name} onChange={e => setName(e.target.value)} />
+            <TextField id="filled-basic" label="Presentation name" className="form__input" variant="filled" value={namePresentation} onChange={e => setName(e.target.value)} />
           </div>
           <DialogActions>
-            <Button onClick={inviteEmail} color="inherit">
+            <Button onClick={() => handleClose()} color="inherit">
               Cancel
             </Button>
-            <Button onClick={inviteEmail} color="primary">
+            <Button onClick={createPresentation} color="primary">
               Create presentation
             </Button>
           </DialogActions>
