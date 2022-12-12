@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.chartCtn {
+    flex: 1;
+}
+
+.listCateCtn {
+    width: 200px;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.optionItem {
+    display: flex;
+    margin-top: 8px;
+    color: #fff;
+    font-size: larger;
+    align-items: center;
+}
+
+.optionColor{
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+}
+
+.optionName {
+
+}
+
+.optionValue {
+
+}
