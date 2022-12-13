@@ -11,25 +11,14 @@ const renderCustomizedLabel = (props: any) => {
 
   return (
     <g>
-      <text x={x + width / 2} y={y + height / 2} fill="#fff" textAnchor="middle" dominantBaseline="middle" font-size="1.5em">
+      <text x={x + width / 2} y={y + height / 2 - radius} fill="#fff" textAnchor="middle" dominantBaseline="middle" font-size="1.5em">
         {value}
       </text>
     </g>
   );
 };
 
-export default function CustomBarChart({
-  data = [
-    {
-      name: 'Ngay 12/1',
-      value: 30,
-    },
-    {
-      name: 'Ngay 21/12',
-      value: 24,
-    },
-  ],
-}: Props) {
+export default function CustomBarChart({data = []}: Props) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
@@ -42,7 +31,6 @@ export default function CustomBarChart({
           left: 20,
           bottom: 5,
         }}>
-        {/* <CartesianGrid strokeDasharray="3 3" /> */}
         <XAxis dataKey="name" stroke="#fff" />
         <Tooltip />
         <Legend />
