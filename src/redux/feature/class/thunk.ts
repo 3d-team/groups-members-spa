@@ -23,13 +23,6 @@ const getAllCoOwners = createAsyncThunk('class/getAllCoOwners', async (id: strin
   return response;
 });
 
-// const addClass = createAsyncThunk('class/addClass', async (data: any) => {
-//   const response = await ClassApi.addClass(data);
-//   console.log('@DUKE)))__addClass respone: ', response);
-
-//   return response;
-// });
-
 const kickMember = createAsyncThunk('class/kickMember', async (payload: any) => {
   const URL = `/api/groups/${payload.classId}/members/${payload.uuid}`;
   const response = await axiosClient.delete(URL);
@@ -78,18 +71,6 @@ export const classExtraReducers = (builder: any) => {
     .addCase(getAllCoOwners.rejected, (state: ClassState) => {
       state.status = 'failed';
     });
-  // .addCase(addClass.pending, (state: ClassState) => {
-  //   state.status = 'loading';
-  // })
-  // .addCase(addClass.fulfilled, (state: ClassState, action: any) => {
-  //   state.status = 'idle';
-  //   console.log('@DUKE__action.payload', action);
-
-  //   // state.classList = [...state.classList, ...action.payload];
-  // })
-  // .addCase(addClass.rejected, (state: ClassState) => {
-  //   state.status = 'loading';
-  // });
 };
 
 const ClassThunks = {

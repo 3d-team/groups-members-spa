@@ -1,11 +1,32 @@
-import {MockMultipleChoice, MultipleChoiceModel} from '@/models/page';
+import {ChartType, MockMultipleChoice, MultipleChoiceModel} from '@/models/page';
 import Helper from '@/ultilities/Helper';
-import {DoneAll, RemoveCircleOutline} from '@mui/icons-material';
+import {BarChart, DoneAll, PieChart, RemoveCircleOutline} from '@mui/icons-material';
 import {TextField} from '@mui/material';
+import clsx from 'clsx';
 import React, {useState} from 'react';
 import styles from './styles.module.css';
 
-const ToolSide = () => {
+interface Props {
+  onChangeChart: (type: ChartType)=>void,
+  selectedType: ChartType
+}
+
+interface ChartOption {
+  type: ChartType;
+  name: string;
+}
+
+const ChartOptions: ChartOption[]  = [{
+  type: 'bar-chart',
+  name: 'Bars',
+},
+{
+  type: 'pie-chart',
+  name: 'Pie'
+}
+]
+
+const ToolSide = ({onChangeChart, selectedType = 'bar-chart'}: Props) => {
   const [data, setData] = useState<MultipleChoiceModel>(MockMultipleChoice);
 
   const onChangeQuestion = (text: string) => {
@@ -45,6 +66,17 @@ const ToolSide = () => {
       };
     });
   };
+
+  const renderChartIcon = (type: ChartType) => {
+    switch(type){
+      case 'bar-chart':
+        return <BarChart />;
+      case 'pie-chart':
+        return <PieChart />;
+      default:
+          return <></>
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -96,13 +128,17 @@ const ToolSide = () => {
             </button>
           </div>
 
-          <div>
-            <input className={styles.radioBtn} type="radio" id="bar-chart" name="fav_language" value="barchart" />
-            <label htmlFor="bar-chart">Bar chart</label>
-            <br />
-            <br />
-            <input className={styles.radioBtn} type="radio" id="pie-chart" name="fav_language" value="piechart" />
-            <label htmlFor="pie-chart">Pie chart</label>
+          <div className={styles.chartBtnCtn}>
+            {
+              ChartOptions.map((item, index)=>{
+                return (
+                  <button className={clsx([styles.chartBtn, selectedType === item.type && styles.chartSelected])} onClick={()=>{onChangeChart(item.type)}}>
+                    {renderChartIcon(item.type)}
+                    <p>{item.name}</p>
+                  </button>
+                )
+              })
+            }
           </div>
         </div>
       </div>

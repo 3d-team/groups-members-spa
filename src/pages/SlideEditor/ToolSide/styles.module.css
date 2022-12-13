@@ -119,6 +119,21 @@
     background-color: rgba(20, 86, 204, 0.5);
 }
 
-.radioBtn {
-    margin-right: 8px;
+
+.chartBtnCtn {
+    display: flex;
+    flex-wrap: wrap;
+
 }
+
+.chartBtn {
+    margin: 8px;
+    padding: 5px 12px;
+}
+
+.chartSelected {
+    color: rgb(20, 86, 204);
+    border: 2px solid rgb(104, 151, 232);
+    border-radius: 4px;
+}
+

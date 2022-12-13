@@ -32,12 +32,10 @@ const SlideEditor = () => {
   const [typeChart, setTypeChart] = useState<ChartType>('bar-chart');
 
   const onSelectedPage = (index: number) => {
-    console.log('@DUKE__onSelectedPage--', index);
     setSelectedIndex(index);
   };
 
   const onDeletePage = (index: number) => {
-    console.log('@DUKE__onDeletePage--', listPage);
     setListPage(Helper.removeItemByIndex(listPage, index));
   };
 
@@ -46,7 +44,9 @@ const SlideEditor = () => {
       return [...prev, MockMultipleChoice];
     });
   };
-
+  const onChangeTypeChart = (type: ChartType) => {
+    setTypeChart(type);
+  }
   return (
     <div className={styles.container}>
       {/* Header: back button, saved button, present button */}
@@ -62,7 +62,7 @@ const SlideEditor = () => {
           <PreviewSlide data={listPage[selectedIndex]} type={typeChart} />
         </div>
         <div className={styles.rightContainer}>
-          <ToolSide />
+          <ToolSide onChangeChart={onChangeTypeChart} selectedType={typeChart}/>
         </div>
       </div>
     </div>

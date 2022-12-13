@@ -1,4 +1,5 @@
 import {OptionModel} from '@/models/page';
+import { useMemo } from 'react';
 import {PieChart, Pie, Cell, ResponsiveContainer} from 'recharts';
 import styles from './styles.module.css';
 
@@ -6,7 +7,6 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#6faa00', '#003daa'
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = (props: any) => {
-  console.log('@DUKE__PROPS: ', props);
 
   const {cx, cy, midAngle, innerRadius, outerRadius, percent, index, value} = props;
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -22,25 +22,24 @@ const renderCustomizedLabel = (props: any) => {
 };
 
 interface Props {
-  data?: OptionModel[];
+  data: OptionModel[];
 }
 
-const CustomPieChart = ({
-  data = [
-    {
-      name: 'Ngay 12/01',
-      value: 30,
-    },
-    {
-      name: 'Ngay 21/12',
-      value: 24,
-    },
-  ],
-}: Props) => {
+const CustomPieChart = ({data = []}: Props) => {
+  const isZero: boolean = useMemo(()=>{
+    data.forEach((element)=>{
+      if(element.value > 0){
+        return false;
+      }
+    })
+    return true;
+  }, [data])
+  
   return (
     <div className={styles.container}>
       <div className={styles.chartCtn}>
-        <ResponsiveContainer width="100%" height="100%">
+        {isZero ? <div className={styles.nullPieChart}></div>:
+          <ResponsiveContainer width="100%" height="100%">
           <PieChart width={400} height={400}>
             <Pie data={data} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel} outerRadius={180} fill="#8884d8" dataKey="value">
               {data.map((entry, index) => (
@@ -49,6 +48,7 @@ const CustomPieChart = ({
             </Pie>
           </PieChart>
         </ResponsiveContainer>
+        }
       </div>
       <div className={styles.listCateCtn}>
         {data.map((item, index) => {

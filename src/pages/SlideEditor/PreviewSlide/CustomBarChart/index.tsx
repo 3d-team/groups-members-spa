@@ -7,7 +7,7 @@ interface Props {
 
 const renderCustomizedLabel = (props: any) => {
   const {x, y, width, height, value} = props;
-  const radius = 16;
+  const radius = 10;
 
   return (
     <g>
