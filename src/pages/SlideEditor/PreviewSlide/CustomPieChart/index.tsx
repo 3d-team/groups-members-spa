@@ -1,5 +1,5 @@
-import {OptionModel} from '@/models/page';
-import { useMemo } from 'react';
+import {OptionModel} from '@/models/presentation';
+import {useMemo} from 'react';
 import {PieChart, Pie, Cell, ResponsiveContainer} from 'recharts';
 import styles from './styles.module.css';
 
@@ -7,7 +7,6 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#6faa00', '#003daa'
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = (props: any) => {
-
   const {cx, cy, midAngle, innerRadius, outerRadius, percent, index, value} = props;
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -26,25 +25,29 @@ interface Props {
 }
 
 const CustomPieChart = ({data = []}: Props) => {
-  const isZero: boolean = useMemo(()=>{
-    const index = data.findIndex((item)=>{return item.value > 0})
+  const isZero: boolean = useMemo(() => {
+    const index = data.findIndex(item => {
+      return item.value > 0;
+    });
     return index < 0;
-  }, [data])
-    
+  }, [data]);
+
   return (
     <div className={styles.container}>
       <div className={styles.chartCtn}>
-        {isZero ? <div className={styles.nullPieChart}></div>:
+        {isZero ? (
+          <div className={styles.nullPieChart}></div>
+        ) : (
           <ResponsiveContainer width="100%" height="100%">
-          <PieChart width={400} height={400}>
-            <Pie data={data} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel} outerRadius={180} fill="#8884d8" dataKey="value">
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
-          </PieChart>
-        </ResponsiveContainer>
-        }
+            <PieChart width={400} height={400}>
+              <Pie data={data} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel} outerRadius={180} fill="#8884d8" dataKey="value">
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+        )}
       </div>
       <div className={styles.listCateCtn}>
         {data.map((item, index) => {

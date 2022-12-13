@@ -1,6 +1,6 @@
-import {createAsyncThunk} from '@reduxjs/toolkit';
+import {createAsyncThunk, PayloadAction} from '@reduxjs/toolkit';
 import PresentationApi from '@/api/presentationApi';
-import {PresentationModel, PresentationState} from '@/models/presentation';
+import {PresentationModel, PresentationState, MultipleChoiceModel} from '@/models/presentation';
 import axiosClient from '@/api/axiosClient';
 
 const getPresentationById = createAsyncThunk('Presentation/fetchPresentationById', async (id: string) => {
@@ -20,10 +20,14 @@ const getAllSlides = createAsyncThunk('Presentation/getAllSlides', async (id: st
 
 // const addPresentation = createAsyncThunk('Presentation/addPresentation', async (data: any) => {
 //   const response = await PresentationApi.addPresentation(data);
-//   console.log('@DUKE)))__addPresentation respone: ', response);
 
 //   return response;
 // });
+
+const saveAllSlides = createAsyncThunk('Presentation/saveAllSlides', async (slides: MultipleChoiceModel[]) => {
+  // callApi method post
+  return slides;
+});
 
 export const PresentationExtraReducers = (builder: any) => {
   builder
@@ -53,13 +57,17 @@ export const PresentationExtraReducers = (builder: any) => {
     })
     .addCase(getAllSlides.rejected, (state: PresentationState) => {
       state.status = 'failed';
+    })
+    .addCase(saveAllSlides.fulfilled, (state: PresentationState, action: PayloadAction<MultipleChoiceModel[]>) => {
+      console.log('@DUKE_____', action.payload);
+
+      state.data.slides = action.payload;
     });
   // .addCase(addPresentation.pending, (state: PresentationState) => {
   //   state.status = 'loading';
   // })
   // .addCase(addPresentation.fulfilled, (state: PresentationState, action: any) => {
   //   state.status = 'idle';
-  //   console.log('@DUKE__action.payload', action);
 
   //   // state.PresentationList = [...state.PresentationList, ...action.payload];
   // })
@@ -73,6 +81,7 @@ const PresentationThunks = {
   getAllPresentations,
   getAllSlides,
   // addPresentation,
+  saveAllSlides,
 };
 
 export default PresentationThunks;

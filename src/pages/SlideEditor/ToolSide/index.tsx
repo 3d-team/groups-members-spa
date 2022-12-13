@@ -1,4 +1,4 @@
-import {ChartType, MockMultipleChoice, MultipleChoiceModel} from '@/models/page';
+import {ChartType, MockMultipleChoice, MultipleChoiceModel} from '@/models/presentation';
 import Helper from '@/ultilities/Helper';
 import {BarChart, DoneAll, PieChart, RemoveCircleOutline} from '@mui/icons-material';
 import clsx from 'clsx';
@@ -8,8 +8,8 @@ import styles from './styles.module.css';
 interface Props {
   onChangeChart: (type: ChartType) => void;
   selectedType: ChartType;
-  onSubmitData: (data: MultipleChoiceModel)=>void;
-  currentData: MultipleChoiceModel,
+  onSubmitData: (data: MultipleChoiceModel) => void;
+  currentData: MultipleChoiceModel;
 }
 
 interface ChartOption {
@@ -80,8 +80,7 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
     }
   };
 
-
-  useEffect(()=>{
+  useEffect(() => {
     setData(currentData);
   }, [currentData]);
 
@@ -151,7 +150,11 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
           </div>
         </div>
       </div>
-      <button className={styles.button} onClick={()=>{onSubmitData(data)}}>
+      <button
+        className={styles.button}
+        onClick={() => {
+          onSubmitData(data);
+        }}>
         <DoneAll />
         <p style={{marginLeft: 8}}>Submit Changes!</p>
         <div></div>

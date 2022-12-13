@@ -1,4 +1,6 @@
-import {ChartType, MockMultipleChoice, MultipleChoiceModel, PageModel} from '@/models/page';
+import {ChartType, MockMultipleChoice, MultipleChoiceModel, SlideModel} from '@/models/presentation';
+import {useAppDispatch, useAppSelector} from '@/redux';
+import PresentationThunks from '@/redux/feature/presentation/thunk';
 import Helper from '@/ultilities/Helper';
 import {useState} from 'react';
 import Header from './Header';
@@ -30,8 +32,12 @@ const multipleChoicePage: MultipleChoiceModel = {
 const mocklistPage: any[] = [defaultPage, multipleChoicePage];
 
 const SlideEditor = () => {
+  const dispatcher = useAppDispatch();
+  const present = useAppSelector(state => state.presentation.data);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const [listPage, setListPage] = useState<any[]>(mocklistPage);
+  const [listPage, setListPage] = useState<MultipleChoiceModel[]>(present.slides);
+  console.log('@duKE__', present);
+
   const [typeChart, setTypeChart] = useState<ChartType>('bar-chart');
 
   const onSelectedPage = (index: number) => {
@@ -39,6 +45,9 @@ const SlideEditor = () => {
   };
 
   const onDeletePage = (index: number) => {
+    if (listPage.length < 2) {
+      return;
+    }
     setListPage(Helper.removeItemByIndex(listPage, index));
   };
 
@@ -52,29 +61,26 @@ const SlideEditor = () => {
   };
 
   const onSubmitData = (data: MultipleChoiceModel) => {
-    setListPage((prev)=>{
+    setListPage(prev => {
       const newList = [...prev];
       newList[selectedIndex] = data;
       return newList;
-    })
+    });
   };
 
   const onSave = () => {
-
+    dispatcher(PresentationThunks.saveAllSlides(listPage));
   };
 
-  const onPresent = () => {
+  const onPresent = () => {};
 
-  };
-
-  const onShare = () => {
-  };
+  const onShare = () => {};
 
   return (
     <div className={styles.container}>
       {/* Header: back button, saved button, present button */}
       <div className={styles.topContainer}>
-        <Header />
+        <Header onSave={onSave} onPresent={onPresent} onShare={onShare} />
       </div>
       {/* Body */}
       <div className={styles.bodyContainer}>
@@ -85,7 +91,7 @@ const SlideEditor = () => {
           <PreviewSlide data={listPage[selectedIndex]} type={typeChart} />
         </div>
         <div className={styles.rightContainer}>
-          <ToolSide onChangeChart={onChangeTypeChart} selectedType={typeChart} onSubmitData={onSubmitData} currentData={listPage[selectedIndex]}/>
+          <ToolSide onChangeChart={onChangeTypeChart} selectedType={typeChart} onSubmitData={onSubmitData} currentData={listPage[selectedIndex]} />
         </div>
       </div>
     </div>

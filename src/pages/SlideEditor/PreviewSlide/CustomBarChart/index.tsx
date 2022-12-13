@@ -1,4 +1,4 @@
-import {OptionModel} from '@/models/page';
+import {OptionModel} from '@/models/presentation';
 import {ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, LabelList, Label} from 'recharts';
 
 interface Props {

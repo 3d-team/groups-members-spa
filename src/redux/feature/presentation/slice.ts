@@ -8,7 +8,7 @@ const initialState: PresentationState = {
     name: '',
     ownerId: '',
     accessCode: '',
-    slideIds: [],
+    slides: [],
   },
   status: 'idle',
   presentationList: [],

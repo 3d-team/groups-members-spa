@@ -1,4 +1,4 @@
-import {ChartType, MockMultipleChoice, MultipleChoiceModel, OptionModel} from '@/models/page';
+import {ChartType, MockMultipleChoice, MultipleChoiceModel, OptionModel} from '@/models/presentation';
 import CustomBarChart from './CustomBarChart';
 import CustomPieChart from './CustomPieChart';
 import styles from './styles.module.css';
@@ -11,12 +11,8 @@ const PreviewSlide = ({data = MockMultipleChoice, type = 'bar-chart'}: Props) =>
   const renderChart = (type: ChartType, data: OptionModel[]) => {
     switch (type) {
       case 'bar-chart':
-        console.log('@DUKE_DATA_BAR', data);
-
         return <CustomBarChart data={data} />;
       case 'pie-chart':
-        console.log('@DUKE_DATA_PIE', data);
-
         return <CustomPieChart data={data} />;
       default:
         return <></>;

@@ -1,5 +1,5 @@
 import styles from './styles.module.css';
-import {ChartType, MultipleChoiceModel} from '@/models/page';
+import {ChartType, MultipleChoiceModel} from '@/models/presentation';
 
 interface Props {
   data: MultipleChoiceModel | undefined;

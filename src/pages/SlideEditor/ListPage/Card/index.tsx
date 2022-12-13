@@ -1,10 +1,10 @@
-import {PageModel, TemplatePage} from '@/models/page';
+import {SlideModel, TemplatePage} from '@/models/presentation';
 import {BarChart, BubbleChart, Delete} from '@mui/icons-material';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 
 interface Props {
-  data: PageModel;
+  data: SlideModel;
   isSelected: boolean;
   onSelect: () => void;
   onDelete: () => void;
