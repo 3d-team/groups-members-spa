@@ -17,7 +17,6 @@ const Authorized = () => {
         <Route path="/class/:classId/member" element={<Member />} />
         <Route path="/presentation" element={<Presentations />} />
         <Route path="/presentation/:presentationId" element={<SlideEditor />} />
-        <Route path="/presentation/:presentationId/:slideId" element={<a>Edit Slide</a>} />
         <Route path="/myprofile" element={<MyProfile />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
