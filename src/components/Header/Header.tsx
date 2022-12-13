@@ -12,6 +12,7 @@ import {useStyles} from './style';
 import {useAppSelector, useAppDispatch} from '@/redux';
 import {useNavigate, useLocation} from 'react-router-dom';
 import {ClassModel} from '@/models/class';
+import CreatePresentation from '../CreatePresentation/CreatePresentation';
 
 interface Props {
   children: JSX.Element;
@@ -39,6 +40,11 @@ const Header = ({children, classData}: Props) => {
   const handleCreate = () => {
     handleClose();
     dispatcher(dialogActions.openCreateClassDialog());
+  };
+
+  const handleCreatePresentation = () => {
+    handleClose();
+    dispatcher(dialogActions.openCreatePresentationDialog());
   };
 
   const handleJoin = () => {
@@ -111,6 +117,7 @@ const Header = ({children, classData}: Props) => {
             <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
               <MenuItem onClick={handleJoin}>Join Class</MenuItem>
               <MenuItem onClick={handleCreate}>Create Class</MenuItem>
+              <MenuItem onClick={handleCreatePresentation}>Create New Presentation</MenuItem>
             </Menu>
             <div style={{position: 'relative', justifyContent: 'center', alignItems: 'center'}}>
               <Avatar onClick={() => setShowOption(!showOption)} className={classes.icon} />
@@ -132,6 +139,7 @@ const Header = ({children, classData}: Props) => {
       </AppBar>
       <CreateClass />
       <JoinClass />
+      <CreatePresentation/>
     </div>
   );
 };

@@ -14,7 +14,7 @@ import {CircularProgress} from '@mui/material';
 
 export default function Dashboard() {
   const dispatcher = useDispatch<AppDispatch>();
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const fetchClasses = async () => {
     const response = await ClassApi.all();

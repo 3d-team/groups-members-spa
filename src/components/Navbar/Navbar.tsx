@@ -10,6 +10,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import HomeIcon from '@mui/icons-material/Home';
+import SlideshowIcon from '@mui/icons-material/Slideshow';
 import {IconButton} from '@mui/material';
 import {Menu} from '@mui/icons-material';
 import Header from '../Header/Header';
@@ -38,6 +39,10 @@ export default function Navbar({classData}: NavbarProps) {
     navigate(`/`);
   };
 
+  const goToPresentation = () => {
+    navigate(`/presentation`);
+  };
+
   const toggleDrawer = (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (event && event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
       return;
@@ -59,6 +64,14 @@ export default function Navbar({classData}: NavbarProps) {
               <HomeIcon />
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key="presentation" disablePadding>
+          <ListItemButton onClick={goToPresentation}>
+            <ListItemIcon>
+              <SlideshowIcon />
+            </ListItemIcon>
+            <ListItemText primary="Presentation" />
           </ListItemButton>
         </ListItem>
       </List>
