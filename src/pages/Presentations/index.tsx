@@ -13,22 +13,25 @@ import {CircularProgress} from '@mui/material';
 import PresentationCard from '@/components/PresentationCard/PresentationCard';
 
 export default function Presentations() {
+  // State - Variable ////////////////////////
   const dispatcher = useDispatch<AppDispatch>();
   const [loading, setLoading] = useState<boolean>(false);
+  const presentations = useAppSelector(state => state.presentation.presentationList);
+  const numberOfSlideInPresentation = 1;
 
+  // Function ////////////////////////
   const fetchPresentations = async () => {
     const response = await PresentationApi.all();
     dispatcher(PresentationActions.setPresentationList(response));
     setLoading(false);
   };
 
+  // Side Effect ////////////////////////
   useEffect(() => {
     fetchPresentations();
   }, []);
 
-  const presentations = useAppSelector(state => state.presentation.presentationList);
-  const numberOfSlideInPresentation = 1;
-
+  // Render Component ////////////////////////
   if (loading) {
     return (
       <CenterContainer>
@@ -48,9 +51,15 @@ export default function Presentations() {
       ) : (
         <Grid container direction="row" justifyContent="flex-start" alignItems="center" px={5} py={2}>
           {presentations.map((item: any) => (
-            <div key={item.uuid}> 
-              <PresentationCard ownerId={item.ownerId} name={item.name} numberSlide={item.numberSlide}
-               uuid={item.uuid} createdTime={item.createdTime} modifiedTime={item.modifiedTime}/>
+            <div key={item.uuid}>
+              <PresentationCard
+                ownerId={item.ownerId}
+                name={item.name}
+                numberSlide={item.numberSlide}
+                uuid={item.uuid}
+                createdTime={item.createdTime}
+                modifiedTime={item.modifiedTime}
+              />
             </div>
             //name, numberSlide, ownerId, createdTime, modifiedTime, uuid
           ))}
