@@ -1,0 +1,139 @@
+* {
+    -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+}
+.container {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    height: calc(100vh - 45px);
+    box-sizing: border-box;
+}
+
+.button{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(20, 86, 204);
+    color: #fff;
+    border: 1px solid rgb(20, 86, 204);
+    padding: 6px 12px;
+    font-size: large;
+}
+
+.button:hover {
+    background-color: rgba(20, 86, 204, 0.3);
+    color: black;
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 8px 0;
+    font-size: large;
+}
+
+.toolCtn {
+    flex: 1;
+    overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.toolCtn::-webkit-scrollbar {
+    display: none;
+}
+
+.tools {
+    width: 400px;
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: #888; */
+    padding: 16px
+}
+
+.inputText {
+    padding: 8px;
+    width: 300px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    font-size: large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: italic;
+    outline: none;
+}
+
+.inputText:focus {
+    border-bottom: 1px solid rgb(20, 86, 204);
+}
+
+.section {
+    margin: 8px 0 32px;
+}
+
+.heading {
+    font-weight: 500;
+    font-size: larger;
+}
+
+.option {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.deleteButton {
+    border: 0;
+    color: #888;
+    background-color: transparent;
+    border-radius: 50%;
+    padding: 4px;
+}
+
+.deleteButton:hover {
+    color: red;
+}
+
+.addOptionBtn {
+    background-color: rgb(20, 86, 204);
+    border: 0;
+    padding: 8px;
+    border-radius: 4px;
+    color: white;
+    font-size: medium;
+    font-style: italic;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.addOptionBtn:active {
+    background-color: rgba(20, 86, 204, 0.5);
+}
+
+
+.chartBtnCtn {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.chartBtn {
+    margin: 8px;
+    padding: 5px 12px;
+}
+
+.chartSelected {
+    color: rgb(20, 86, 204);
+    border: 2px solid rgb(104, 151, 232);
+    border-radius: 4px;
+}
+

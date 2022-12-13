@@ -1,0 +1,59 @@
+* {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.container {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    height: calc(100vh - 45px);
+}
+
+.button{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(20, 86, 204);
+    color: #fff;
+    border: 1px solid rgb(20, 86, 204);
+    padding: 6px 12px;
+    font-size: large;
+}
+
+.button:hover {
+    background-color: rgba(20, 86, 204, 0.3);
+    color: black;
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 8px 0;
+    font-size: large;
+}
+
+.listCardCtn {
+    flex: 1;
+    overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.listCardCtn::-webkit-scrollbar {
+    display: none;
+}
+
+.listCard {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+

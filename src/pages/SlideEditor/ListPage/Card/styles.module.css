@@ -1,0 +1,88 @@
+*{
+    box-sizing: border-box;
+}
+
+.container {
+    width: 200px;
+    height: 100px;
+    /* background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),  url('../../../../assets/images/default-background.jpg'); */
+    margin: 4px 0;
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    background-color: #ccc;
+    border-left: 8px solid #888;
+}
+
+.isCurrentActive {
+    border: 1px solid rgb(20, 86, 204);
+    border-left: 8px solid rgb(20, 86, 204);
+}
+
+.cardCtn {
+    position: relative;
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),  url('../../../../assets/images/default-background.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #ccc;
+}
+
+.title{
+    color: #fff;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 500;
+}
+
+.actionCtn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    background-color: transparent;
+    display: flex;
+}
+
+
+.button{
+    border: 0 solid #00000000;
+}
+
+.outerButton {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+.innerButton {
+    position: absolute;
+    top: 8px;
+    right: 4px;
+    background-color: transparent;
+    color: #f00;
+    background-color: #fff;
+    border-radius: 50%;
+    padding-top: 4px;
+    display: none;
+}
+
+.actionCtn:hover {
+    display: flex;
+    background-color: rgba(255,255,255,0.5);
+}
+
+.actionCtn:hover .innerButton {
+    display: block;
+}
