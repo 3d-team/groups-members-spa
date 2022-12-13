@@ -7,5 +7,5 @@ const RootRouterProvider = () => {
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
   return <BrowserRouter>{!isLoggedIn ? <Authorized /> : <UnAuthorized />}</BrowserRouter>;
 };
-
+    
 export default RootRouterProvider;

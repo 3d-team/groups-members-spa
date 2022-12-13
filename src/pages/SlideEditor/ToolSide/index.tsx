@@ -1,14 +1,15 @@
 import {ChartType, MockMultipleChoice, MultipleChoiceModel} from '@/models/page';
 import Helper from '@/ultilities/Helper';
 import {BarChart, DoneAll, PieChart, RemoveCircleOutline} from '@mui/icons-material';
-import {TextField} from '@mui/material';
 import clsx from 'clsx';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './styles.module.css';
 
 interface Props {
-  onChangeChart: (type: ChartType)=>void,
-  selectedType: ChartType
+  onChangeChart: (type: ChartType) => void;
+  selectedType: ChartType;
+  onSubmitData: (data: MultipleChoiceModel)=>void;
+  currentData: MultipleChoiceModel,
 }
 
 interface ChartOption {
@@ -16,18 +17,19 @@ interface ChartOption {
   name: string;
 }
 
-const ChartOptions: ChartOption[]  = [{
-  type: 'bar-chart',
-  name: 'Bars',
-},
-{
-  type: 'pie-chart',
-  name: 'Pie'
-}
-]
+const ChartOptions: ChartOption[] = [
+  {
+    type: 'bar-chart',
+    name: 'Bars',
+  },
+  {
+    type: 'pie-chart',
+    name: 'Pie',
+  },
+];
 
-const ToolSide = ({onChangeChart, selectedType = 'bar-chart'}: Props) => {
-  const [data, setData] = useState<MultipleChoiceModel>(MockMultipleChoice);
+const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, currentData}: Props) => {
+  const [data, setData] = useState<MultipleChoiceModel>(currentData);
 
   const onChangeQuestion = (text: string) => {
     setData(prev => {
@@ -68,15 +70,20 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart'}: Props) => {
   };
 
   const renderChartIcon = (type: ChartType) => {
-    switch(type){
+    switch (type) {
       case 'bar-chart':
         return <BarChart />;
       case 'pie-chart':
         return <PieChart />;
       default:
-          return <></>
+        return <></>;
     }
-  }
+  };
+
+
+  useEffect(()=>{
+    setData(currentData);
+  }, [currentData]);
 
   return (
     <div className={styles.container}>
@@ -129,20 +136,22 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart'}: Props) => {
           </div>
 
           <div className={styles.chartBtnCtn}>
-            {
-              ChartOptions.map((item, index)=>{
-                return (
-                  <button className={clsx([styles.chartBtn, selectedType === item.type && styles.chartSelected])} onClick={()=>{onChangeChart(item.type)}}>
-                    {renderChartIcon(item.type)}
-                    <p>{item.name}</p>
-                  </button>
-                )
-              })
-            }
+            {ChartOptions.map((item, index) => {
+              return (
+                <button
+                  className={clsx([styles.chartBtn, selectedType === item.type && styles.chartSelected])}
+                  onClick={() => {
+                    onChangeChart(item.type);
+                  }}>
+                  {renderChartIcon(item.type)}
+                  <p>{item.name}</p>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
-      <button className={styles.button}>
+      <button className={styles.button} onClick={()=>{onSubmitData(data)}}>
         <DoneAll />
         <p style={{marginLeft: 8}}>Submit Changes!</p>
         <div></div>

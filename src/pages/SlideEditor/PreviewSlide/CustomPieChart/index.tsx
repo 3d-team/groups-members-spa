@@ -27,14 +27,10 @@ interface Props {
 
 const CustomPieChart = ({data = []}: Props) => {
   const isZero: boolean = useMemo(()=>{
-    data.forEach((element)=>{
-      if(element.value > 0){
-        return false;
-      }
-    })
-    return true;
+    const index = data.findIndex((item)=>{return item.value > 0})
+    return index < 0;
   }, [data])
-  
+    
   return (
     <div className={styles.container}>
       <div className={styles.chartCtn}>
