@@ -6,7 +6,7 @@ import clsx from 'clsx';
 export default function Header() {
   const navigate = useNavigate();
   const onBackPress = () => {
-    navigate('/');
+    navigate('/presentation');
   };
 
   return (
