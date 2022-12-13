@@ -1,17 +1,20 @@
-import CenterContainer from '@/components/CenterContainer';
 import {ChartType, MockMultipleChoice, MultipleChoiceModel, PageModel} from '@/models/page';
 import Helper from '@/ultilities/Helper';
-import React, {useState} from 'react';
+import {useState} from 'react';
 import Header from './Header';
 import ListPage from './ListPage';
 import PreviewSlide from './PreviewSlide';
 import styles from './styles.module.css';
 import ToolSide from './ToolSide';
 
-const defaultPage: PageModel = {
-  type: 'default',
-  title: 'Hello Everyone',
+const defaultPage: MultipleChoiceModel = {
+  type: 'multiple-choice',
+  title: 'Are you ready?',
   backgroundImage: '',
+  options: [
+    {name: 'Yes', value: 0},
+    {name: 'No', value: 0},
+  ],
 };
 
 const multipleChoicePage: MultipleChoiceModel = {
@@ -19,8 +22,8 @@ const multipleChoicePage: MultipleChoiceModel = {
   title: 'Are you ready?',
   backgroundImage: '',
   options: [
-    {name: 'Yes', value: 0},
-    {name: 'No', value: 0},
+    {name: 'Yes', value: 1},
+    {name: 'No', value: 2},
   ],
 };
 
@@ -46,7 +49,27 @@ const SlideEditor = () => {
   };
   const onChangeTypeChart = (type: ChartType) => {
     setTypeChart(type);
-  }
+  };
+
+  const onSubmitData = (data: MultipleChoiceModel) => {
+    setListPage((prev)=>{
+      const newList = [...prev];
+      newList[selectedIndex] = data;
+      return newList;
+    })
+  };
+
+  const onSave = () => {
+
+  };
+
+  const onPresent = () => {
+
+  };
+
+  const onShare = () => {
+  };
+
   return (
     <div className={styles.container}>
       {/* Header: back button, saved button, present button */}
@@ -62,7 +85,7 @@ const SlideEditor = () => {
           <PreviewSlide data={listPage[selectedIndex]} type={typeChart} />
         </div>
         <div className={styles.rightContainer}>
-          <ToolSide onChangeChart={onChangeTypeChart} selectedType={typeChart}/>
+          <ToolSide onChangeChart={onChangeTypeChart} selectedType={typeChart} onSubmitData={onSubmitData} currentData={listPage[selectedIndex]}/>
         </div>
       </div>
     </div>

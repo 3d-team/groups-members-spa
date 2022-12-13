@@ -7,8 +7,7 @@ interface Props {
   type?: ChartType;
 }
 
-const PreviewSlide = ({data = MockMultipleChoice, type = 'pie-chart'}: Props) => {
-  
+const PreviewSlide = ({data = MockMultipleChoice, type = 'bar-chart'}: Props) => {
   const renderChart = (type: ChartType, data: OptionModel[]) => {
     switch (type) {
       case 'bar-chart':
@@ -17,14 +16,14 @@ const PreviewSlide = ({data = MockMultipleChoice, type = 'pie-chart'}: Props) =>
         return <CustomBarChart data={data} />;
       case 'pie-chart':
         console.log('@DUKE_DATA_PIE', data);
-        
+
         return <CustomPieChart data={data} />;
       default:
         return <></>;
     }
   };
 
-  const _width = data?.options?.length ? 100 + data.options.length*100 : 200;  
+  const _width = data?.options?.length ? 100 + data.options.length * 100 : 200;
 
   return (
     <div className={styles.container}>
@@ -34,7 +33,7 @@ const PreviewSlide = ({data = MockMultipleChoice, type = 'pie-chart'}: Props) =>
             <p className={styles.question}>Chọn ngày vấn đáp đi mấy đứa!</p>
           </div>
           <div className={styles.chartCtn}>
-            <div style={{width: _width, height: '90%'}}>{renderChart(type, data.options)}</div>
+            <div style={{width: type === 'bar-chart' ? _width : '100%', height: '100%'}}>{renderChart(type, data.options)}</div>
           </div>
         </div>
       </div>
