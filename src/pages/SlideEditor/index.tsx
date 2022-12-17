@@ -2,7 +2,7 @@ import {ChartType, MockMultipleChoice, MultipleChoiceModel, SlideModel} from '@/
 import {useAppDispatch, useAppSelector} from '@/redux';
 import PresentationThunks from '@/redux/feature/presentation/thunk';
 import Helper from '@/ultilities/Helper';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Header from './Header';
 import ListPage from './ListPage';
 import PreviewSlide from './PreviewSlide';
@@ -36,7 +36,6 @@ const SlideEditor = () => {
   const present = useAppSelector(state => state.presentation.data);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [listPage, setListPage] = useState<MultipleChoiceModel[]>(present.slides);
-  console.log('@duKE__', present);
 
   const [typeChart, setTypeChart] = useState<ChartType>('bar-chart');
 
@@ -75,6 +74,13 @@ const SlideEditor = () => {
   const onPresent = () => {};
 
   const onShare = () => {};
+
+  // ----- Side Effect ----
+  useEffect(() => {
+    return () => {
+      onSave();
+    };
+  }, []);
 
   return (
     <div className={styles.container}>

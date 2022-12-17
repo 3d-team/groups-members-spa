@@ -13,16 +13,13 @@ export default function RedirectPage() {
   setTimeout(() => {
     const token = searchParams.get('token');
     const tokenValue = token ? token : '';
-    console.log(searchParams.get('token'));
+    console.log('@DUKE__TOKEN____', searchParams.get('token'));
     dispatcher(authActions.setToken(tokenValue));
     dispatcher(authActions.loginSucceed());
     navigate('/');
   }, 1500);
 
   return (
-    // <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
-    //   <CircularProgress />
-    // </div>
     <CenterContainer>
       <CircularProgress />
     </CenterContainer>
