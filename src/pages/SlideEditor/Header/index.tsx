@@ -24,9 +24,9 @@ export default function Header({onSave, onPresent, onShare, title = ''}: Props) 
       </button>
       <h6 className={styles.title}>{title}</h6>
       <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <button className={styles.button} onClick={onSave}>
+        {/* <button className={styles.button} onClick={onSave}>
           Save
-        </button>
+        </button> */}
         <button className={styles.button} onClick={onPresent}>
           Present
         </button>
