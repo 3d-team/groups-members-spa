@@ -5,8 +5,10 @@ import styles from './styles.module.css';
 const Home = () => {
   return (
     <div className={styles.root}>
-      <SideNavigation />
-      <div>
+      <div className={styles.sideNavigation}>
+        <SideNavigation />
+      </div>
+      <div className={styles.renderPageCtn}>
         <Outlet />
       </div>
     </div>

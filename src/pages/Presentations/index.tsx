@@ -42,8 +42,6 @@ export default function Presentations() {
 
   return (
     <>
-      <Navbar />
-
       {presentations.length === 0 ? (
         <CenterContainer>
           <div>No presentations found! Create new a presentation!</div>

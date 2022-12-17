@@ -33,7 +33,6 @@ const MyProfile = () => {
 
   return (
     <>
-      <Navbar />
       <div className={classes.root}>
         <Box
           sx={{
