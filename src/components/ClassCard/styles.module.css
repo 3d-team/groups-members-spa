@@ -1,41 +1,47 @@
-.presentationCard__upper {
+.classCard__upper {
   background-color: #008d7d;
-  height: 90px;
-  position: relative;
   color: white;
-  padding: 10px;
+  padding: 12px;
   border-bottom: 1px solid #dcdcdc;
+  display: flex;
+  flex-direction: column;
 }
 
-.presentationCard {
+.classCard {
   width: 300px;
   border: 1px solid #dcdcdc;
   border-radius: 5px;
   overflow: hidden;
   cursor: pointer;
+  margin-right: 30px;
+  margin-bottom: 30px;
 }
 
-.presentationCard__middle {
-  height: 100px;
-  padding: 10px;
+.classCard__middle {
+  height: 190px;
   border-bottom: 1px solid #dcdcdc;
 }
 
-.presentationCard__Name {
+.classCard__creatorPhoto {
+  position: absolute;
+  right: 5px;
+  border-radius: 9999px;
+}
+
+.classCard__className {
   font-weight: 600;
   font-size: 30px;
 }
 
-.presentationCard__creatorName {
-  position: absolute;
+.classCard__creatorName {
   font-size: 15px;
 }
 
-.presentationCard__numberSlide {
+.classCard__subjectName {
   font-size: 15px;
 }
 
-.presentationCard__lower {
+.classCard__lower {
   display: flex;
   flex-direction: row-reverse;
 }

@@ -1,7 +1,7 @@
 import {IconButton} from '@mui/material';
 import {AssignmentIndOutlined, FolderOpenOutlined} from '@mui/icons-material';
 import {useNavigate} from 'react-router-dom';
-import './style.css';
+import styles from './styles.module.css';
 
 type Props = {
   name: string;
@@ -18,14 +18,14 @@ function ClassCard({name, creatorName, subjectName, uuid}: Props) {
   };
 
   return (
-    <div className="classCard" style={{marginRight: 30, marginBottom: 30}} onClick={goToClass} key={uuid}>
-      <div className="classCard__upper">
-        <div className="classCard__className">{name}</div>
-        <div className="classCard__subjectName">{subjectName}</div>
-        <div className="classCard__creatorName">{creatorName}</div>
+    <div className={styles.classCard} onClick={goToClass} key={uuid}>
+      <div className={styles.classCard__upper}>
+        <div className={styles.classCard__className}>{name}</div>
+        <div className={styles.classCard__subjectName}>{subjectName}</div>
+        <div className={styles.classCard__creatorName}>{creatorName}</div>
       </div>
-      <div className="classCard__middle"></div>
-      <div className="classCard__lower">
+      <div className={styles.classCard__middle}></div>
+      <div className={styles.classCard__lower}>
         <IconButton>
           <FolderOpenOutlined />
         </IconButton>
