@@ -2,6 +2,7 @@ import {IconButton} from '@mui/material';
 import {AssignmentIndOutlined, FolderOpenOutlined} from '@mui/icons-material';
 import {useNavigate} from 'react-router-dom';
 import styles from './styles.module.css';
+import clsx from 'clsx';
 
 type Props = {
   name: string;
@@ -18,21 +19,14 @@ function ClassCard({name, creatorName, subjectName, uuid}: Props) {
   };
 
   return (
-    <div className={styles.classCard} onClick={goToClass} key={uuid}>
-      <div className={styles.classCard__upper}>
-        <div className={styles.classCard__className}>{name}</div>
-        <div className={styles.classCard__subjectName}>{subjectName}</div>
-        <div className={styles.classCard__creatorName}>{creatorName}</div>
+    <div className={styles.container} key={uuid}>
+      <div>
+        <div className={styles.image}></div>
+        <div className={styles.name}>{name}</div>
+        <div className={clsx(styles.creatorName, styles.desc)}>{`Người tạo: ${creatorName}`}</div>
+        <div className={styles.desc}>{`Mô tả: Đây là lớp học thiết kế ui/ux cho người mới bắt đầu...`}</div>
       </div>
-      <div className={styles.classCard__middle}></div>
-      <div className={styles.classCard__lower}>
-        <IconButton>
-          <FolderOpenOutlined />
-        </IconButton>
-        <IconButton>
-          <AssignmentIndOutlined />
-        </IconButton>
-      </div>
+      <div className={styles.button}>Xem chi tiết</div>
     </div>
   );
 }

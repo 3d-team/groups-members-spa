@@ -1,47 +1,60 @@
-.classCard__upper {
-  background-color: #008d7d;
-  color: white;
-  padding: 12px;
-  border-bottom: 1px solid #dcdcdc;
+* {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.container {
+  width: 350px;
+  height: 400px;
+  margin: 16px;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px #ccc solid;
+  box-shadow: 0 0 8px #aaa;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
-.classCard {
-  width: 300px;
-  border: 1px solid #dcdcdc;
-  border-radius: 5px;
-  overflow: hidden;
-  cursor: pointer;
-  margin-right: 30px;
-  margin-bottom: 30px;
+.image {
+  background-image: url('../../assets/images/class-card.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 50%;
+  border-radius: 8px;
+  margin-bottom: 16px;
 }
 
-.classCard__middle {
-  height: 190px;
-  border-bottom: 1px solid #dcdcdc;
+.name {
+  font-size: x-large;
 }
 
-.classCard__creatorPhoto {
-  position: absolute;
-  right: 5px;
-  border-radius: 9999px;
+.creatorName {
+  font-size: medium;
+  margin-top: 8px;
 }
 
-.classCard__className {
-  font-weight: 600;
-  font-size: 30px;
+.desc {
+  font-size: medium;
+  margin-top: 8px;
+  color: #888;
 }
 
-.classCard__creatorName {
-  font-size: 15px;
+.button {
+  width: 100%;
+  background-color: #888;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 8px;
 }
 
-.classCard__subjectName {
-  font-size: 15px;
+.button:hover {
+  background-color: #0088fe;
+  color: #fff;
 }
 
-.classCard__lower {
-  display: flex;
-  flex-direction: row-reverse;
+.button:active {
+  background-color: #ff3366;
+  color: #000;
 }
