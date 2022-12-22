@@ -6,7 +6,8 @@ const AddButton = () => {
   return (
     <div className={clsx(styles.container, styles.button)}>
       <Add sx={{fontSize: 50, color: '#333'}} />
-      <div>{`Tạo lớp học mới .`}</div>
+      <button>Tạo lớp học mới</button>
+      <button>Mời</button>
     </div>
   );
 };
