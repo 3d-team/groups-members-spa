@@ -2,17 +2,11 @@ import {AccountCircle, ExitToAppRounded, Home, Logout, School, Slideshow} from '
 import clsx from 'clsx';
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {NavigationOptionType, NAV_OPTIONS} from '../index.props';
 
 import styles from './styles.module.css';
 
-type NavItem = 'classes' | 'presentation' | 'account';
-interface NavItemModel {
-  type: NavItem;
-  displayName: string;
-  link: string;
-}
-
-const NavIcon = ({type}: {type: NavItem}) => {
+const NavIcon = ({type}: {type: NavigationOptionType}) => {
   switch (type) {
     case 'classes':
       return <Home sx={{fontSize: 40}} />;
@@ -25,35 +19,16 @@ const NavIcon = ({type}: {type: NavItem}) => {
   }
 };
 
-const navData: NavItemModel[] = [
-  {
-    type: 'classes',
-    displayName: 'Class',
-    link: '/',
-  },
-  {
-    type: 'presentation',
-    displayName: 'Presentation',
-    link: '/presentation',
-  },
-  {
-    type: 'account',
-    displayName: 'Account',
-    link: '/myprofile',
-  },
-];
+interface Props {
+  onPressNav: () => void;
+  activeNav: number;
+}
 
-const SideNavigation = () => {
-  const [activeNav, setActiveNav] = useState<number>(0);
-  const navigate = useNavigate();
-  const onPressNav = (index: number, link: string) => {
-    setActiveNav(index);
-    navigate(link);
-  };
+const SideNavigation = ({onPressNav, activeNav}: any) => {
   return (
     <div className={styles.navContainer}>
       <div>
-        {navData.map((item, index) => {
+        {NAV_OPTIONS.map((item, index) => {
           return (
             <div className={clsx(styles.navItem, index === activeNav && styles.navActive)} onClick={() => onPressNav(index, item.link)}>
               <NavIcon type={item.type} />

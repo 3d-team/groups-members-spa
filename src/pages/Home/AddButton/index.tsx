@@ -1,13 +1,32 @@
 import {Add} from '@mui/icons-material';
 import clsx from 'clsx';
+import {NavigationOptionType} from '../index.props';
+import ClassOptions from './ClassOptions';
+import PresentationOptions from './PresentationOptions';
 import styles from './styles.module.css';
 
-const AddButton = () => {
+interface Props {
+  type?: NavigationOptionType;
+}
+
+const AddButton = ({type = 'classes'}: Props) => {
+  const renderOptions = (key: NavigationOptionType) => {
+    switch (key) {
+      case 'classes':
+        return <ClassOptions />;
+      case 'presentation':
+        return <PresentationOptions />;
+      default:
+        break;
+    }
+  };
+
   return (
-    <div className={clsx(styles.container, styles.button)}>
-      <Add sx={{fontSize: 50, color: '#333'}} />
-      <button>Tạo lớp học mới</button>
-      <button>Mời</button>
+    <div className={styles.container}>
+      <div className={styles.addButton}>
+        <Add sx={{fontSize: 50, color: '#333'}} />
+      </div>
+      <div className={styles.optionsCtn}>{renderOptions(type)}</div>
     </div>
   );
 };

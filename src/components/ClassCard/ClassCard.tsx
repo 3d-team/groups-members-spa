@@ -1,5 +1,3 @@
-import {IconButton} from '@mui/material';
-import {AssignmentIndOutlined, FolderOpenOutlined} from '@mui/icons-material';
 import {useNavigate} from 'react-router-dom';
 import styles from './styles.module.css';
 import clsx from 'clsx';
@@ -26,7 +24,10 @@ function ClassCard({name, creatorName, subjectName, uuid}: Props) {
         <div className={clsx(styles.creatorName, styles.desc)}>{`Người tạo: ${creatorName}`}</div>
         <div className={styles.desc}>{`Mô tả: Đây là lớp học thiết kế ui/ux cho người mới bắt đầu...`}</div>
       </div>
-      <div className={styles.button}>Xem chi tiết</div>
+
+      <div className={styles.button} onClick={goToClass}>
+        Xem chi tiết
+      </div>
     </div>
   );
 }
