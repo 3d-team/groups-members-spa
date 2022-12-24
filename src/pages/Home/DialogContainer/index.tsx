@@ -3,6 +3,7 @@ import {Close} from '@mui/icons-material';
 import {DialogRef, DialogType} from '../index.props';
 import {forwardRef, Ref, useImperativeHandle, useState} from 'react';
 import clsx from 'clsx';
+import CreatePresentation from '@/components/CreatePresentation/CreatePresentation';
 
 interface Props {}
 
@@ -32,7 +33,13 @@ const DialogContainer = forwardRef<DialogRef, Props>((_, ref) => {
       case 'create_new_class':
         return <div>Create new class</div>;
       case 'create_new_presentation':
-        return <div>Create new presentation</div>;
+        return (
+          <CreatePresentation
+            hideOnSubmit={() => {
+              hide();
+            }}
+          />
+        );
       default:
         return <></>;
     }
