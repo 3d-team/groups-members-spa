@@ -26,7 +26,7 @@ const PreviewSlide = ({data = MockMultipleChoice, type = 'bar-chart'}: Props) =>
       <div className={styles.slide}>
         <div className={styles.content}>
           <div className={styles.questionCtn}>
-            <p className={styles.question}>Chọn ngày vấn đáp đi mấy đứa!</p>
+            <p className={styles.question}>{data.title}</p>
           </div>
           <div className={styles.chartCtn}>
             <div style={{width: type === 'bar-chart' ? _width : '100%', height: '100%'}}>{renderChart(type, data.options)}</div>
