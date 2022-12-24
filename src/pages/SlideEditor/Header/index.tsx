@@ -13,7 +13,7 @@ interface Props {
 export default function Header({onSave, onPresent, onShare, title = ''}: Props) {
   const navigate = useNavigate();
   const onBackPress = () => {
-    navigate('/presentation');
+    navigate('/');
   };
 
   return (

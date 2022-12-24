@@ -59,8 +59,6 @@ export const PresentationExtraReducers = (builder: any) => {
       state.status = 'failed';
     })
     .addCase(saveAllSlides.fulfilled, (state: PresentationState, action: PayloadAction<MultipleChoiceModel[]>) => {
-      console.log('@DUKE_____', action.payload);
-
       state.data.slides = action.payload;
     });
   // .addCase(addPresentation.pending, (state: PresentationState) => {
@@ -80,7 +78,6 @@ const PresentationThunks = {
   getPresentationById,
   getAllPresentations,
   getAllSlides,
-  // addPresentation,
   saveAllSlides,
 };
 

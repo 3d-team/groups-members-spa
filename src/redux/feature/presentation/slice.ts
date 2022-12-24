@@ -1,17 +1,11 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {PresentationState} from '@/models/presentation';
+import {MOCK_PRESENTATION_MODEL, PresentationState} from '@/models/presentation';
 import {PresentationExtraReducers} from './thunk';
 
 const initialState: PresentationState = {
-  data: {
-    uuid: '',
-    name: '',
-    ownerId: '',
-    accessCode: '',
-    slides: [],
-  },
+  data: MOCK_PRESENTATION_MODEL,
   status: 'idle',
-  presentationList: [],
+  presentationList: [{}],
 };
 
 export const PresentationSlice = createSlice({

@@ -85,11 +85,10 @@ const SlideEditor = () => {
 
   return (
     <div className={styles.container}>
-      {/* Header: back button, saved button, present button */}
       <div className={styles.topContainer}>
         <Header onSave={onSave} onPresent={onPresent} onShare={onShare} />
       </div>
-      {/* Body */}
+
       <div className={styles.bodyContainer}>
         <div className={styles.leftContainer}>
           <ListPage listPage={listPage} addNewPage={addNewMultipleChoicePage} onSelect={onSelectedPage} onDelete={onDeletePage} selectedIndex={selectedIndex} />

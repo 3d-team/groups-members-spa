@@ -38,3 +38,11 @@ export interface PresentationState {
   status: 'loading' | 'failed' | 'idle';
   presentationList: any[];
 }
+
+export const MOCK_PRESENTATION_MODEL: PresentationModel = {
+  uuid: 'test',
+  name: 'DEV_TEST_PRESENTATION',
+  ownerId: 'DEV_',
+  accessCode: 'DEV_ACCESS_CODE',
+  slides: [MockMultipleChoice],
+};
