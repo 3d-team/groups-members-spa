@@ -36,7 +36,7 @@ const mock: MultipleChoiceModel = {
 };
 
 const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, currentData}: Props) => {
-  const [data, setData] = useState<MultipleChoiceModel>(currentData || mock);
+  const [data, setData] = useState<MultipleChoiceModel>(currentData);
   // console.log('@DUKE____WHAT', {data, mock});
 
   const onChangeQuestion = (text: string) => {
@@ -93,10 +93,13 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
       setData(currentData);
     }
   }, [currentData]);
-
+  if (!data) {
+    return <></>;
+  }
   return (
     <div className={styles.container}>
       <p className={styles.title}>Tools</p>
+
       <div className={styles.toolCtn}>
         <div className={styles.tools}>
           <div className={styles.section}>

@@ -1,3 +1,5 @@
+import {useAppDispatch} from '@/redux';
+import {authActions} from '@/redux/feature/auth/slice';
 import {AccountCircle, ExitToAppRounded, Home, Slideshow} from '@mui/icons-material';
 import clsx from 'clsx';
 import {NavigationOptionType, NAV_OPTIONS} from '../index.props';
@@ -23,6 +25,10 @@ interface Props {
 }
 
 const SideNavigation = ({onPressNav, activeNav}: Props) => {
+  const dispatcher = useAppDispatch();
+  const logout = () => {
+    dispatcher(authActions.logout());
+  };
   return (
     <div className={styles.navContainer}>
       <div>
@@ -36,7 +42,7 @@ const SideNavigation = ({onPressNav, activeNav}: Props) => {
         })}
       </div>
 
-      <div className={clsx(styles.navItem, styles.logout)}>
+      <div className={clsx(styles.navItem, styles.logout)} onClick={logout}>
         <ExitToAppRounded sx={{fontSize: 40}} />
         <span>Logout</span>
       </div>

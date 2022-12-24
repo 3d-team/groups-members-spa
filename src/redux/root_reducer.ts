@@ -2,6 +2,7 @@ import {combineReducers, Reducer} from 'redux';
 import authReducer from './feature/auth/slice';
 import classReducer from './feature/class/slice';
 import dialogReducer from './feature/dialog/slice';
+import appReducer from './feature/app/slice';
 import presentationReducer from './feature/presentation/slice';
 import userReducer from './feature/user/slice';
 import {RootState} from './store';
@@ -12,6 +13,7 @@ export const combinedReducer = combineReducers({
   dialog: dialogReducer,
   class: classReducer,
   presentation: presentationReducer,
+  app: appReducer,
 });
 
 const rootReducer: Reducer<RootState> = (state, action) => {
