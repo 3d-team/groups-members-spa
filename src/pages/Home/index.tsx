@@ -1,17 +1,31 @@
 import {useState} from 'react';
-import {Outlet, useNavigate} from 'react-router-dom';
+import Dashboard from '../Dashboard';
+import MyProfile from '../MyProfile';
+import Presentations from '../Presentations';
 import AddButton from './AddButton';
-import {NAV_OPTIONS} from './index.props';
+import DialogContainer from './DialogContainer';
+import {dialogRef, NavigationOptionType, NAV_OPTIONS} from './index.props';
 import SideNavigation from './SideNavigation';
 import styles from './styles.module.css';
 
 const Home = () => {
   const [activeNav, setActiveNav] = useState<number>(0);
-  const navigate = useNavigate();
 
-  const onPressNav = (index: number, link: string) => {
+  const onPressNav = (index: number) => {
     setActiveNav(index);
-    navigate(link);
+  };
+
+  const renderPageContent = (key: NavigationOptionType) => {
+    switch (key) {
+      case 'classes':
+        return <Dashboard />;
+      case 'presentation':
+        return <Presentations />;
+      case 'account':
+        return <MyProfile />;
+      default:
+        return <></>;
+    }
   };
 
   return (
@@ -20,9 +34,8 @@ const Home = () => {
       <div className={styles.sideNavigation}>
         <SideNavigation onPressNav={onPressNav} activeNav={activeNav} />
       </div>
-      <div className={styles.renderPageCtn}>
-        <Outlet />
-      </div>
+      <div className={styles.renderPageCtn}>{renderPageContent(NAV_OPTIONS[activeNav].type)}</div>
+      <DialogContainer ref={dialogRef} />
     </div>
   );
 };

@@ -1,7 +1,5 @@
-import {AccountCircle, ExitToAppRounded, Home, Logout, School, Slideshow} from '@mui/icons-material';
+import {AccountCircle, ExitToAppRounded, Home, Slideshow} from '@mui/icons-material';
 import clsx from 'clsx';
-import {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
 import {NavigationOptionType, NAV_OPTIONS} from '../index.props';
 
 import styles from './styles.module.css';
@@ -20,17 +18,17 @@ const NavIcon = ({type}: {type: NavigationOptionType}) => {
 };
 
 interface Props {
-  onPressNav: () => void;
+  onPressNav: (index: number) => void;
   activeNav: number;
 }
 
-const SideNavigation = ({onPressNav, activeNav}: any) => {
+const SideNavigation = ({onPressNav, activeNav}: Props) => {
   return (
     <div className={styles.navContainer}>
       <div>
         {NAV_OPTIONS.map((item, index) => {
           return (
-            <div className={clsx(styles.navItem, index === activeNav && styles.navActive)} onClick={() => onPressNav(index, item.link)}>
+            <div className={clsx(styles.navItem, index === activeNav && styles.navActive)} onClick={() => onPressNav(index)}>
               <NavIcon type={item.type} />
               <span>{item.displayName}</span>
             </div>

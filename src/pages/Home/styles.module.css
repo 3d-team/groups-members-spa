@@ -1,18 +1,15 @@
 .root {
-  /* background-color: #f00; */
   flex: 1;
   display: flex;
 }
 
 .sideNavigation {
-  /* background-color: aqua; */
   width: 80px;
   height: 100px;
-  z-index: 1000;
+  z-index: 50;
 }
 
 .renderPageCtn {
-  /* background-color: blueviolet; */
   display: flex;
   flex: 1;
   margin: 0 16px;
