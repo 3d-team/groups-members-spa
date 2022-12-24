@@ -1,7 +1,6 @@
-import {IconButton} from '@mui/material';
-import {AssignmentIndOutlined, FolderOpenOutlined} from '@mui/icons-material';
 import {useNavigate} from 'react-router-dom';
-import './style.css';
+import styles from './styles.module.css';
+import clsx from 'clsx';
 
 type Props = {
   name: string;
@@ -18,20 +17,16 @@ function ClassCard({name, creatorName, subjectName, uuid}: Props) {
   };
 
   return (
-    <div className="classCard" style={{marginRight: 30, marginBottom: 30}} onClick={goToClass} key={uuid}>
-      <div className="classCard__upper">
-        <div className="classCard__className">{name}</div>
-        <div className="classCard__subjectName">{subjectName}</div>
-        <div className="classCard__creatorName">{creatorName}</div>
+    <div className={styles.container} key={uuid}>
+      <div>
+        <div className={styles.image}></div>
+        <div className={styles.name}>{name}</div>
+        <div className={clsx(styles.creatorName, styles.desc)}>{`Người tạo: ${creatorName}`}</div>
+        <div className={styles.desc}>{`Mô tả: Đây là lớp học thiết kế ui/ux cho người mới bắt đầu...`}</div>
       </div>
-      <div className="classCard__middle"></div>
-      <div className="classCard__lower">
-        <IconButton>
-          <FolderOpenOutlined />
-        </IconButton>
-        <IconButton>
-          <AssignmentIndOutlined />
-        </IconButton>
+
+      <div className={styles.button} onClick={goToClass}>
+        Xem chi tiết
       </div>
     </div>
   );

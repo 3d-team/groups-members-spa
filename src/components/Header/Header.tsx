@@ -139,7 +139,7 @@ const Header = ({children, classData}: Props) => {
       </AppBar>
       <CreateClass />
       <JoinClass />
-      <CreatePresentation/>
+      {/* <CreatePresentation/> */}
     </div>
   );
 };

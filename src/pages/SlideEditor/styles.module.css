@@ -1,43 +1,44 @@
 .container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-y: hidden;
-    overflow-x: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  /* background-color: blueviolet; */
 }
 
 .topContainer {
-    height: 45px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 8px;
-    border-bottom: 1px solid #e0e0e0;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 8px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .bodyContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: stretch;
-    height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  height: 100%;
 }
 
 .leftContainer {
-    width: 200px;
-    display: flex;
-    justify-content: center;
-    border-right: 1px solid #e0e0e0;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  border-right: 1px solid #e0e0e0;
 }
 
 .centerContainer {
-    height: 100%;
-    background-color: #e0e0e0;
-    flex: 1;
+  height: 100%;
+  background-color: #e0e0e0;
+  flex: 1;
 }
 
 .rightContainer {
-    height: 100%;
-    width: 400px;
-    border-left: 1px solid #e0e0e0
+  height: 100%;
+  width: 400px;
+  border-left: 1px solid #e0e0e0;
 }

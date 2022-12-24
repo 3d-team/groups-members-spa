@@ -3,12 +3,13 @@ import {AssignmentIndOutlined, FolderOpenOutlined} from '@mui/icons-material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import SlideshowIcon from '@mui/icons-material/Slideshow';
 import {useNavigate} from 'react-router-dom';
-import './style.css';
+import styles from './styles.module.css';
+import clsx from 'clsx';
 
 type Props = {
   name: string;
   numberSlide: number;
-  ownerId : string;
+  ownerId: string;
   createdTime: string;
   modifiedTime: string;
   uuid: string;
@@ -21,32 +22,21 @@ function PresentationCard({name, numberSlide, ownerId, createdTime, modifiedTime
     navigate(`/presentation/${uuid}`);
   };
 
-  const deletePresentation = () => {
+  const deletePresentation = () => {};
 
-  };
-
-  const presentSlides = () => {
-
-  };
+  const presentSlides = () => {};
 
   return (
-    <div className="presentationCard" style={{marginRight: 30, marginBottom: 30}} onClick={goToPresentationDetail} key={uuid}>
-      <div className="presentationCard__upper">
-        <div className="presentationCard__Name">{name}</div>
-        <div className="presentationCard__numberSlide">{numberSlide} {numberSlide > 1 ? "Slides" : "Slide"}</div>
-        <div className="presentationCard__creatorName">{ownerId}</div>
+    <div className={styles.container} key={uuid}>
+      <div>
+        <div className={styles.image}></div>
+        <div className={styles.name}>{name}</div>
+        <div className={clsx(styles.creatorName, styles.desc)}>{`Người tạo: ${ownerId}`}</div>
+        <div className={styles.desc}>{`Thời gian tạo: 24:00`}</div>
       </div>
-      <div className="presentationCard__middle">
-        <div>Created: {createdTime}</div>
-        <div>Modified: {modifiedTime}</div>
-      </div>
-      <div className="presentationCard__lower">
-        <IconButton onClick={deletePresentation}>
-          <DeleteOutlineIcon />
-        </IconButton>
-        <IconButton onClick={presentSlides} >
-          <SlideshowIcon />
-        </IconButton>
+
+      <div className={styles.button} onClick={goToPresentationDetail}>
+        Xem chi tiết
       </div>
     </div>
   );

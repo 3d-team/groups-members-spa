@@ -51,8 +51,6 @@ export default function Class() {
 
   return (
     <>
-      <Navbar classData={classData} />
-
       <div className="main">
         <div className="main__wrapper">
           <div className="main__content">

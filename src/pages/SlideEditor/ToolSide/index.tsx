@@ -28,8 +28,16 @@ const ChartOptions: ChartOption[] = [
   },
 ];
 
+const mock: MultipleChoiceModel = {
+  backgroundImage: '',
+  options: [],
+  title: '',
+  type: 'multiple-choice',
+};
+
 const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, currentData}: Props) => {
-  const [data, setData] = useState<MultipleChoiceModel>(currentData);
+  const [data, setData] = useState<MultipleChoiceModel>(currentData || mock);
+  // console.log('@DUKE____WHAT', {data, mock});
 
   const onChangeQuestion = (text: string) => {
     setData(prev => {
@@ -81,7 +89,9 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
   };
 
   useEffect(() => {
-    setData(currentData);
+    if (currentData) {
+      setData(currentData);
+    }
   }, [currentData]);
 
   return (
@@ -105,6 +115,7 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
             <p className={styles.heading} style={{marginBottom: 16}}>
               Options:
             </p>
+
             <div className={styles.optionsCtn}>
               {data.options.map((item, index) => {
                 return (
@@ -156,7 +167,7 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
           onSubmitData(data);
         }}>
         <DoneAll />
-        <p style={{marginLeft: 8}}>Submit Changes!</p>
+        <p style={{marginLeft: 8}}>Save</p>
         <div></div>
       </button>
     </div>

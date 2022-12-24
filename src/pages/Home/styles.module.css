@@ -1,0 +1,17 @@
+.root {
+  flex: 1;
+  display: flex;
+}
+
+.sideNavigation {
+  width: 80px;
+  height: 100px;
+  z-index: 50;
+}
+
+.renderPageCtn {
+  display: flex;
+  flex: 1;
+  margin: 0 16px;
+  width: 100%;
+}

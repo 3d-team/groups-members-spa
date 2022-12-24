@@ -7,12 +7,13 @@ interface Props {
   onSave: () => void;
   onPresent: () => void;
   onShare: () => void;
+  title?: string;
 }
 
-export default function Header({onSave, onPresent, onShare}: Props) {
+export default function Header({onSave, onPresent, onShare, title = ''}: Props) {
   const navigate = useNavigate();
   const onBackPress = () => {
-    navigate('/presentation');
+    navigate('/');
   };
 
   return (
@@ -21,11 +22,11 @@ export default function Header({onSave, onPresent, onShare}: Props) {
         <ChevronLeft />
         Back
       </button>
-      <h6 className={styles.title}>Tiêu đề: Khảo sát ý kiến sinh viên về lịch vấn đáp</h6>
+      <h6 className={styles.title}>{title}</h6>
       <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <button className={styles.button} onClick={onSave}>
+        {/* <button className={styles.button} onClick={onSave}>
           Save
-        </button>
+        </button> */}
         <button className={styles.button} onClick={onPresent}>
           Present
         </button>

@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  transition: all 0.5s ease;
+}
+
+.addButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0 0 8px #888;
+  text-align: center;
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  transition: all 0.2s ease;
+  z-index: 50;
+}
+
+.addButton:hover {
+  background-color: #0088fe;
+  color: #000;
+  transition: all 0.2s ease;
+  padding: 0;
+  transform: rotate(135deg);
+}
+
+.addButton:active {
+  background-color: #ff3366;
+}
+
+.optionsCtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: absolute;
+  z-index: 100;
+  width: 0;
+  height: 0;
+  width: 150px;
+  height: 100px;
+  top: -100px;
+  right: -500px;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+
+.container:hover .optionsCtn {
+  right: 0;
+  transition: all 0.5s ease;
+}
+
+.buttonOption {
+  padding: 8px;
+  text-align: center;
+  border: 1px #ccc solid;
+  margin: 4px;
+  font-size: 18px;
+  border-radius: 24px;
+  height: 40px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.buttonOption:hover {
+  background-color: #0088fe;
+}
+
+.buttonOption:active {
+  background-color: #ff3366;
+}

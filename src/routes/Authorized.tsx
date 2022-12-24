@@ -7,17 +7,16 @@ import {Route, Routes} from 'react-router-dom';
 import MyProfile from '@/pages/MyProfile';
 import SlideEditor from '@/pages/SlideEditor';
 import Presentations from '@/pages/Presentations';
+import Home from '@/pages/Home';
 
 const Authorized = () => {
   return (
     <Routes>
       <Route path="/" element={<RootPage />}>
-        <Route index element={<Dashboard />} />
+        <Route index element={<Home />} />
         <Route path="/class/:classId" element={<Class />} />
         <Route path="/class/:classId/member" element={<Member />} />
-        <Route path="/presentation" element={<Presentations />} />
         <Route path="/presentation/:presentationId" element={<SlideEditor />} />
-        <Route path="/myprofile" element={<MyProfile />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>

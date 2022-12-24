@@ -1,0 +1,61 @@
+* {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.container {
+  width: 350px;
+  height: 400px;
+  margin: 16px;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px #ccc solid;
+  box-shadow: 0 0 8px #aaa;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.image {
+  background-image: url('../../assets/images/class-card.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 50%;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.name {
+  font-size: x-large;
+}
+
+.creatorName {
+  font-size: medium;
+  margin-top: 8px;
+}
+
+.desc {
+  font-size: medium;
+  margin-top: 8px;
+  color: #888;
+}
+
+.button {
+  width: 100%;
+  background-color: #888;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0088fe;
+  color: #fff;
+}
+
+.button:active {
+  background-color: #ff3366;
+  color: #000;
+}

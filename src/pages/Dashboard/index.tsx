@@ -38,8 +38,6 @@ export default function Dashboard() {
 
   return (
     <>
-      <Navbar />
-
       {classes.length === 0 ? (
         <CenterContainer>
           <div>No classes found! Join or create one!</div>

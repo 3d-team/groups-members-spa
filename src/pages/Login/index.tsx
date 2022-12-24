@@ -123,10 +123,10 @@ const Login = () => {
             <img src={GoogleLogo} alt="Google_Logo" />
             <p className={classes.textBtn}>Sign in with Google</p>
           </Button>
-          <Button fullWidth variant="contained" color="inherit" sx={{mt: 2, mb: 2}}>
+          {/* <Button fullWidth variant="contained" color="inherit" sx={{mt: 2, mb: 2}}>
             <img src={FacebookLogo} alt="Facebook_logo" width={24} />
             <p className={classes.textBtn}>Sign in with Facebook</p>
-          </Button>
+          </Button> */}
         </Box>
         <Copyright sx={{mt: 8, mb: 4}} />
       </Container>
