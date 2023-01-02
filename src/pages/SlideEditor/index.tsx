@@ -81,7 +81,6 @@ const SlideEditor = () => {
       onSave();
     };
   }, []);
-  console.log('@DUKE__CMN');
 
   return (
     <div className={styles.container}>

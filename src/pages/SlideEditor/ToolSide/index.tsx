@@ -1,9 +1,10 @@
-import {ChartType, MockMultipleChoice, MultipleChoiceModel} from '@/models/presentation';
+import { ChartType, MockMultipleChoice, MultipleChoiceModel } from '@/models/presentation';
 import Helper from '@/ultilities/Helper';
-import {BarChart, DoneAll, PieChart, RemoveCircleOutline} from '@mui/icons-material';
+import { BarChart, DoneAll, PieChart, RemoveCircleOutline } from '@mui/icons-material';
 import clsx from 'clsx';
-import React, {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import styles from './styles.module.css';
+import { OptionModel } from '@/models/presentation';
 
 interface Props {
   onChangeChart: (type: ChartType) => void;
@@ -35,9 +36,10 @@ const mock: MultipleChoiceModel = {
   type: 'multiple-choice',
 };
 
-const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, currentData}: Props) => {
+const ToolSide = ({ onChangeChart, selectedType = 'bar-chart', onSubmitData, currentData }: Props) => {
   const [data, setData] = useState<MultipleChoiceModel>(currentData);
-  // console.log('@DUKE____WHAT', {data, mock});
+  console.log('@DUKE___', currentData);
+  
 
   const onChangeQuestion = (text: string) => {
     setData(prev => {
@@ -50,12 +52,18 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
 
   const onChangeOptionTitle = (text: string, index: number) => {
     setData(prev => {
-      const newOptions = [...prev.options];
-      newOptions[index].name = text;
       return {
         ...prev,
-        options: newOptions,
-      };
+        options: prev.options.map((item: OptionModel, _index)=>{
+          if(_index === index){
+            return {
+              ...item,
+              name: text,
+            }
+          }
+          return item;
+        })
+      }
     });
   };
 
@@ -72,7 +80,7 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
     setData(prev => {
       return {
         ...prev,
-        options: [...prev.options, {name: '', value: 0}],
+        options: [...prev.options, { name: '', value: 0 }],
       };
     });
   };
@@ -115,12 +123,13 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
           </div>
 
           <div className={styles.section}>
-            <p className={styles.heading} style={{marginBottom: 16}}>
+            <p className={styles.heading} style={{ marginBottom: 16 }}>
               Options:
             </p>
 
             <div className={styles.optionsCtn}>
               {data.options.map((item, index) => {
+
                 return (
                   <div className={styles.option}>
                     <input
@@ -170,7 +179,7 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
           onSubmitData(data);
         }}>
         <DoneAll />
-        <p style={{marginLeft: 8}}>Save</p>
+        <p style={{ marginLeft: 8 }}>Save</p>
         <div></div>
       </button>
     </div>
