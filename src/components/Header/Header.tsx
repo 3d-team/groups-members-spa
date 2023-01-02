@@ -117,7 +117,7 @@ const Header = ({children, classData}: Props) => {
             <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
               <MenuItem onClick={handleJoin}>Join Class</MenuItem>
               <MenuItem onClick={handleCreate}>Create Class</MenuItem>
-              <MenuItem onClick={handleCreatePresentation}>Create New Presentation</MenuItem>
+              <MenuItem onClick={handleCreatePresentation}>Create new presentation</MenuItem>
             </Menu>
             <div style={{position: 'relative', justifyContent: 'center', alignItems: 'center'}}>
               <Avatar onClick={() => setShowOption(!showOption)} className={classes.icon} />

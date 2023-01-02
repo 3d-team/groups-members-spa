@@ -59,6 +59,8 @@ export const PresentationExtraReducers = (builder: any) => {
       state.status = 'failed';
     })
     .addCase(saveAllSlides.fulfilled, (state: PresentationState, action: PayloadAction<MultipleChoiceModel[]>) => {
+      console.log('@DUKE___action_payload', action.payload);
+      
       state.data.slides = action.payload;
     });
   // .addCase(addPresentation.pending, (state: PresentationState) => {
