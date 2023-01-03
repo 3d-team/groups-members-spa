@@ -29,6 +29,11 @@ const saveAllSlides = createAsyncThunk('Presentation/saveAllSlides', async (slid
   return slides;
 });
 
+const addNewPresentation = createAsyncThunk('Presentation/addNewPresentation',async (presentation: PresentationModel) => {
+  // callApi add Presentation
+  return presentation;
+})
+
 export const PresentationExtraReducers = (builder: any) => {
   builder
     .addCase(getPresentationById.pending, (state: PresentationState) => {
@@ -59,10 +64,11 @@ export const PresentationExtraReducers = (builder: any) => {
       state.status = 'failed';
     })
     .addCase(saveAllSlides.fulfilled, (state: PresentationState, action: PayloadAction<MultipleChoiceModel[]>) => {
-      console.log('@DUKE___action_payload', action.payload);
       
-      state.data.slides = action.payload;
-    });
+    })
+    .addCase(addNewPresentation.fulfilled, (state: PresentationState, action: PayloadAction<PresentationModel>)=>{
+      // state.presentationList = 
+    })
   // .addCase(addPresentation.pending, (state: PresentationState) => {
   //   state.status = 'loading';
   // })

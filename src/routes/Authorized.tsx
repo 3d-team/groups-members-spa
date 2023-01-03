@@ -8,6 +8,7 @@ import MyProfile from '@/pages/MyProfile';
 import SlideEditor from '@/pages/SlideEditor';
 import Presentations from '@/pages/Presentations';
 import Home from '@/pages/Home';
+import PresentShow from '@/pages/PresentShow';
 
 const Authorized = () => {
   return (
@@ -17,6 +18,7 @@ const Authorized = () => {
         <Route path="/class/:classId" element={<Class />} />
         <Route path="/class/:classId/member" element={<Member />} />
         <Route path="/presentation/:presentationId" element={<SlideEditor />} />
+        <Route path="/presentation/show/:presentationId" element={<PresentShow />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>

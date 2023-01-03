@@ -34,9 +34,8 @@ export interface PresentationModel {
 }
 
 export interface PresentationState {
-  data: PresentationModel;
   status: 'loading' | 'failed' | 'idle';
-  presentationList: any[];
+  presentationList: PresentationModel[];
 }
 
 export const MOCK_PRESENTATION_MODEL: PresentationModel = {

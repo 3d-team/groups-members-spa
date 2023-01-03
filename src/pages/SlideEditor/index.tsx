@@ -3,6 +3,7 @@ import {useAppDispatch, useAppSelector} from '@/redux';
 import PresentationThunks from '@/redux/feature/presentation/thunk';
 import Helper from '@/ultilities/Helper';
 import {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import ListPage from './ListPage';
 import PreviewSlide from './PreviewSlide';
@@ -33,11 +34,12 @@ const mocklistPage: any[] = [defaultPage, multipleChoicePage];
 
 const SlideEditor = () => {
   const dispatcher = useAppDispatch();
-  const present = useAppSelector(state => state.presentation.data);
+  const present = useAppSelector(state => state.presentation.presentationList[0]);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [listPage, setListPage] = useState<MultipleChoiceModel[]>(present.slides);
-
   const [typeChart, setTypeChart] = useState<ChartType>('bar-chart');
+
+  const navigate = useNavigate();
 
   const onSelectedPage = (index: number) => {
     setSelectedIndex(index);
@@ -71,7 +73,9 @@ const SlideEditor = () => {
     dispatcher(PresentationThunks.saveAllSlides(listPage));
   };
 
-  const onPresent = () => {};
+  const onPresent = () => {
+    navigate(`/presentation/show/1243`)
+  };
 
   const onShare = () => {};
 

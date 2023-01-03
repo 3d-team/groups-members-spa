@@ -5,6 +5,7 @@ import { dialogActions } from '@/redux/feature/dialog/slice';
 import PresentationApi from '@/api/presentationApi';
 import { PresentationActions } from '@/redux/feature/presentation/slice';
 import styles from './styles.module.css';
+import { MockMultipleChoice, PresentationModel } from '@/models/presentation';
 
 interface Props {
   hideOnSubmit: () => void;
@@ -12,10 +13,15 @@ interface Props {
 const CreatePresentation = ({ hideOnSubmit }: Props) => {
   const [namePresentation, setName] = useState('');
   const dispatcher = useAppDispatch();
+  const ownerId = useAppSelector(state=>state.user.data.uuid)
 
   const createPresentation = async () => {
-    const data = {
+    const data: PresentationModel = {
       name: namePresentation,
+      uuid: '123' + Date.now(),
+      accessCode: '',
+      ownerId: ownerId,
+      slides: [MockMultipleChoice],
     };
     PresentationApi.addPresentation(data);
     dispatcher(PresentationActions.addPresentation(data));
