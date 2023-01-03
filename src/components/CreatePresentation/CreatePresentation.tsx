@@ -14,6 +14,7 @@ const CreatePresentation = ({hideOnSubmit}: Props) => {
   const dispatcher = useAppDispatch();
 
   const createPresentation = async () => {
+    console.log("Create new presentation");
     const data = {
       name: namePresentation,
     };

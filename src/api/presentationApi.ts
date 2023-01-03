@@ -1,5 +1,6 @@
 import axiosClient from './axiosClient';
 import {PresentationModel} from '@/models/presentation';
+import { MultipleChoiceModel } from '@/models/presentation';
 
 class PresentationApi {
   constructor() {}
@@ -11,7 +12,7 @@ class PresentationApi {
 
   static async findById(id: string) {
     const url = `/api/presentations/${id}`;
-    return axiosClient.get<PresentationModel>(url);
+    return axiosClient.get<PresentationModel, PresentationModel>(url);
   }
 
   static async addPresentation(data: any) {
@@ -22,6 +23,11 @@ class PresentationApi {
   static async findAllSlideByPresentationId(id: string) {
     const url = `/api/presentations/${id}/slides`;
     return axiosClient.get(url);
+  }
+
+  static async updateSlides(id: string, data: MultipleChoiceModel[]) {
+    const url = `/api/presentations/${id}/slides`;
+    return axiosClient.put(url, data);
   }
 }
 

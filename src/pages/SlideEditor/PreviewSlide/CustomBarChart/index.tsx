@@ -11,7 +11,7 @@ const renderCustomizedLabel = (props: any) => {
 
   return (
     <g>
-      <text x={x + width / 2} y={y + height / 2 - radius} fill="#fff" textAnchor="middle" dominantBaseline="middle" font-size="1.5em">
+      <text x={x + width / 2} y={y + height / 2 - radius} fill="#fff" textAnchor="middle" dominantBaseline="middle" fontSize="1.5em">
         {value}
       </text>
     </g>

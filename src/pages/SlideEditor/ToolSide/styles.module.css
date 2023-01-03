@@ -24,7 +24,7 @@
     color: #fff;
     border: 1px solid rgb(20, 86, 204);
     padding: 6px 12px;
-    font-size: large;
+    fontSize: large;
 }
 
 .button:hover {
@@ -37,7 +37,7 @@
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
     padding: 8px 0;
-    font-size: large;
+    fontSize: large;
 }
 
 .toolCtn {
@@ -65,7 +65,7 @@
     width: 300px;
     border: 0;
     border-bottom: 1px solid #ccc;
-    font-size: large;
+    fontSize: large;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-style: italic;
     outline: none;
@@ -81,7 +81,7 @@
 
 .heading {
     font-weight: 500;
-    font-size: larger;
+    fontSize: larger;
 }
 
 .option {
@@ -109,7 +109,7 @@
     padding: 8px;
     border-radius: 4px;
     color: white;
-    font-size: medium;
+    fontSize: medium;
     font-style: italic;
     width: 100%;
     margin-top: 8px;

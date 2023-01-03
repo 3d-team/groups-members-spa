@@ -18,7 +18,7 @@
     align-items: center;
     background-color: rgb(20, 86, 204);
     color: #fff;
-    font-size: larger;
+    fontSize: larger;
     padding: 6px 12px;
     border-radius: 4px;
     border: 1px solid rgb(20, 86, 204);
@@ -35,7 +35,7 @@
 }
 
 .title {
-    font-size: x-large;
+    fontSize: x-large;
     text-decoration: none;
     font-weight: 500;
     font-family: Georgia, 'Times New Roman', Times, serif;

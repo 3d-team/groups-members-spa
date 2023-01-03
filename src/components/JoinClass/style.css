@@ -1,6 +1,6 @@
 .joinClass {
     font-family: Roboto, Arial, sans-serif;
-    font-size: 14px;
+    fontSize: 14px;
     font-weight: 400;
     letter-spacing: 0.2px;
     line-height: 20px;
@@ -27,7 +27,7 @@
   }
   .joinClass__topHead {
     font-family: "Google Sans", Roboto, Arial, sans-serif;
-    font-size: 1.375rem;
+    fontSize: 1.375rem;
     font-weight: 400;
     line-height: 1.75rem;
     color: #80868b;
@@ -56,7 +56,7 @@
   }
   .joinClass__formText {
     color: #7f7f7f;
-    font-size: 0.875rem;
+    fontSize: 0.875rem;
     margin-bottom: 0.5rem;
   }
   .joinClass__loginInfo {
@@ -69,7 +69,7 @@
   .joinClass__loginName {
     letter-spacing: 0.01785714em;
     font-family: "Google Sans", Roboto, Arial, sans-serif;
-    font-size: 0.875rem;
+    fontSize: 0.875rem;
     font-weight: 500;
     line-height: 1.25rem;
     color: #3c4043;
@@ -81,7 +81,7 @@
   .joinClass__loginEmail {
     letter-spacing: 0.025em;
     font-family: Roboto, Arial, sans-serif;
-    font-size: 0.75rem;
+    fontSize: 0.75rem;
     font-weight: 400;
     line-height: 1rem;
     color: #5f6368;

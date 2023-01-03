@@ -26,16 +26,16 @@
 }
 
 .name {
-  font-size: x-large;
+  fontSize: x-large;
 }
 
 .creatorName {
-  font-size: medium;
+  fontSize: medium;
   margin-top: 8px;
 }
 
 .desc {
-  font-size: medium;
+  fontSize: medium;
   margin-top: 8px;
   color: #888;
 }

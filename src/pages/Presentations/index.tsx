@@ -29,7 +29,7 @@ export default function Presentations() {
   // Side Effect ////////////////////////
   useEffect(() => {
     fetchPresentations();
-  }, []);
+  }, [presentations.length]);
 
   // Render Component ////////////////////////
   if (loading) {
@@ -51,12 +51,12 @@ export default function Presentations() {
           {presentations.map((item: any) => (
             <div key={item.uuid}>
               <PresentationCard
-                ownerId={item.ownerId}
+                hostId={item.hostId}
                 name={item.name}
                 numberSlide={item.numberSlide}
                 uuid={item.uuid}
-                createdTime={item.createdTime}
-                modifiedTime={item.modifiedTime}
+                createdTime={item.createDate}
+                modifiedTime={item.modifiedDate}
               />
             </div>
             //name, numberSlide, ownerId, createdTime, modifiedTime, uuid
