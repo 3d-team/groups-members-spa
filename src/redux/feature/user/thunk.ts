@@ -3,7 +3,7 @@ import UserApi from '@/api/userApi';
 import { UserState } from '@/models/user';
 import axiosClient from '@/api/axiosClient';
 
-const getUserById = createAsyncThunk('user/fetchUserById', async (id: number) => {
+const getUserById = createAsyncThunk('user/fetchUserById', async (id: string) => {
   const response = await UserApi.getUserById(id);
   // The value we return becomes the `fulfilled` action payload
   return response;

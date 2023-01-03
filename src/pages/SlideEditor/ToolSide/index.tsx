@@ -32,6 +32,7 @@ const mock: MultipleChoiceModel = {
   backgroundImage: '',
   options: [],
   title: '',
+  paragraph: '',
   type: 'multiple-choice',
 };
 
@@ -39,11 +40,20 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
   const [data, setData] = useState<MultipleChoiceModel>(currentData);
   // console.log('@DUKE____WHAT', {data, mock});
 
-  const onChangeQuestion = (text: string) => {
+  const onChangeHeading = (text: string) => {
     setData(prev => {
       return {
         ...prev,
         title: text,
+      };
+    });
+  };
+
+  const onChangeParagraph = (text: string) => {
+    setData(prev => {
+      return {
+        ...prev,
+        paragraph: text,
       };
     });
   };
@@ -72,7 +82,7 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
     setData(prev => {
       return {
         ...prev,
-        options: [...prev.options, {name: '', value: 0}],
+        options: [...prev.options, {uuid: '', name: '', value: 0}],
       };
     });
   };
@@ -103,13 +113,25 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
       <div className={styles.toolCtn}>
         <div className={styles.tools}>
           <div className={styles.section}>
-            <p className={styles.heading}>Your question: </p>
+            <p className={styles.heading}>Heading: </p>
             <input
               className={styles.inputText}
               value={data.title}
               type={'text'}
               onChange={e => {
-                onChangeQuestion(e.target.value);
+                onChangeHeading(e.target.value);
+              }}
+            />
+          </div>
+
+          <div className={styles.section}>
+            <p className={styles.heading}>Paragraph: </p>
+            <input
+              className={styles.inputText}
+              value={data.paragraph}
+              type={'text'}
+              onChange={e => {
+                onChangeParagraph(e.target.value);
               }}
             />
           </div>
@@ -122,7 +144,7 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
             <div className={styles.optionsCtn}>
               {data.options.map((item, index) => {
                 return (
-                  <div className={styles.option}>
+                  <div className={styles.option} key={index}>
                     <input
                       className={styles.inputText}
                       placeholder={`Option ${index + 1}`}
@@ -151,7 +173,7 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
           <div className={styles.chartBtnCtn}>
             {ChartOptions.map((item, index) => {
               return (
-                <button
+                <button key={index}
                   className={clsx([styles.chartBtn, selectedType === item.type && styles.chartSelected])}
                   onClick={() => {
                     onChangeChart(item.type);

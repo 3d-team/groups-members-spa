@@ -3,10 +3,12 @@ export type ChartType = 'pie-chart' | 'bar-chart';
 export interface SlideModel {
   type: TemplatePage;
   title: string;
+  paragraph: string,
   backgroundImage: string;
 }
 
 export interface OptionModel {
+  uuid: string,
   name: string;
   value: number;
 }
@@ -18,17 +20,18 @@ export const MockMultipleChoice: MultipleChoiceModel = {
   type: 'multiple-choice',
   title: '',
   backgroundImage: '',
+  paragraph: '',
   options: [
-    {name: '', value: 0},
-    {name: '', value: 0},
-    {name: '', value: 0},
+    {uuid: '', name: '', value: 0},
+    {uuid: '', name: '', value: 0},
+    {uuid: '', name: '', value: 0},
   ],
 };
 
 export interface PresentationModel {
   uuid: string;
   name: string;
-  ownerId: string;
+  hostId: string;
   accessCode: string;
   slides: MultipleChoiceModel[];
 }
@@ -42,7 +45,7 @@ export interface PresentationState {
 export const MOCK_PRESENTATION_MODEL: PresentationModel = {
   uuid: 'test',
   name: 'DEV_TEST_PRESENTATION',
-  ownerId: 'DEV_',
+  hostId: 'DEV_',
   accessCode: 'DEV_ACCESS_CODE',
   slides: [MockMultipleChoice],
 };

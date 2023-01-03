@@ -2,11 +2,15 @@ import axiosClient from "./axiosClient";
 
 class UserApi {
   static async getAll() {
-    const url = '/users';
+    const url = '/api/users';
     return axiosClient.get(url);
   }
-  static async getUserById(id: number) {
-    const url = `/users/${id}`;
+  static async getUserById(id: string) {
+    const url = `/api/users/${id}`;
+    return axiosClient.get(url);
+  }
+  static async getProfile() {
+    const url = `/api/profile`;
     return axiosClient.get(url);
   }
 }

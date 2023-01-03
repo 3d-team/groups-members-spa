@@ -20,13 +20,13 @@ const getAllSlides = createAsyncThunk('Presentation/getAllSlides', async (id: st
 
 // const addPresentation = createAsyncThunk('Presentation/addPresentation', async (data: any) => {
 //   const response = await PresentationApi.addPresentation(data);
-
 //   return response;
 // });
 
-const saveAllSlides = createAsyncThunk('Presentation/saveAllSlides', async (slides: MultipleChoiceModel[]) => {
-  // callApi method post
-  return slides;
+const saveAllSlides = createAsyncThunk('Presentation/saveAllSlides', async (payload: any) => {
+  const response = await PresentationApi.updateSlides(payload.id, payload.slides);
+  console.log(response); 
+  return payload.slides;
 });
 
 export const PresentationExtraReducers = (builder: any) => {

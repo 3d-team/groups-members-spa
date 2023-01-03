@@ -47,7 +47,7 @@
 
 .navItem > span {
   margin-left: 12px;
-  font-size: larger;
+  fontSize: larger;
   display: flex;
 }
 
@@ -59,7 +59,7 @@
 .logo span {
   color: #0088fe;
   font-weight: bold;
-  font-size: larger;
+  fontSize: larger;
 }
 
 .logout {

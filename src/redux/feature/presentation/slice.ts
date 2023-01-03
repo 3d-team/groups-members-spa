@@ -16,7 +16,7 @@ export const PresentationSlice = createSlice({
       state.data.name = action.payload;
     },
     setOwnerId: (state, action: PayloadAction<string>) => {
-      state.data.ownerId = action.payload;
+      state.data.hostId = action.payload;
     },
     setSubjectName: (state, action: PayloadAction<string>) => {
       state.data.accessCode = action.payload;

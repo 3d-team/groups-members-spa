@@ -6,7 +6,7 @@
 
 .room-member__title {
     font-weight: 400;
-    font-size: 32px;
+    fontSize: 32px;
     padding: 15px 10px;
     border-bottom: 1px #aaa solid
 }
