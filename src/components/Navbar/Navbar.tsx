@@ -14,7 +14,6 @@ import SlideshowIcon from '@mui/icons-material/Slideshow';
 import {IconButton} from '@mui/material';
 import {Menu} from '@mui/icons-material';
 import Header from '../Header/Header';
-import {useStyles} from './style';
 import {useNavigate} from 'react-router-dom';
 import {ClassModel} from '@/models/class';
 
@@ -25,7 +24,6 @@ interface NavbarProps {
 }
 
 export default function Navbar({classData}: NavbarProps) {
-  const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -94,7 +92,7 @@ export default function Navbar({classData}: NavbarProps) {
       {(['left'] as const).map(anchor => (
         <React.Fragment key={anchor}>
           <Header classData={classData}>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={toggleDrawer(anchor, true)}>
+            <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(anchor, true)}>
               <Menu />
             </IconButton>
           </Header>
