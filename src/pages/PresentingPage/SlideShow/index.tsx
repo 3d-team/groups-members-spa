@@ -25,9 +25,11 @@ const SlideShow = ({data = MockMultipleChoice, type = 'bar-chart'}: Props) => {
     <div className={styles.container}>
       <div className={styles.slide}>
         <div className={styles.content}>
-          <div className={styles.questionCtn}>{/* <p className={styles.question}>{data.title}</p> */}</div>
+          <div className={styles.questionCtn}>
+            <p className={styles.question}>{data.title}</p>
+          </div>
           <div className={styles.chartCtn}>
-            {/* <div style={{width: type === 'bar-chart' ? _width : '100%', height: '100%'}}>{renderChart(type, data.options)}</div> */}
+            <div style={{width: type === 'bar-chart' ? _width : '100%', height: '100%'}}>{renderChart(type, data.options)}</div>
           </div>
         </div>
       </div>
