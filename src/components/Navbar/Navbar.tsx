@@ -91,11 +91,11 @@ export default function Navbar({classData}: NavbarProps) {
     <div>
       {(['left'] as const).map(anchor => (
         <React.Fragment key={anchor}>
-          <Header classData={classData}>
+          {/* <Header classData={classData}>
             <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(anchor, true)}>
               <Menu />
             </IconButton>
-          </Header>
+          </Header> */}
           <SwipeableDrawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} onOpen={toggleDrawer(anchor, true)}>
             {list(anchor)}
           </SwipeableDrawer>

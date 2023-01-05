@@ -1,8 +1,9 @@
-import {makeStyles} from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 
 export const useStyles = makeStyles({
   root: {
     flexGrow: 1,
+    backgroundColor: '#fff',
   },
   menuButton: {
     marginRight: 1,
@@ -59,4 +60,18 @@ export const useStyles = makeStyles({
     },
     textAlign: 'center'
   },
+
+  button: {
+    "display": "flex",
+    "flexDirection": "row", 
+    "justifyContent": "center", 
+    "alignItems": "center", 
+    "backgroundColor": "rgb(20, 86, 204)", 
+    "color": "#fff", 
+    "fontSize": "0.9rem", "padding": "6px 12px", "borderRadius": "4px", "border": "1px solid rgb(20, 86, 204)", "marginRight": "15px",
+    "&:hover":{
+      "backgroundColor":"rgba(20, 86, 204, 0.3)","color":"black"
+    }
+  }
+
 });

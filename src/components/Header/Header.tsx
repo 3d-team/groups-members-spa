@@ -12,14 +12,15 @@ import {useStyles} from './style';
 import {useAppSelector, useAppDispatch} from '@/redux';
 import {useNavigate, useLocation} from 'react-router-dom';
 import {ClassModel} from '@/models/class';
+import { ChevronLeft } from '@mui/icons-material';
 import CreatePresentation from '../CreatePresentation/CreatePresentation';
 
 interface Props {
-  children: JSX.Element;
+  //children: JSX.Element;
   classData?: ClassModel;
 }
 
-const Header = ({children, classData}: Props) => {
+const Header = ({classData}: Props) => {
   const classes = useStyles();
   const location = useLocation();
   const navigate = useNavigate();
@@ -69,14 +70,21 @@ const Header = ({children, classData}: Props) => {
     navigate(`/`);
   };
 
+  const onBackPress = () => {
+    navigate('/');
+  };
+
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appBar} position="static">
+      <AppBar className={classes.appBar} color="inherit" position="static">
         <Toolbar className={classes.toolbar}>
           {classData ? (
             <>
               <div className={classes.headerWrapper}>
-                {children}
+                <button className={classes.button} onClick={onBackPress}>
+                    <ChevronLeft />
+                    Back
+                </button>
                 <div className={classes.headerClass}>
                   <Typography variant="h6" className={classes.title1}>
                     {classData.name}
@@ -102,23 +110,23 @@ const Header = ({children, classData}: Props) => {
                 </Box>
               </div>
             </>
-          ) : (
-            <div className={classes.headerWrapper}>
-              {children}
-              <img src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg" alt="Classroom" />
-              <Typography variant="h6" className={classes.title1}>
-                Classroom
-              </Typography>
-            </div>
+          ) : (<></>
+            // <div className={classes.headerWrapper}>
+            //   {children}
+            //   <img src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg" alt="Classroom" />
+            //   <Typography variant="h6" className={classes.title1}>
+            //     Classroom
+            //   </Typography>
+            // </div>
           )}
 
           <div className={classes.header__wrapper__right}>
-            {!classData && <Add onClick={handleClick} className={classes.icon} />}
+            {/* {!classData && <Add onClick={handleClick} className={classes.icon} />}
             <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
               <MenuItem onClick={handleJoin}>Join Class</MenuItem>
               <MenuItem onClick={handleCreate}>Create Class</MenuItem>
               <MenuItem onClick={handleCreatePresentation}>Create New Presentation</MenuItem>
-            </Menu>
+            </Menu> */}
             <div style={{position: 'relative', justifyContent: 'center', alignItems: 'center'}}>
               <Avatar onClick={() => setShowOption(!showOption)} className={classes.icon} />
               {showOption ? (
