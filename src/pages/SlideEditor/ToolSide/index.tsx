@@ -38,7 +38,6 @@ const mock: MultipleChoiceModel = {
 
 const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, currentData}: Props) => {
   const [data, setData] = useState<MultipleChoiceModel>(currentData);
-  // console.log('@DUKE____WHAT', {data, mock});
 
   const onChangeHeading = (text: string) => {
     setData(prev => {
@@ -173,7 +172,8 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
           <div className={styles.chartBtnCtn}>
             {ChartOptions.map((item, index) => {
               return (
-                <button key={index}
+                <button
+                  key={index}
                   className={clsx([styles.chartBtn, selectedType === item.type && styles.chartSelected])}
                   onClick={() => {
                     onChangeChart(item.type);
