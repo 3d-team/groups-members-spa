@@ -1,5 +1,5 @@
-import {ChartType, MockMultipleChoice, MultipleChoiceModel, SlideModel} from '@/models/presentation';
-import {useAppDispatch, useAppSelector} from '@/redux';
+import {ChartType, MockMultipleChoice, MultipleChoiceModel} from '@/models/presentation';
+import {useAppDispatch} from '@/redux';
 import PresentationThunks from '@/redux/feature/presentation/thunk';
 import Helper from '@/ultilities/Helper';
 import {useEffect, useState} from 'react';
@@ -11,10 +11,10 @@ import PreviewSlide from './PreviewSlide';
 import styles from './styles.module.css';
 import ToolSide from './ToolSide';
 import {PresentationModel} from '@/models/presentation';
-import {useParams, useSearchParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import PresentationApi from '@/api/presentationApi';
 
-const {IdentitySerializer, JsonSerializer, RSocket, RSocketClient} = require('rsocket-core');
+const {IdentitySerializer, JsonSerializer, RSocketClient} = require('rsocket-core');
 const RSocketWebSocketClient = require('rsocket-websocket-client').default;
 
 const defaultPage: MultipleChoiceModel = {
@@ -58,6 +58,7 @@ const SlideEditor = () => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [listPage, setListPage] = useState<MultipleChoiceModel[]>(presentation.slides);
   const [typeChart, setTypeChart] = useState<ChartType>('bar-chart');
+  const navigate = useNavigate();
 
   const createClient = () => {
     const clientId = uuidv4();
@@ -167,7 +168,9 @@ const SlideEditor = () => {
     dispatcher(PresentationThunks.saveAllSlides(payload));
   };
 
-  const onPresent = () => {};
+  const onPresent = () => {
+    navigate(`/presenting/${presentation.uuid}`);
+  };
 
   const onShare = () => {};
 
