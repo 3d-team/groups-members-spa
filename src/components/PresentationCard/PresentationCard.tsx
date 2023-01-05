@@ -1,9 +1,5 @@
-import {IconButton} from '@mui/material';
-import {AssignmentIndOutlined, FolderOpenOutlined} from '@mui/icons-material';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import SlideshowIcon from '@mui/icons-material/Slideshow';
 import {useNavigate} from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import {useAppDispatch} from '@/redux';
 import styles from './styles.module.css';
 import clsx from 'clsx';
@@ -52,7 +48,7 @@ function PresentationCard({name, numberSlide, hostId, createdTime, modifiedTime,
         <div className={styles.image}></div>
         <div className={styles.name}>{name}</div>
         <div className={clsx(styles.creatorName, styles.desc)}>{`Người tạo: ${host.fullName}`}</div>
-        <div className={styles.desc}>{`Thời gian tạo: ${(new Date(createdTime)).toLocaleDateString('en-US')}`}</div>
+        <div className={styles.desc}>{`Thời gian tạo: ${new Date(createdTime).toLocaleDateString('en-US')}`}</div>
       </div>
 
       <div className={styles.button} onClick={goToPresentationDetail}>

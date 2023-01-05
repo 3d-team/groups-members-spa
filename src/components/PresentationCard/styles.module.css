@@ -17,7 +17,8 @@
 }
 
 .image {
-  background-image: url('../../assets/images/class-card.jpg');
+  /* background-image: url('../../assets/images/class-card.jpg'); */
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6Qe1dRHX8O4hFFMNcMNLadNpRnuzmio2nKQ&usqp=CAU');
   background-size: cover;
   background-repeat: no-repeat;
   padding-top: 50%;
@@ -26,16 +27,16 @@
 }
 
 .name {
-  fontSize: x-large;
+  fontsize: x-large;
 }
 
 .creatorName {
-  fontSize: medium;
+  fontsize: medium;
   margin-top: 8px;
 }
 
 .desc {
-  fontSize: medium;
+  fontsize: medium;
   margin-top: 8px;
   color: #888;
 }
