@@ -14,8 +14,6 @@ const Home = () => {
   const activeNav: number = useAppSelector(state => state.app.currentNavIndex);
   const dispatcher = useAppDispatch();
 
-  console.log('@DUKE___ASLJLFDJ', activeNav);
-
   const onPressNav = (index: number) => {
     dispatcher(appActions.updateNavIndex(index));
   };
