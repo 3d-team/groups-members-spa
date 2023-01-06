@@ -23,7 +23,6 @@ const JoinClass = ({hideOnClick}: Props) => {
   const loggedInUser = useAppSelector(state => state.user.data);
 
   const [classCode, setClassCode] = useState("");
-  const [email, setemail] = useState("");
   const [error, setError] = useState();
 
   const dispatcher = useAppDispatch();
@@ -94,13 +93,6 @@ const JoinClass = ({hideOnClick}: Props) => {
                 onChange={(e) => setClassCode(e.target.value)}
                 error={error}
                 helperText={error && "No class was found"}
-              />
-              <TextField
-                id="outlined-basic"
-                label="Owner's email"
-                variant="outlined"
-                value={email}
-                onChange={(e) => setemail(e.target.value)}
               />
             </div>
           </div>

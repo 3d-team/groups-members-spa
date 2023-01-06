@@ -1,18 +1,21 @@
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar/Navbar';
-import {ClassModel} from '@/models/class';
-import {useEffect, useRef, useState} from 'react';
-import {Avatar} from '@mui/material';
+import { ClassModel } from '@/models/class';
+import { useEffect, useRef, useState } from 'react';
+import { Avatar } from '@mui/material';
 import Button from '@mui/material/Button';
+import { ChevronLeft } from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
 import LinkIcon from '@mui/icons-material/Link';
-import {useAppDispatch} from '@/redux';
-import {dialogActions} from '@/redux/feature/dialog/slice';
+import { useAppDispatch } from '@/redux';
+import { dialogActions } from '@/redux/feature/dialog/slice';
 import InvitationDialog from '@/components/InvitationDialog/InvitationDialog';
 import './style.css';
 import ClassThunks from '@/redux/feature/class/thunk';
-import {useDispatch} from 'react-redux';
-import {DialogRef} from '@/components/models';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { DialogRef } from '@/components/models';
+import Header from '@/components/Header/Header';
 
 export default function Class() {
   const sampleData: ClassModel = {
@@ -28,9 +31,10 @@ export default function Class() {
   };
   const dialogRef = useRef<DialogRef>(null);
 
+  const navigate = useNavigate();
   const dispatcher = useAppDispatch();
   const [classData, setClassData] = useState<any>(sampleData);
-  const {classId} = useParams();
+  const { classId } = useParams();
 
   async function fetchClassInfo() {
     const id: string = classId ? classId : '';
@@ -47,11 +51,12 @@ export default function Class() {
     dialogRef.current?.show();
   };
 
-  const copyInviteLink = () => {};
+  const copyInviteLink = () => { };
 
   return (
     <>
       <div className="main">
+        <Header classData={classData}/>
         <div className="main__wrapper">
           <div className="main__content">
             <div className="main__wrapper1">

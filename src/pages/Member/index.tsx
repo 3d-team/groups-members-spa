@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { useAppDispatch } from '@/redux';
 import { IconButton, Menu, MenuItem, Avatar } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Header from '@/components/Header/Header';
 import "./style.css";
 
 import ClassThunks from '@/redux/feature/class/thunk';
@@ -51,8 +52,8 @@ export default function Member() {
         const coOwnersResponse = await dispatcher(ClassThunks.getAllCoOwners(id));
         console.log("Co-Owners: ", coOwnersResponse.payload);
         setCoOwners(coOwnersResponse.payload);
-      }
-      
+    }
+
     useEffect(() => {
         fetchClassInfo();
     }, []);
@@ -90,8 +91,8 @@ export default function Member() {
 
     return (
         <>
-            <Navbar classData={classData} />
-
+            {/* <Navbar classData={classData} /> */}
+            <Header classData={classData}/>
             <div className="room-member__container">
                 <div>
                     <div className="room-member__students">
@@ -183,7 +184,7 @@ export default function Member() {
                     </div>
                 </div>
             </div>
-            
+
         </>
     );
 }
