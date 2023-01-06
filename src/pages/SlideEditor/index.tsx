@@ -1,21 +1,21 @@
-import {ChartType, MockMultipleChoice, MultipleChoiceModel, SlideModel} from '@/models/presentation';
-import {useAppDispatch, useAppSelector} from '@/redux';
+import {ChartType, MockMultipleChoice, MultipleChoiceModel} from '@/models/presentation';
+import {useAppDispatch} from '@/redux';
 import PresentationThunks from '@/redux/feature/presentation/thunk';
 import Helper from '@/ultilities/Helper';
 import {useEffect, useState} from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 
 import Header from './Header';
 import ListPage from './ListPage';
 import PreviewSlide from './PreviewSlide';
 import styles from './styles.module.css';
 import ToolSide from './ToolSide';
-import { PresentationModel } from '@/models/presentation';
-import { useParams, useSearchParams } from 'react-router-dom';
+import {PresentationModel} from '@/models/presentation';
+import {useNavigate, useParams} from 'react-router-dom';
 import PresentationApi from '@/api/presentationApi';
 import { EchoResponder } from '@/api/EchoResponder';
 
-const { IdentitySerializer, JsonSerializer, RSocket, RSocketClient } = require('rsocket-core');
+const {IdentitySerializer, JsonSerializer, RSocketClient} = require('rsocket-core');
 const RSocketWebSocketClient = require('rsocket-websocket-client').default;
 
 const defaultPage: MultipleChoiceModel = {
@@ -53,9 +53,14 @@ const PRESENTATION_ENDPOINT: string = "presentation:join";
 const SlideEditor = () => {
   const {presentationId} = useParams();
   const dispatcher = useAppDispatch();
+  const [clientId, setClientId] = useState<string>('');
+  const [presentation, setPresentation] = useState<PresentationModel>(MOCK_PRESENTATION_MODEL);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [listPage, setListPage] = useState<MultipleChoiceModel[]>(presentation.slides);
+  const [typeChart, setTypeChart] = useState<ChartType>('bar-chart');
+  const navigate = useNavigate();
 
   /* RSocket */
-  const [clientId, setClientId] = useState<string>("");
   const [client, setClient] = useState<any>(null);
   const [socket, setSocket] = useState<any>(null);
   const messageReceiver = (payload: any) => {
@@ -66,7 +71,7 @@ const SlideEditor = () => {
     const client = new RSocketClient({
       serializers: {
         data: JsonSerializer,
-        metadata: IdentitySerializer
+        metadata: IdentitySerializer,
       },
       setup: {
         payload: {
@@ -79,15 +84,16 @@ const SlideEditor = () => {
         keepAlive: 60000,
         lifetime: 180000,
         dataMimeType: 'application/json',
-        metadataMimeType: 'message/x.rsocket.routing.v0'
+        metadataMimeType: 'message/x.rsocket.routing.v0',
       },
       responder: new EchoResponder(messageReceiver),
       transport: new RSocketWebSocketClient({
-        url: "ws://localhost:8080/rsocket"
-      })
+        url: 'ws://localhost:8080/rsocket',
+      }),
     });
     return client;
-  }
+  };
+
   useEffect(() => {
     const id = uuidv4();
     const client = createClient(id);
@@ -125,21 +131,16 @@ const SlideEditor = () => {
   }, []);
   /* End RSocket */
 
-  /* Presentation */
-  const [presentation, setPresentation] = useState<PresentationModel>(MOCK_PRESENTATION_MODEL);
-  const [listPage, setListPage] = useState<MultipleChoiceModel[]>(presentation.slides);
   const fetchPresentation = async () => {
     const response: PresentationModel = await PresentationApi.findById(String(presentationId));
     setPresentation(response);
     setListPage(response.slides);
-  }
+  };
+
   useEffect(() => {
     fetchPresentation();
   }, []);
   /* End presentation */
-
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const [typeChart, setTypeChart] = useState<ChartType>('bar-chart');
 
   const onSelectedPage = (index: number) => {
     setSelectedIndex(index);
@@ -169,8 +170,8 @@ const SlideEditor = () => {
 
       const payload = {
         id: presentationId,
-        slides: newList
-      }
+        slides: newList,
+      };
       dispatcher(PresentationThunks.saveAllSlides(payload));
       return newList;
     });
@@ -179,12 +180,14 @@ const SlideEditor = () => {
   const onSave = () => {
     const payload = {
       id: presentationId,
-      slides: listPage
-    }
+      slides: listPage,
+    };
     dispatcher(PresentationThunks.saveAllSlides(payload));
   };
 
-  const onPresent = () => {};
+  const onPresent = () => {
+    navigate(`/presenting/${presentation.uuid}`);
+  };
 
   const onShare = () => {};
 
@@ -194,7 +197,6 @@ const SlideEditor = () => {
       onSave();
     };
   }, []);
-  console.log('@DUKE__CMN');
 
   return (
     <div className={styles.container}>

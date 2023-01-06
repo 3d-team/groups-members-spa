@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+.container {
+  background-color: #fff;
+  padding: 32px;
+  border-radius: 8px;
+}
+
 .class__title {
   font-family: "Open Sans", Roboto, Arial, sans-serif;
   fontSize: 16px;

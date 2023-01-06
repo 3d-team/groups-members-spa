@@ -15,9 +15,12 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const JoinClass = () => {
+interface Props {
+  hideOnClick: () => void;
+}
+
+const JoinClass = ({hideOnClick}: Props) => {
   const loggedInUser = useAppSelector(state => state.user.data);
-  const joinClassDialog = useAppSelector(state => state.dialog.joinClassDialog);
 
   const [classCode, setClassCode] = useState("");
   const [email, setemail] = useState("");
@@ -29,23 +32,14 @@ const JoinClass = () => {
     e.preventDefault();
 
     //Call backend
+    hideOnClick();
   };
 
   return (
-    <div>
-      <Dialog
-        fullScreen
-        open={joinClassDialog}
-        onClose={() => dispatcher(dialogActions.closeJoinClassDialog())}
-        TransitionComponent={Transition}
-      >
+    <div className="container">
         <div className="joinClass">
           <div className="joinClass__wrapper">
-            <div
-              className="joinClass__wraper2"
-              onClick={() => dispatcher(dialogActions.closeJoinClassDialog())}
-            >
-              <Close className="joinClass__svg" />
+            <div className="joinClass__wraper2">
               <div className="joinClass__topHead">Join Class</div>
             </div>
             <Button
@@ -111,7 +105,6 @@ const JoinClass = () => {
             </div>
           </div>
         </div>
-      </Dialog>
     </div>
   );
 };

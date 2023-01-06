@@ -25,7 +25,6 @@ const getAllSlides = createAsyncThunk('Presentation/getAllSlides', async (id: st
 
 const saveAllSlides = createAsyncThunk('Presentation/saveAllSlides', async (payload: any) => {
   const response = await PresentationApi.updateSlides(payload.id, payload.slides);
-  console.log(response); 
   return payload.slides;
 });
 

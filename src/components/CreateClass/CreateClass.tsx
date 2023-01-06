@@ -1,90 +1,61 @@
-import {
-    Button,
-    Checkbox,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    Typography
-} from "@mui/material";
+import { Button, DialogActions, TextField } from '@mui/material';
 import React, { useState } from "react";
-import {useAppSelector, useAppDispatch} from '@/redux';
-import Form from "./Form";
-import {dialogActions} from '@/redux/feature/dialog/slice';
-import "./style.css";   
+import { useAppSelector, useAppDispatch } from '@/redux';
+import ClassApi from '@/api/classApi';
+import {ClassActions} from '@/redux/feature/class/slice';
+import "./style.css";
 
-const CreateClass = () => {
-    const createClassDialog = useAppSelector(state => state.dialog.createClassDialog);
-    const [check, setChecked] = useState(false);
-    const [showForm, setShowForm] = useState(false);
+interface Props {
+    hideOnClick: () => void;
+}
+const CreateClass = ({ hideOnClick }: Props) => {
+    const [className, setClassName] = useState('');
+    const [Section, setSection] = useState('');
+    const [subjectName, setSubjectName] = useState('');
 
     const dispatcher = useAppDispatch();
 
-    const handleClose = () => {
-        dispatcher(dialogActions.closeCreateClassDialog());
+    const addClass = async () => {
+        const data = {
+            name: className,
+            section: Section,
+            subject: subjectName,
+        };
+        ClassApi.addClass(data);
+        dispatcher(ClassActions.addClass(data));
+        hideOnClick();
     };
 
     return (
-        <div>
-            <Dialog
-                onClose={() => handleClose()}
-                aria-labelledby="customized-dialog-title"
-                open={createClassDialog}
-                maxWidth={showForm ? "lg" : "xs"}
-                className="form__dialog"
-            >
-                {showForm ? (
-                    <Form />
-                ) : (
-                    <>
-                        <div className="class__title">
-                            Using Classroom at a school with students?
-                        </div>
-                        <DialogContent className="class__content">
-                            <Typography component={'span'} className="class__text">
-                                <p>If so, your school must sign up for a free</p>
-                                <a href="/register" className="class__link">
-                                    G Suite for Education
-                                </a>
-                                account before you can use Classroom
-                                <a href="/learn" className="class__link2">
-                                    Learn More.
-                                </a>
-                            </Typography>
-                            <Typography component={'span'} >
-                                G Suite for Education lets schools decide which Google services
-                                their students can use, and provides additional
-                                <a href="/privacy" className="class__link2 class__link">
-                                    privacy and security
-                                </a>
-                                protections that are important in a school setting. Students
-                                cannot use Google Classroom at a school with personal accounts.
-                            </Typography>
+        <div className="container" >
+            <div className="form">
+                <p className="class__title">Create Class</p>
 
-                            <div className="class__checkboxWrapper">
-                                <Checkbox color="primary" onChange={() => setChecked(!check)} />
-                                <p>
-                                    I've read and understand the above notice, and I'm not using
-                                    Classroom at a school with students
-                                </p>
-                            </div>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button autoFocus onClick={() => handleClose()}>
-                                Close
-                            </Button>
-
-                            <Button
-                                autoFocus
-                                color="primary"
-                                disabled={!check}
-                                onClick={() => setShowForm(true)}
-                            >
-                                Continue
-                            </Button>
-                        </DialogActions>
-                    </>
-                )}
-            </Dialog>
+                <div className="form__inputs">
+                    <TextField
+                        id="filled-basic"
+                        label="Class Name (required)"
+                        className="form__input"
+                        variant="filled"
+                        value={className}
+                        onChange={e => setClassName(e.target.value)}
+                    />
+                    <TextField id="filled-basic" label="Section" className="form__input" variant="filled" value={Section} onChange={e => setSection(e.target.value)} />
+                    <TextField
+                        id="filled-basic"
+                        label="Subject"
+                        className="form__input"
+                        variant="filled"
+                        value={subjectName}
+                        onChange={e => setSubjectName(e.target.value)}
+                    />
+                </div>
+                <DialogActions>
+                    <Button onClick={addClass} color="primary">
+                        Create
+                    </Button>
+                </DialogActions>
+            </div>
         </div>
     );
 };
