@@ -43,9 +43,9 @@ export default function Class() {
     setClassData(response.payload);
   }
 
-  // useEffect(() => {
-  //   fetchClassInfo();
-  // }, []);
+  useEffect(() => {
+    fetchClassInfo();
+  }, []);
 
   const handleClickInvite = () => {
     dialogRef.current?.show();

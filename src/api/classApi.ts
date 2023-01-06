@@ -29,6 +29,11 @@ class ClassApi {
     const url = `/api/groups`;
     return axiosClient.post(url, data);
   }
+
+  static async deleteClass(id: string){
+    const url = `/api/groups/${id}`;
+    return axiosClient.delete(url);
+  }
 }
 
 export default ClassApi;
