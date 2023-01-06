@@ -13,6 +13,7 @@ import ToolSide from './ToolSide';
 import { PresentationModel } from '@/models/presentation';
 import { useParams, useSearchParams } from 'react-router-dom';
 import PresentationApi from '@/api/presentationApi';
+import { EchoResponder } from '@/api/EchoResponder';
 
 const { IdentitySerializer, JsonSerializer, RSocket, RSocketClient } = require('rsocket-core');
 const RSocketWebSocketClient = require('rsocket-websocket-client').default;
@@ -47,17 +48,21 @@ const MOCK_PRESENTATION_MODEL: PresentationModel = {
   slides: [MockMultipleChoice],
 };
 
-const PRESENTATION_ENDPOINT = "presentation:register";
-const CHANNEL_PRESENTATION: string = 'presentation:test';
+const PRESENTATION_ENDPOINT: string = "presentation:join";
 
 const SlideEditor = () => {
   const {presentationId} = useParams();
   const dispatcher = useAppDispatch();
 
+  /* RSocket */
   const [clientId, setClientId] = useState<string>("");
-  const createClient = () => {
-    const clientId = uuidv4();
-    setClientId(clientId);
+  const [client, setClient] = useState<any>(null);
+  const [socket, setSocket] = useState<any>(null);
+  const messageReceiver = (payload: any) => {
+    console.log(payload);
+  };
+  const createClient = (id: string) => {
+    setClientId(id);
     const client = new RSocketClient({
       serializers: {
         data: JsonSerializer,
@@ -65,7 +70,10 @@ const SlideEditor = () => {
       },
       setup: {
         payload: {
-          data: clientId,
+          data: {
+            clientId: id,
+            presentationId: presentationId
+          },
           metadata: String.fromCharCode(PRESENTATION_ENDPOINT.length) + PRESENTATION_ENDPOINT
         },
         keepAlive: 60000,
@@ -73,6 +81,7 @@ const SlideEditor = () => {
         dataMimeType: 'application/json',
         metadataMimeType: 'message/x.rsocket.routing.v0'
       },
+      responder: new EchoResponder(messageReceiver),
       transport: new RSocketWebSocketClient({
         url: "ws://localhost:8080/rsocket"
       })
@@ -80,11 +89,19 @@ const SlideEditor = () => {
     return client;
   }
   useEffect(() => {
-    createClient().connect().subscribe({
+    const id = uuidv4();
+    const client = createClient(id);
+    setClient(client);
+
+    client.connect().subscribe({
       onComplete: (socket: any) => {
-        socket.requestStream({
-          data: null,
-          metadata: String.fromCharCode(CHANNEL_PRESENTATION.length) + CHANNEL_PRESENTATION
+        const PRESENTATION_STREAM: string = 'presentation:update';
+         socket.requestStream({
+          data: {
+            clientId: id,
+            presentationId: presentationId
+          },
+          metadata: String.fromCharCode(PRESENTATION_STREAM.length) + PRESENTATION_STREAM
         }).subscribe({
           onComplete: () => console.log("Completed"),
           onError: (error: string) => {
@@ -97,15 +114,20 @@ const SlideEditor = () => {
             subscription.request(1000);
           }
         });
+
+        setSocket(socket);
       },
       onError: (error: string) => {
         console.log("Error: ", error);
       },
       onSubscribe: () => {}
-    })
+    });
   }, []);
+  /* End RSocket */
 
+  /* Presentation */
   const [presentation, setPresentation] = useState<PresentationModel>(MOCK_PRESENTATION_MODEL);
+  const [listPage, setListPage] = useState<MultipleChoiceModel[]>(presentation.slides);
   const fetchPresentation = async () => {
     const response: PresentationModel = await PresentationApi.findById(String(presentationId));
     setPresentation(response);
@@ -114,9 +136,9 @@ const SlideEditor = () => {
   useEffect(() => {
     fetchPresentation();
   }, []);
+  /* End presentation */
 
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const [listPage, setListPage] = useState<MultipleChoiceModel[]>(presentation.slides);
   const [typeChart, setTypeChart] = useState<ChartType>('bar-chart');
 
   const onSelectedPage = (index: number) => {
