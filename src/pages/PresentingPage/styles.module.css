@@ -57,3 +57,18 @@
   bottom: 16px;
   right: 16px;
 }
+
+.questionBtn {
+  color: #fff;
+  background-color: #35cce6;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: 100px;
+  bottom: 20px;
+  box-shadow: 0px 0px 10px 1px #fff;
+}
