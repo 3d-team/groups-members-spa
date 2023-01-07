@@ -44,6 +44,22 @@
   align-items: center;
 }
 
+.button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0 0 8px #888;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  margin-right: 100px;
+}
+
 .slidePage > p {
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;

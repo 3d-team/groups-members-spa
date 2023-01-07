@@ -4,6 +4,8 @@ import {useEffect, useState} from 'react';
 import {useParams} from 'react-router';
 import SlideShow from './SlideShow';
 import styles from './styles.module.css';
+import { IconButton } from '@mui/material';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 
 export default function PresentingPage() {
   const presentationId = useParams();
@@ -46,6 +48,10 @@ export default function PresentingPage() {
     });
   };
 
+  const handleClickQuestion = () => {
+
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.slidePage}>
@@ -55,6 +61,14 @@ export default function PresentingPage() {
         <ChevronLeft sx={{fontSize: 50, color: '#fff'}} />
       </div>
       <SlideShow data={presentation.slides[currentSlideIndex]} type={'bar-chart'} />
+      <div className={styles.button}>
+        <IconButton
+            onClick={handleClickQuestion}
+            color="inherit"
+          >
+            <QuestionAnswerIcon sx={{fontSize: 30, color: '#333'}} />
+        </IconButton>
+      </div>
       <div className={styles.arrowBtn} onClick={increasePage}>
         <ChevronRight sx={{fontSize: 50, color: '#fff'}} />
       </div>
