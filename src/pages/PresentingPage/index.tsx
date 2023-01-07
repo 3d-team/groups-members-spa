@@ -4,6 +4,8 @@ import {useEffect, useState} from 'react';
 import {useParams} from 'react-router';
 import SlideShow from './SlideShow';
 import styles from './styles.module.css';
+import {Widget, addResponseMessage} from 'react-chat-widget';
+import 'react-chat-widget/lib/styles.css';
 
 export default function PresentingPage() {
   const presentationId = useParams();
@@ -34,6 +36,10 @@ export default function PresentingPage() {
     // 2. set
   }, []);
 
+  useEffect(() => {
+    addResponseMessage('Hello, this is respone message');
+  });
+
   const increasePage = () => {
     setcurrentSlideIndex(prev => {
       return prev >= presentation.slides.length ? presentation.slides.length : prev + 1;
@@ -44,6 +50,11 @@ export default function PresentingPage() {
     setcurrentSlideIndex(prev => {
       return prev <= 0 ? 0 : prev - 1;
     });
+  };
+
+  const handleNewUserMessage = (newMessage: any) => {
+    console.log(`New message incoming! ${newMessage}`);
+    // Now send the message throught the backend API
   };
 
   return (
@@ -57,6 +68,9 @@ export default function PresentingPage() {
       <SlideShow data={presentation.slides[currentSlideIndex]} type={'bar-chart'} />
       <div className={styles.arrowBtn} onClick={increasePage}>
         <ChevronRight sx={{fontSize: 50, color: '#fff'}} />
+      </div>
+      <div className={styles.chatBox}>
+        <Widget handleNewUserMessage={handleNewUserMessage} />
       </div>
     </div>
   );
