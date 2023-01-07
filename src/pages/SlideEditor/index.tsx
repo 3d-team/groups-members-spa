@@ -64,8 +64,8 @@ const SlideEditor = () => {
   const [client, setClient] = useState<any>(null);
   const [socket, setSocket] = useState<any>(null);
   const messageReceiver = (payload: any) => {
-    const newPresentation: PresentationModel = payload.presentation;
-    console.log(newPresentation);
+    setPresentation(payload.data.presentation);
+    console.log(payload);
   };
   const createClient = (id: string) => {
     setClientId(id);

@@ -12,6 +12,8 @@ import {dialogRef, showDialog} from '../Home/index.props';
 import DialogContainer from '../Home/DialogContainer';
 import PresentationApi from '@/api/presentationApi';
 import { EchoResponder } from '@/api/EchoResponder';
+import UserApi from '@/api/userApi';
+import ChatApi from '@/api/chatApi';
 
 const {IdentitySerializer, JsonSerializer, RSocketClient} = require('rsocket-core');
 const RSocketWebSocketClient = require('rsocket-websocket-client').default;
@@ -50,11 +52,6 @@ export default function PresentingPage() {
     // 2. set
   }, []);
 
-  // Listen incomming message, remember that: don't forget add dependencies in useEffect() hook
-  useEffect(() => {
-    addResponseMessage('Hello, this is respone message');
-  }, []);
-
   const increasePage = () => {
     setcurrentSlideIndex(prev => {
       return prev >= presentation.slides.length ? presentation.slides.length : prev + 1;
@@ -67,8 +64,17 @@ export default function PresentingPage() {
     });
   };
 
-  const getNewMessage = (newMessage: any) => {
-    console.log(`New message incoming! ${newMessage}`);
+  const getNewMessage = async (newMessage: any) => {
+    const profile: any = await UserApi.getProfile();
+    
+    const data = {
+      sender: profile.fullName,
+      content: newMessage,
+      createdDate: new Date(),
+      presentationId: presentationId
+    }
+    const response = await ChatApi.send(data);
+    console.log(response);
   };
 
   const showQuestionDialog = () => {
@@ -79,8 +85,22 @@ export default function PresentingPage() {
   const [clientId, setClientId] = useState<string>('');
   const [client, setClient] = useState<any>(null);
   const [socket, setSocket] = useState<any>(null);
-  const messageReceiver = (payload: any) => {
-    setPresentation(payload.data.presentation);
+  const messageReceiver = async (payload: any) => {
+    const metadata: string = payload.metadata;
+    const presentationMetadata: string = String.fromCharCode("presentation:update".length) + "presentation:update";
+    const chatMetadata: string = String.fromCharCode("chat:update".length) + "chat:update";
+    if (metadata == presentationMetadata) {
+      setPresentation(payload.data.presentation);
+    } else if (metadata == chatMetadata) {
+      const profile: any = await UserApi.getProfile();
+
+      const message: any = payload.data.message;
+      if (message.senderId != profile.uuid) {
+        addResponseMessage(message.content);
+      }
+    }
+
+    console.log(payload);
   };
   const createClient = (id: string) => {
     const PRESENTATION_ENDPOINT: string = "presentation:join";
@@ -121,12 +141,32 @@ export default function PresentingPage() {
     client.connect().subscribe({
       onComplete: (socket: any) => {
         const PRESENTATION_STREAM: string = 'presentation:update';
+        const CHAT_STREAM: string = 'chat:update';
         socket.requestStream({
           data: {
             clientId: id,
             presentationId: presentationId
           },
           metadata: String.fromCharCode(PRESENTATION_STREAM.length) + PRESENTATION_STREAM
+        }).subscribe({
+          onComplete: () => console.log("Completed"),
+          onError: (error: string) => {
+            console.log("Connection error: ", error);
+          },
+          onNext: (payload: any) => {
+            console.log(payload);
+          },
+          onSubscribe: (subscription: any) => {
+            subscription.request(1000);
+          }
+        });
+
+        socket.requestStream({
+          data: {
+            clientId: id,
+            presentationId: presentationId
+          },
+          metadata: String.fromCharCode(CHAT_STREAM.length) + CHAT_STREAM
         }).subscribe({
           onComplete: () => console.log("Completed"),
           onError: (error: string) => {
