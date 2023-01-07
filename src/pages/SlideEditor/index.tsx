@@ -13,6 +13,7 @@ import ToolSide from './ToolSide';
 import {PresentationModel} from '@/models/presentation';
 import {useNavigate, useParams} from 'react-router-dom';
 import PresentationApi from '@/api/presentationApi';
+import { EchoResponder } from '@/api/EchoResponder';
 
 const {IdentitySerializer, JsonSerializer, RSocketClient} = require('rsocket-core');
 const RSocketWebSocketClient = require('rsocket-websocket-client').default;
@@ -47,8 +48,7 @@ const MOCK_PRESENTATION_MODEL: PresentationModel = {
   slides: [MockMultipleChoice],
 };
 
-const PRESENTATION_ENDPOINT = 'presentation:register';
-const CHANNEL_PRESENTATION: string = 'presentation:test';
+const PRESENTATION_ENDPOINT: string = "presentation:join";
 
 const SlideEditor = () => {
   const {presentationId} = useParams();
@@ -60,9 +60,14 @@ const SlideEditor = () => {
   const [typeChart, setTypeChart] = useState<ChartType>('bar-chart');
   const navigate = useNavigate();
 
-  const createClient = () => {
-    const clientId = uuidv4();
-    setClientId(clientId);
+  /* RSocket */
+  const [client, setClient] = useState<any>(null);
+  const [socket, setSocket] = useState<any>(null);
+  const messageReceiver = (payload: any) => {
+    console.log(payload);
+  };
+  const createClient = (id: string) => {
+    setClientId(id);
     const client = new RSocketClient({
       serializers: {
         data: JsonSerializer,
@@ -70,14 +75,18 @@ const SlideEditor = () => {
       },
       setup: {
         payload: {
-          data: clientId,
-          metadata: String.fromCharCode(PRESENTATION_ENDPOINT.length) + PRESENTATION_ENDPOINT,
+          data: {
+            clientId: id,
+            presentationId: presentationId
+          },
+          metadata: String.fromCharCode(PRESENTATION_ENDPOINT.length) + PRESENTATION_ENDPOINT
         },
         keepAlive: 60000,
         lifetime: 180000,
         dataMimeType: 'application/json',
         metadataMimeType: 'message/x.rsocket.routing.v0',
       },
+      responder: new EchoResponder(messageReceiver),
       transport: new RSocketWebSocketClient({
         url: 'ws://localhost:8080/rsocket',
       }),
@@ -86,34 +95,41 @@ const SlideEditor = () => {
   };
 
   useEffect(() => {
-    createClient()
-      .connect()
-      .subscribe({
-        onComplete: (socket: any) => {
-          socket
-            .requestStream({
-              data: null,
-              metadata: String.fromCharCode(CHANNEL_PRESENTATION.length) + CHANNEL_PRESENTATION,
-            })
-            .subscribe({
-              onComplete: () => console.log('Completed'),
-              onError: (error: string) => {
-                console.log('Connection error: ', error);
-              },
-              onNext: (payload: any) => {
-                console.log(payload);
-              },
-              onSubscribe: (subscription: any) => {
-                subscription.request(1000);
-              },
-            });
-        },
-        onError: (error: string) => {
-          console.log('Error: ', error);
-        },
-        onSubscribe: () => {},
-      });
+    const id = uuidv4();
+    const client = createClient(id);
+    setClient(client);
+
+    client.connect().subscribe({
+      onComplete: (socket: any) => {
+        const PRESENTATION_STREAM: string = 'presentation:update';
+         socket.requestStream({
+          data: {
+            clientId: id,
+            presentationId: presentationId
+          },
+          metadata: String.fromCharCode(PRESENTATION_STREAM.length) + PRESENTATION_STREAM
+        }).subscribe({
+          onComplete: () => console.log("Completed"),
+          onError: (error: string) => {
+            console.log("Connection error: ", error);
+          },
+          onNext: (payload: any) => {
+            console.log(payload);
+          },
+          onSubscribe: (subscription: any) => {
+            subscription.request(1000);
+          }
+        });
+
+        setSocket(socket);
+      },
+      onError: (error: string) => {
+        console.log("Error: ", error);
+      },
+      onSubscribe: () => {}
+    });
   }, []);
+  /* End RSocket */
 
   const fetchPresentation = async () => {
     const response: PresentationModel = await PresentationApi.findById(String(presentationId));
@@ -124,6 +140,7 @@ const SlideEditor = () => {
   useEffect(() => {
     fetchPresentation();
   }, []);
+  /* End presentation */
 
   const onSelectedPage = (index: number) => {
     setSelectedIndex(index);

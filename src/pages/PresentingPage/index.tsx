@@ -1,4 +1,4 @@
-import {MockMultipleChoice, MOCK_PRESENTATION_MODEL, MultipleChoiceModel, PresentationModel} from '@/models/presentation';
+import {ChartType, MockMultipleChoice, MOCK_PRESENTATION_MODEL, PresentationModel} from '@/models/presentation';
 import {ChevronLeft, ChevronRight} from '@mui/icons-material';
 import {useEffect, useState} from 'react';
 import {useParams} from 'react-router';
@@ -10,6 +10,7 @@ import 'react-chat-widget/lib/styles.css';
 export default function PresentingPage() {
   const presentationId = useParams();
   const [currentSlideIndex, setcurrentSlideIndex] = useState<number>(0);
+  const [typeChart, setTypeChart] = useState<ChartType>('bar-chart')
   const [presentation, setPresentation] = useState<PresentationModel>((): PresentationModel => {
     return {
       ...MOCK_PRESENTATION_MODEL,
@@ -65,7 +66,7 @@ export default function PresentingPage() {
       <div className={styles.arrowBtn} onClick={decreasePage}>
         <ChevronLeft sx={{fontSize: 50, color: '#fff'}} />
       </div>
-      <SlideShow data={presentation.slides[currentSlideIndex]} type={'bar-chart'} />
+      <SlideShow data={presentation.slides[currentSlideIndex]} type={typeChart} />
       <div className={styles.arrowBtn} onClick={increasePage}>
         <ChevronRight sx={{fontSize: 50, color: '#fff'}} />
       </div>
