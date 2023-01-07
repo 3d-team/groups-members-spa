@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import CreatePresentation from '@/components/CreatePresentation/CreatePresentation';
 import CreateClass from '@/components/CreateClass/CreateClass';
 import JoinClass from '@/components/JoinClass/JoinClass';
+import Question from '@/components/Question';
 
 interface Props { }
 
@@ -51,6 +52,10 @@ const DialogContainer = forwardRef<DialogRef, Props>((_, ref) => {
           <JoinClass hideOnClick={() => {
             hide();
           }} />
+        );
+      case 'question':
+        return (
+          <Question/>
         );
       default:
         return <></>;

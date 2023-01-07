@@ -62,7 +62,7 @@ export default function PresentingPage() {
   };
 
   const showQuestionDialog = () => {
-    showDialog('create_new_class');
+    showDialog('question');
   };
 
 

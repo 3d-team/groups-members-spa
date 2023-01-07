@@ -26,7 +26,7 @@ export const NAV_OPTIONS: NavItemModel[] = [
   },
 ];
 
-export type DialogType = 'create_new_class' | 'create_new_presentation' | 'join_class';
+export type DialogType = 'create_new_class' | 'create_new_presentation' | 'join_class' | 'question';
 export interface DialogRef {
   hide: () => void;
   show: (key: DialogType) => void;
