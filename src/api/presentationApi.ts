@@ -29,6 +29,11 @@ class PresentationApi {
     const url = `/api/presentations/${id}/slides`;
     return axiosClient.put(url, data);
   }
+
+  static async share(id: string) {
+    const url = `/api/presentations/${id}/share`;
+    return axiosClient.post(url);
+  }
 }
 
 export default PresentationApi;

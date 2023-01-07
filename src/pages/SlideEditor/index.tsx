@@ -64,7 +64,8 @@ const SlideEditor = () => {
   const [client, setClient] = useState<any>(null);
   const [socket, setSocket] = useState<any>(null);
   const messageReceiver = (payload: any) => {
-    console.log(payload);
+    const newPresentation: PresentationModel = payload.presentation;
+    console.log(newPresentation);
   };
   const createClient = (id: string) => {
     setClientId(id);
@@ -186,6 +187,8 @@ const SlideEditor = () => {
   };
 
   const onPresent = () => {
+    PresentationApi.share(String(presentationId))
+      .then(console.log);
     navigate(`/presenting/${presentation.uuid}`);
     // window.open('http://localhost:3000/presenting/test');
   };
