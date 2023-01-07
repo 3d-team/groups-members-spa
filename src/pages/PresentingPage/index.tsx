@@ -1,13 +1,19 @@
-import {MockMultipleChoice, MOCK_PRESENTATION_MODEL, MultipleChoiceModel, PresentationModel} from '@/models/presentation';
-import {ChevronLeft, ChevronRight} from '@mui/icons-material';
+import {ChartType, MockMultipleChoice, MOCK_PRESENTATION_MODEL, PresentationModel} from '@/models/presentation';
+import {ChevronLeft, ChevronRight, ContactSupport} from '@mui/icons-material';
 import {useEffect, useState} from 'react';
 import {useParams} from 'react-router';
 import SlideShow from './SlideShow';
 import styles from './styles.module.css';
+import {Widget, addResponseMessage} from 'react-chat-widget';
+import 'react-chat-widget/lib/styles.css';
+import {fontSize} from '@mui/system';
+import {dialogRef, showDialog} from '../Home/index.props';
+import DialogContainer from '../Home/DialogContainer';
 
 export default function PresentingPage() {
   const presentationId = useParams();
   const [currentSlideIndex, setcurrentSlideIndex] = useState<number>(0);
+  const [typeChart, setTypeChart] = useState<ChartType>('bar-chart');
   const [presentation, setPresentation] = useState<PresentationModel>((): PresentationModel => {
     return {
       ...MOCK_PRESENTATION_MODEL,
@@ -34,6 +40,11 @@ export default function PresentingPage() {
     // 2. set
   }, []);
 
+  // Listen incomming message, remember that: don't forget add dependencies in useEffect() hook
+  useEffect(() => {
+    addResponseMessage('Hello, this is respone message');
+  }, []);
+
   const increasePage = () => {
     setcurrentSlideIndex(prev => {
       return prev >= presentation.slides.length ? presentation.slides.length : prev + 1;
@@ -46,6 +57,14 @@ export default function PresentingPage() {
     });
   };
 
+  const getNewMessage = (newMessage: any) => {
+    console.log(`New message incoming! ${newMessage}`);
+  };
+
+  const showQuestionDialog = () => {
+    showDialog('create_new_class');
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.slidePage}>
@@ -54,10 +73,18 @@ export default function PresentingPage() {
       <div className={styles.arrowBtn} onClick={decreasePage}>
         <ChevronLeft sx={{fontSize: 50, color: '#fff'}} />
       </div>
-      <SlideShow data={presentation.slides[currentSlideIndex]} type={'bar-chart'} />
+      <SlideShow data={presentation.slides[currentSlideIndex]} type={typeChart} />
       <div className={styles.arrowBtn} onClick={increasePage}>
         <ChevronRight sx={{fontSize: 50, color: '#fff'}} />
       </div>
+      <div className={styles.chatBox}>
+        <Widget handleNewUserMessage={getNewMessage} title={'Group Chatting'} subtitle={'Chat box of this presentation'} emojis showBadge={false} />
+      </div>
+      {/* button open dialog question here */}
+      <div className={styles.questionBtn} onClick={showQuestionDialog}>
+        <ContactSupport sx={{fontSize: 50, color: '#fff'}} />
+      </div>
+      <DialogContainer ref={dialogRef} />
     </div>
   );
 }

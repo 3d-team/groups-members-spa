@@ -1,5 +1,4 @@
 import {Add} from '@mui/icons-material';
-import clsx from 'clsx';
 import {NavigationOptionType} from '../index.props';
 import ClassOptions from './ClassOptions';
 import PresentationOptions from './PresentationOptions';
