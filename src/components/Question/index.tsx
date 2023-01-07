@@ -14,14 +14,14 @@ const Question = ({ hideOnClick }: Props) => {
         tittle: 'zxczxc',
         content: 'zxczxc',
         status: 'NEW',
-        voterIds: '1',
-        answers: 'zxc',
+        voterIds: [],
+        answers: [],
         groupId: '1',
       };
 
     const [question, setQuestion] = useState('');
     const [buttonAnswerText, setButtonAnswerText] = useState('ark as answered');
-    const [listQuestions, setListQuestions] = useState<QuestionModel>(sampleData);
+    const [listQuestions, setListQuestions] = useState<any>(sampleData);
 
     const presentation = useAppSelector(state => state.presentation.data.uuid);
     const ownerId = useAppSelector(state => state.presentation.data.hostId);
@@ -55,7 +55,7 @@ const Question = ({ hideOnClick }: Props) => {
             <div className="form">
                 <p className="class__title">Questions from audience</p>
                 <div className='questions'>
-                    {listQuestions.map((item: QuestionModel, index: number) => (
+                    {listQuestions.map((item: any, index: number) => (
                         <div key={index} className='question'>
                             <div>
                             <p className='question__title'>{item.tittle}</p>

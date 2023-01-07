@@ -4,6 +4,11 @@ import {useEffect, useState} from 'react';
 import {useParams} from 'react-router';
 import SlideShow from './SlideShow';
 import styles from './styles.module.css';
+import {Widget, addResponseMessage} from 'react-chat-widget';
+import 'react-chat-widget/lib/styles.css';
+import {fontSize} from '@mui/system';
+import {dialogRef, showDialog} from '../Home/index.props';
+import DialogContainer from '../Home/DialogContainer';
 
 export default function PresentingPage() {
   const presentationId = useParams();
@@ -51,6 +56,15 @@ export default function PresentingPage() {
       return prev <= 0 ? 0 : prev - 1;
     });
   };
+
+  const getNewMessage = (newMessage: any) => {
+    console.log(`New message incoming! ${newMessage}`);
+  };
+
+  const showQuestionDialog = () => {
+    showDialog('create_new_class');
+  };
+
 
   return (
     <div className={styles.container}>
