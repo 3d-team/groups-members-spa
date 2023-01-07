@@ -6,7 +6,6 @@ import SlideShow from './SlideShow';
 import styles from './styles.module.css';
 import {Widget, addResponseMessage} from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
-import {fontSize} from '@mui/system';
 import {dialogRef, showDialog} from '../Home/index.props';
 import DialogContainer from '../Home/DialogContainer';
 

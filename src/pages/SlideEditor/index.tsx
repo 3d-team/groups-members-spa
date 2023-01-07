@@ -186,8 +186,8 @@ const SlideEditor = () => {
   };
 
   const onPresent = () => {
-    // navigate(`/presenting/${presentation.uuid}`);
-    window.open('http://localhost:3000/presenting/test');
+    navigate(`/presenting/${presentation.uuid}`);
+    // window.open('http://localhost:3000/presenting/test');
   };
 
   const onShare = () => {};
