@@ -48,22 +48,6 @@
   align-items: center;
 }
 
-.button {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  height: 40px;
-  width: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  box-shadow: 0 0 8px #888;
-  border-radius: 20px;
-  margin-bottom: 10px;
-  margin-right: 100px;
-}
-
 .slidePage > p {
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
@@ -91,4 +75,47 @@
   right: 100px;
   bottom: 20px;
   box-shadow: 0px 0px 10px 1px #fff;
+}
+
+.slideContainer {
+  display: flex;
+  height: 100%;
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* background-color: #35cce6; */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.submitButton {
+  background-color: rgba(138, 43, 226, 0.75);
+  display: flex;
+  border-radius: 100px;
+  padding: 8px;
+  width: 200px;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+  margin-top: 32px;
+  margin-left: 8px;
+}
+
+.submitButton:hover {
+  background-color: rgba(138, 43, 226, 1);
+}
+
+.submitButton:active {
+  background-color: rgba(138, 43, 226, 0.5);
+}
+
+.thanksMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  /* background-color: #35cce6; */
+  font-size: 64px;
+  color: aliceblue;
 }

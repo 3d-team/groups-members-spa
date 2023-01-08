@@ -20,9 +20,9 @@ const RSocketWebSocketClient = require('rsocket-websocket-client').default;
 
 export default function VotingPage() {
   const {presentationId} = useParams();
-  const [currentSlideIndex, setcurrentSlideIndex] = useState<number>(1);
+  const [currentSlideIndex, setcurrentSlideIndex] = useState<number>(0);
   const [typeChart, setTypeChart] = useState<ChartType>('bar-chart');
-
+  const [isSumit, setIsSubmit] = useState<boolean>(false);
   const [presentation, setPresentation] = useState<PresentationModel>((): PresentationModel => {
     return {
       ...MOCK_PRESENTATION_MODEL,
@@ -39,7 +39,18 @@ export default function VotingPage() {
             {uuid: '4', name: 'Mbappe', value: 6},
           ],
         },
-        MockMultipleChoice,
+        {
+          type: 'multiple-choice',
+          title: 'Who is the best singer in Viet Nam?',
+          backgroundImage: '',
+          paragraph: '',
+          options: [
+            {uuid: '1', name: 'Đan Trường', value: 11},
+            {uuid: '2', name: 'Cẩm Ly', value: 7},
+            {uuid: '3', name: 'Mỹ Tâm', value: 10},
+            {uuid: '4', name: 'Sơn Tùng MTP', value: 6},
+          ],
+        },
       ],
     };
   });
@@ -52,32 +63,70 @@ export default function VotingPage() {
   //   fetchPresentation(String(presentationId));
   // }, []);
 
-  const increasePage = () => {
+  const submit = () => {
     setcurrentSlideIndex(prev => {
-      return prev >= presentation.slides.length ? presentation.slides.length : prev + 1;
+      return prev >= presentation.slides.length - 1 ? presentation.slides.length - 1 : prev + 1;
+    });
+    if (currentSlideIndex + 1 === presentation.slides.length) {
+      // callApi submit this presentation ===  api save this presentation
+      setIsSubmit(true);
+    }
+  };
+
+  const onChooseOption = (prevIndex: number, newIndex: number) => {
+    setPresentation(prev => {
+      return {
+        ...prev,
+        slides: prev.slides.map((item, index) => {
+          if (index === currentSlideIndex) {
+            return {
+              ...item,
+              options: item.options.map((option, _index) => {
+                if (_index === prevIndex) {
+                  return {
+                    ...option,
+                    value: option.value - 1,
+                  };
+                }
+                if (_index === newIndex) {
+                  return {
+                    ...option,
+                    value: option.value + 1,
+                  };
+                }
+                return option;
+              }),
+            };
+          }
+          return item;
+        }),
+      };
     });
   };
 
-  const decreasePage = () => {
-    setcurrentSlideIndex(prev => {
-      return prev <= 1 ? 1 : prev - 1;
-    });
-  };
+  console.log('@DUKE___presentation', presentation.slides[currentSlideIndex]);
 
   /* End RSocket */
 
   return (
     <div className={styles.container}>
-      <div className={styles.slidePage}>
-        <p>{`${currentSlideIndex}/${presentation.slides.length}`}</p>
-      </div>
-      <div className={styles.arrowBtn} onClick={decreasePage}>
-        <ChevronLeft sx={{fontSize: 50, color: '#fff'}} />
-      </div>
-      <SlideOption data={presentation.slides[currentSlideIndex - 1]} />
-      <div className={styles.arrowBtn} onClick={increasePage}>
-        <ChevronRight sx={{fontSize: 50, color: '#fff'}} />
-      </div>
+      {isSumit ? (
+        <div className={styles.thanksMessage}>Thanks you for submit!</div>
+      ) : (
+        <>
+          <div className={styles.slidePage}>
+            <p>{`${currentSlideIndex + 1}/${presentation.slides.length}`}</p>
+          </div>
+          <div className={styles.slideContainer}>
+            <div>
+              <SlideOption data={presentation.slides[currentSlideIndex]} onChooseOption={onChooseOption} slideIndex={currentSlideIndex} />
+              <button onClick={submit} className={styles.submitButton}>
+                {currentSlideIndex + 1 === presentation.slides.length ? 'Submit' : 'Next question'}
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

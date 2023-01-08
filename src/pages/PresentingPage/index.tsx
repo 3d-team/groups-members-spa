@@ -38,7 +38,18 @@ export default function PresentingPage() {
             {uuid: '4', name: 'Mbappe', value: 6},
           ],
         },
-        MockMultipleChoice,
+        {
+          type: 'multiple-choice',
+          title: 'Who is the best singer in Viet Nam?',
+          backgroundImage: '',
+          paragraph: '',
+          options: [
+            {uuid: '1', name: 'Đan Trường', value: 11},
+            {uuid: '2', name: 'Cẩm Ly', value: 7},
+            {uuid: '3', name: 'Mỹ Tâm', value: 10},
+            {uuid: '4', name: 'Sơn Tùng MTP', value: 6},
+          ],
+        },
       ],
     };
   });
