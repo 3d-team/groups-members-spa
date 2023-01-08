@@ -13,7 +13,7 @@ import ToolSide from './ToolSide';
 import {PresentationModel} from '@/models/presentation';
 import {useNavigate, useParams} from 'react-router-dom';
 import PresentationApi from '@/api/presentationApi';
-import { EchoResponder } from '@/api/EchoResponder';
+import {EchoResponder} from '@/api/EchoResponder';
 
 const {IdentitySerializer, JsonSerializer, RSocketClient} = require('rsocket-core');
 const RSocketWebSocketClient = require('rsocket-websocket-client').default;
@@ -48,7 +48,7 @@ const MOCK_PRESENTATION_MODEL: PresentationModel = {
   slides: [MockMultipleChoice],
 };
 
-const PRESENTATION_ENDPOINT: string = "presentation:join";
+const PRESENTATION_ENDPOINT: string = 'presentation:join';
 
 const SlideEditor = () => {
   const {presentationId} = useParams();
@@ -78,9 +78,9 @@ const SlideEditor = () => {
         payload: {
           data: {
             clientId: id,
-            presentationId: presentationId
+            presentationId: presentationId,
           },
-          metadata: String.fromCharCode(PRESENTATION_ENDPOINT.length) + PRESENTATION_ENDPOINT
+          metadata: String.fromCharCode(PRESENTATION_ENDPOINT.length) + PRESENTATION_ENDPOINT,
         },
         keepAlive: 60000,
         lifetime: 180000,
@@ -103,31 +103,33 @@ const SlideEditor = () => {
     client.connect().subscribe({
       onComplete: (socket: any) => {
         const PRESENTATION_STREAM: string = 'presentation:update';
-         socket.requestStream({
-          data: {
-            clientId: id,
-            presentationId: presentationId
-          },
-          metadata: String.fromCharCode(PRESENTATION_STREAM.length) + PRESENTATION_STREAM
-        }).subscribe({
-          onComplete: () => console.log("Completed"),
-          onError: (error: string) => {
-            console.log("Connection error: ", error);
-          },
-          onNext: (payload: any) => {
-            console.log(payload);
-          },
-          onSubscribe: (subscription: any) => {
-            subscription.request(1000);
-          }
-        });
+        socket
+          .requestStream({
+            data: {
+              clientId: id,
+              presentationId: presentationId,
+            },
+            metadata: String.fromCharCode(PRESENTATION_STREAM.length) + PRESENTATION_STREAM,
+          })
+          .subscribe({
+            onComplete: () => console.log('Completed'),
+            onError: (error: string) => {
+              console.log('Connection error: ', error);
+            },
+            onNext: (payload: any) => {
+              console.log(payload);
+            },
+            onSubscribe: (subscription: any) => {
+              subscription.request(1000);
+            },
+          });
 
         setSocket(socket);
       },
       onError: (error: string) => {
-        console.log("Error: ", error);
+        console.log('Error: ', error);
       },
-      onSubscribe: () => {}
+      onSubscribe: () => {},
     });
   }, []);
   /* End RSocket */
@@ -187,13 +189,13 @@ const SlideEditor = () => {
   };
 
   const onPresent = () => {
-    PresentationApi.share(String(presentationId))
-      .then(console.log);
+    PresentationApi.share(String(presentationId)).then(console.log);
     navigate(`/presenting/${presentation.uuid}`);
-    // window.open('http://localhost:3000/presenting/test');
   };
 
-  const onShare = () => {};
+  const onShare = () => {
+    window.open(`http://localhost:3000/presentation-voting/${presentation.uuid}`);
+  };
 
   // ----- Side Effect ----
   useEffect(() => {
