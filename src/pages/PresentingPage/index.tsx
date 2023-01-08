@@ -11,7 +11,7 @@ import 'react-chat-widget/lib/styles.css';
 import {dialogRef, showDialog} from '../Home/index.props';
 import DialogContainer from '../Home/DialogContainer';
 import PresentationApi from '@/api/presentationApi';
-import { EchoResponder } from '@/api/EchoResponder';
+import {EchoResponder} from '@/api/EchoResponder';
 import UserApi from '@/api/userApi';
 import ChatApi from '@/api/chatApi';
 
@@ -20,7 +20,7 @@ const RSocketWebSocketClient = require('rsocket-websocket-client').default;
 
 export default function PresentingPage() {
   const {presentationId} = useParams();
-  const [currentSlideIndex, setcurrentSlideIndex] = useState<number>(0);
+  const [currentSlideIndex, setcurrentSlideIndex] = useState<number>(1);
   const [typeChart, setTypeChart] = useState<ChartType>('bar-chart');
   const [presentation, setPresentation] = useState<PresentationModel>((): PresentationModel => {
     return {
@@ -60,19 +60,19 @@ export default function PresentingPage() {
 
   const decreasePage = () => {
     setcurrentSlideIndex(prev => {
-      return prev <= 0 ? 0 : prev - 1;
+      return prev <= 1 ? 1 : prev - 1;
     });
   };
 
   const getNewMessage = async (newMessage: any) => {
     const profile: any = await UserApi.getProfile();
-    
+
     const data = {
       sender: profile.fullName,
       content: newMessage,
       createdDate: new Date(),
-      presentationId: presentationId
-    }
+      presentationId: presentationId,
+    };
     const response = await ChatApi.send(data);
     console.log(response);
   };
@@ -87,8 +87,8 @@ export default function PresentingPage() {
   const [socket, setSocket] = useState<any>(null);
   const messageReceiver = async (payload: any) => {
     const metadata: string = payload.metadata;
-    const presentationMetadata: string = String.fromCharCode("presentation:update".length) + "presentation:update";
-    const chatMetadata: string = String.fromCharCode("chat:update".length) + "chat:update";
+    const presentationMetadata: string = String.fromCharCode('presentation:update'.length) + 'presentation:update';
+    const chatMetadata: string = String.fromCharCode('chat:update'.length) + 'chat:update';
     if (metadata == presentationMetadata) {
       setPresentation(payload.data.presentation);
     } else if (metadata == chatMetadata) {
@@ -103,8 +103,8 @@ export default function PresentingPage() {
     console.log(payload);
   };
   const createClient = (id: string) => {
-    const PRESENTATION_ENDPOINT: string = "presentation:join";
-    
+    const PRESENTATION_ENDPOINT: string = 'presentation:join';
+
     const client = new RSocketClient({
       serializers: {
         data: JsonSerializer,
@@ -114,9 +114,9 @@ export default function PresentingPage() {
         payload: {
           data: {
             clientId: id,
-            presentationId: presentationId
+            presentationId: presentationId,
           },
-          metadata: String.fromCharCode(PRESENTATION_ENDPOINT.length) + PRESENTATION_ENDPOINT
+          metadata: String.fromCharCode(PRESENTATION_ENDPOINT.length) + PRESENTATION_ENDPOINT,
         },
         keepAlive: 60000,
         lifetime: 180000,
@@ -142,50 +142,54 @@ export default function PresentingPage() {
       onComplete: (socket: any) => {
         const PRESENTATION_STREAM: string = 'presentation:update';
         const CHAT_STREAM: string = 'chat:update';
-        socket.requestStream({
-          data: {
-            clientId: id,
-            presentationId: presentationId
-          },
-          metadata: String.fromCharCode(PRESENTATION_STREAM.length) + PRESENTATION_STREAM
-        }).subscribe({
-          onComplete: () => console.log("Completed"),
-          onError: (error: string) => {
-            console.log("Connection error: ", error);
-          },
-          onNext: (payload: any) => {
-            console.log(payload);
-          },
-          onSubscribe: (subscription: any) => {
-            subscription.request(1000);
-          }
-        });
+        socket
+          .requestStream({
+            data: {
+              clientId: id,
+              presentationId: presentationId,
+            },
+            metadata: String.fromCharCode(PRESENTATION_STREAM.length) + PRESENTATION_STREAM,
+          })
+          .subscribe({
+            onComplete: () => console.log('Completed'),
+            onError: (error: string) => {
+              console.log('Connection error: ', error);
+            },
+            onNext: (payload: any) => {
+              console.log(payload);
+            },
+            onSubscribe: (subscription: any) => {
+              subscription.request(1000);
+            },
+          });
 
-        socket.requestStream({
-          data: {
-            clientId: id,
-            presentationId: presentationId
-          },
-          metadata: String.fromCharCode(CHAT_STREAM.length) + CHAT_STREAM
-        }).subscribe({
-          onComplete: () => console.log("Completed"),
-          onError: (error: string) => {
-            console.log("Connection error: ", error);
-          },
-          onNext: (payload: any) => {
-            console.log(payload);
-          },
-          onSubscribe: (subscription: any) => {
-            subscription.request(1000);
-          }
-        });
+        socket
+          .requestStream({
+            data: {
+              clientId: id,
+              presentationId: presentationId,
+            },
+            metadata: String.fromCharCode(CHAT_STREAM.length) + CHAT_STREAM,
+          })
+          .subscribe({
+            onComplete: () => console.log('Completed'),
+            onError: (error: string) => {
+              console.log('Connection error: ', error);
+            },
+            onNext: (payload: any) => {
+              console.log(payload);
+            },
+            onSubscribe: (subscription: any) => {
+              subscription.request(1000);
+            },
+          });
 
         setSocket(socket);
       },
       onError: (error: string) => {
-        console.log("Error: ", error);
+        console.log('Error: ', error);
       },
-      onSubscribe: () => {}
+      onSubscribe: () => {},
     });
   }, []);
   /* End RSocket */
@@ -198,17 +202,12 @@ export default function PresentingPage() {
       <div className={styles.arrowBtn} onClick={decreasePage}>
         <ChevronLeft sx={{fontSize: 50, color: '#fff'}} />
       </div>
-      <SlideShow data={presentation.slides[currentSlideIndex]} type={'bar-chart'} />
+      <SlideShow data={presentation.slides[currentSlideIndex - 1]} type={'bar-chart'} />
       <div className={styles.arrowBtn} onClick={increasePage}>
         <ChevronRight sx={{fontSize: 50, color: '#fff'}} />
       </div>
       <div className={styles.chatBox}>
-        <Widget 
-            handleNewUserMessage={getNewMessage} 
-            title={'Group Chatting'} 
-            subtitle={'Chat box of this presentation'} 
-            emojis 
-            showBadge={false} />
+        <Widget handleNewUserMessage={getNewMessage} title={'Group Chatting'} subtitle={'Chat box of this presentation'} emojis showBadge={false} />
       </div>
       {/* button open dialog question here */}
       <div className={styles.questionBtn} onClick={showQuestionDialog}>
