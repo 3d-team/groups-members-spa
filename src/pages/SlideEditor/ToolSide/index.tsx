@@ -1,4 +1,4 @@
-import {ChartType, MockMultipleChoice, MultipleChoiceModel} from '@/models/presentation';
+import {ChartType, MockMultipleChoice, MultipleChoiceModel, OptionModel} from '@/models/presentation';
 import Helper from '@/ultilities/Helper';
 import {BarChart, DoneAll, PieChart, RemoveCircleOutline} from '@mui/icons-material';
 import clsx from 'clsx';
@@ -59,11 +59,17 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
 
   const onChangeOptionTitle = (text: string, index: number) => {
     setData(prev => {
-      const newOptions = [...prev.options];
-      newOptions[index].name = text;
       return {
         ...prev,
-        options: newOptions,
+        options: prev.options.map((item: OptionModel, _index) => {
+          if (_index === index) {
+            return {
+              ...item,
+              name: text,
+            };
+          }
+          return item;
+        }),
       };
     });
   };
