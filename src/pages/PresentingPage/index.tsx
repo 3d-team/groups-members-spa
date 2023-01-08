@@ -20,7 +20,7 @@ const RSocketWebSocketClient = require('rsocket-websocket-client').default;
 
 export default function PresentingPage() {
   const {presentationId} = useParams();
-  const [currentSlideIndex, setcurrentSlideIndex] = useState<number>(1);
+  const [currentSlideIndex, setcurrentSlideIndex] = useState<number>(0);
   const [typeChart, setTypeChart] = useState<ChartType>('bar-chart');
   const [presentation, setPresentation] = useState<PresentationModel>((): PresentationModel => {
     return {
@@ -65,13 +65,13 @@ export default function PresentingPage() {
 
   const increasePage = () => {
     setcurrentSlideIndex(prev => {
-      return prev >= presentation.slides.length ? presentation.slides.length : prev + 1;
+      return prev >= presentation.slides.length - 1 ? presentation.slides.length - 1 : prev + 1;
     });
   };
 
   const decreasePage = () => {
     setcurrentSlideIndex(prev => {
-      return prev <= 1 ? 1 : prev - 1;
+      return prev <= 0 ? 0 : prev - 1;
     });
   };
 
@@ -208,12 +208,12 @@ export default function PresentingPage() {
   return (
     <div className={styles.container}>
       <div className={styles.slidePage}>
-        <p>{`${currentSlideIndex}/${presentation.slides.length}`}</p>
+        <p>{`${currentSlideIndex + 1}/${presentation.slides.length}`}</p>
       </div>
       <div className={styles.arrowBtn} onClick={decreasePage}>
         <ChevronLeft sx={{fontSize: 50, color: '#fff'}} />
       </div>
-      <SlideShow data={presentation.slides[currentSlideIndex - 1]} type={'bar-chart'} />
+      <SlideShow data={presentation.slides[currentSlideIndex]} type={'bar-chart'} />
       <div className={styles.arrowBtn} onClick={increasePage}>
         <ChevronRight sx={{fontSize: 50, color: '#fff'}} />
       </div>
