@@ -1,5 +1,6 @@
 import RootPage from '@/pages';
 import ErrorPage from '@/pages/ErrorPage';
+import ForgotPassword from '@/pages/ForgotPassword';
 import Login from '@/pages/Login';
 import RedirectPage from '@/pages/RedirectPage';
 import Register from '@/pages/Register';
@@ -11,6 +12,8 @@ const UnAuthorized = () => {
       <Route path="/" element={<RootPage />}>
         <Route index element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgotpassword" element={<ForgotPassword/>} />
+        <Route path="/resetpassword" element={<Login/>} />
         <Route path="/oauth2/redirect" element={<RedirectPage/>} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
