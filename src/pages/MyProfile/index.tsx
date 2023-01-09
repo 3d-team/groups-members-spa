@@ -6,7 +6,7 @@ import {Box, Button, TextField} from '@mui/material';
 import {useFormik} from 'formik';
 import {useMemo, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import SideNavigation from '../Home/SideNavigation';
+import * as Yup from 'yup';
 
 import {useStyles} from './styles';
 
@@ -24,7 +24,27 @@ const MyProfile = () => {
   }, []);
 
   const formik = useFormik<UserModel>({
-    initialValues,
+    initialValues: initialValues,
+    validationSchema: Yup.object({
+      fullName: Yup.string()
+        .min(2, "Mininum 2 characters")
+        .max(15, "Maximum 20 characters")
+        .required("Required!"),
+      email: Yup.string()
+        .email("Invalid email format")
+        .required("Required!"),
+      password: Yup.string()
+        .min(8, "Minimum 8 characters")
+        .required("Required!"),
+      confirm_password: Yup.string()
+        .oneOf([Yup.ref("password")], "Password's not match")
+        .required("Required!"),
+      studentId: Yup.string()
+        .length(8, "Student ID must have 8 characters")
+        .required("Required!"),
+      age: Yup.number()
+        .positive("age > 0").integer(),
+    }),
     onSubmit: values => {
       formik.setValues(values);
       dispatcher(UserActions.updateProfileUser(values));
@@ -68,6 +88,8 @@ const MyProfile = () => {
             onChange={formik.handleChange}
             value={formik.values.studentId}
             name="studentId"
+            error = {formik.errors.studentId ? true : false}
+            helperText={(formik.errors.studentId && formik.touched.studentId)? formik.errors.studentId: ''}
           />
           <TextField
             id="outlined-basic"
@@ -78,6 +100,8 @@ const MyProfile = () => {
             onChange={formik.handleChange}
             value={formik.values.fullName}
             name="fullName"
+            error = {formik.errors.fullName ? true : false}
+            helperText={(formik.errors.fullName && formik.touched.fullName)? formik.errors.fullName: ''}
           />
           <TextField
             id="outlined-basic"
@@ -88,6 +112,8 @@ const MyProfile = () => {
             onChange={formik.handleChange}
             value={formik.values.email}
             name="email"
+            error = {formik.errors.email ? true : false}
+            helperText={(formik.errors.email && formik.touched.email)? formik.errors.email: ''}
           />
           <TextField
             id="outlined-basic"
@@ -98,6 +124,8 @@ const MyProfile = () => {
             onChange={formik.handleChange}
             value={formik.values.age}
             name="age"
+            error = {formik.errors.age ? true : false}
+            helperText={(formik.errors.age && formik.touched.age)? formik.errors.age: ''}
           />
           <TextField
             id="outlined-basic"

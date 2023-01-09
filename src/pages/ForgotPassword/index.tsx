@@ -31,10 +31,6 @@ const ForgotPassword = () => {
     };
   }, []);
 
-  const ForgotSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Required'),
-  });
-
   const submitForgot = async (values: any) => {
     // await axios
     //   .post('http://localhost:8080/api/requestPasswordReset', {
@@ -45,15 +41,19 @@ const ForgotPassword = () => {
     //   })
     //   .catch((err) => console.error(err)); 
 
-    alert('Reset password successfully!');
+    alert('Password change request has been sent!');
     setTimeout(() => {
-      navigate('/resetpassword');
-    }, 700);
+      navigate(`/resetpassword/${formik.values.email}`);
+    }, 500);
   };
 
   const formik = useFormik({
-    initialValues,
-    validationSchema:{ForgotSchema},
+    initialValues: initialValues,
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email('Invalid email')
+        .required('Required'),
+    }),
     onSubmit: values => {
       formik.setValues(initialValues);
       submitForgot(values);
@@ -89,8 +89,9 @@ const ForgotPassword = () => {
               autoFocus
               value={formik.values.email}
               onChange={formik.handleChange}
+              error = {formik.errors.email ? true : false}
+              helperText={(formik.errors.email && formik.touched.email)? formik.errors.email: ''}
             />
-            {formik.errors.email && formik.touched.email && <div>{formik.errors.email}</div>}
 
             <Button type="submit" fullWidth variant="contained" color="primary" sx={{mt: 1, mb: 2, p: 1.5}}>
               Submit

@@ -16,6 +16,7 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 import axios from 'axios';
 import {authActions} from '@/redux/feature/auth/slice';
 import {Link} from 'react-router-dom';
+import * as Yup from 'yup';
 
 const ChangePassword = () => {
   const navigate = useNavigate();
@@ -47,6 +48,18 @@ const ChangePassword = () => {
 
   const formik = useFormik({
     initialValues,
+    validationSchema: Yup.object({
+      password: Yup.string()
+        .min(8, "Minimum 8 characters")
+        .required("Required!"),
+      newPassword: Yup.string()
+        .min(8, "Minimum 8 characters")
+        .notOneOf([Yup.ref("password")], "New-password's not match Old-password")
+        .required("Required!"),
+      confirmNewPassword: Yup.string()
+        .oneOf([Yup.ref("newPassword")], "Password's not match")
+        .required("Required!")
+    }),
     onSubmit: values => {
       formik.setValues(initialValues);
       submitChange(values);
@@ -80,33 +93,43 @@ const ChangePassword = () => {
               id="password"
               label="Password"
               name="password"
+              type="password"
               autoComplete="password"
               autoFocus
               value={formik.values.password}
               onChange={formik.handleChange}
+              error = {formik.errors.password ? true : false}
+              helperText={(formik.errors.password && formik.touched.password)? formik.errors.password: ''}
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="newpassword"
+              id="password2"
               label="New Password"
-              type="newpassword"
-              id="newpassword"
-              autoComplete="new-password"
+              name="newPassword"
+              type="password"
+              autoComplete="password"
+              autoFocus
               value={formik.values.newPassword}
               onChange={formik.handleChange}
+              error = {formik.errors.newPassword ? true : false}
+              helperText={(formik.errors.newPassword && formik.touched.newPassword)? formik.errors.newPassword: ''}
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              id="confirmpassword"
+              id="password3"
               label="Confirm New Password"
-              name="confirmpassword"
-              autoComplete="new-password"
+              name="confirmNewPassword"
+              type="password"
+              autoComplete="password"
+              autoFocus
               value={formik.values.confirmNewPassword}
               onChange={formik.handleChange}
+              error = {formik.errors.confirmNewPassword ? true : false}
+              helperText={(formik.errors.confirmNewPassword && formik.touched.confirmNewPassword)? formik.errors.confirmNewPassword: ''}
             />
             <Button type="submit" fullWidth variant="contained" color="primary" sx={{mt: 3, mb: 2, p: 2}}>
               Change password
