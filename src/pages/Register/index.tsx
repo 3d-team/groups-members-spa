@@ -15,6 +15,7 @@ import {useAppDispatch} from '@/redux';
 import {authActions} from '@/redux/feature/auth/slice';
 import {Link, useNavigate} from 'react-router-dom';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+import * as Yup from 'yup';
 
 import axios from 'axios';
 
@@ -55,6 +56,26 @@ const Register = () => {
 
   const formik = useFormik({
     initialValues,
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email format")
+        .required("Required!"),
+      password: Yup.string()
+        .min(8, "Minimum 8 characters")
+        .required("Required!"),
+      confirmPassword: Yup.string()
+        .oneOf([Yup.ref("password")], "Password's not match")
+        .required("Required!"),
+      fullName: Yup.string()
+        .min(2, "Mininum 2 characters")
+        .max(15, "Maximum 20 characters")
+        .required("Required!"),
+      dob: Yup.number()
+        .required("Required!").positive().integer(),
+      studentId: Yup.string()
+        .length(8, "Student ID must have 8 characters")
+        .required("Required!"),
+    }),
     onSubmit: values => {
       formik.setValues(initialValues);
       submitLogin(values);
@@ -90,6 +111,8 @@ const Register = () => {
               autoFocus
               value={formik.values.email}
               onChange={formik.handleChange}
+              error = {formik.errors.email ? true : false}
+              helperText={(formik.errors.email && formik.touched.email)? formik.errors.email: ''}
             />
             <TextField
               margin="normal"
@@ -102,6 +125,8 @@ const Register = () => {
               autoComplete="current-password"
               value={formik.values.password}
               onChange={formik.handleChange}
+              error = {formik.errors.password ? true : false}
+              helperText={(formik.errors.password && formik.touched.password)? formik.errors.password: ''}
             />
             <TextField
               margin="normal"
@@ -114,6 +139,8 @@ const Register = () => {
               autoComplete="current-password"
               value={formik.values.confirmPassword}
               onChange={formik.handleChange}
+              error = {formik.errors.confirmPassword ? true : false}
+              helperText={(formik.errors.confirmPassword && formik.touched.confirmPassword)? formik.errors.confirmPassword: ''}
             />
             <TextField
               margin="normal"
@@ -125,6 +152,8 @@ const Register = () => {
               id="studentId"
               value={formik.values.studentId}
               onChange={formik.handleChange}
+              error = {formik.errors.studentId ? true : false}
+              helperText={(formik.errors.studentId && formik.touched.studentId)? formik.errors.studentId : ''}
             />
             <TextField
               variant="outlined"
@@ -137,6 +166,8 @@ const Register = () => {
               id="fullName"
               value={formik.values.fullName}
               onChange={formik.handleChange}
+              error = {formik.errors.fullName ? true : false}
+              helperText={(formik.errors.fullName && formik.touched.fullName)? formik.errors.fullName : ''}
             />
             <TextField
               margin="normal"
@@ -148,6 +179,7 @@ const Register = () => {
               id="dob"
               value={formik.values.dob}
               onChange={formik.handleChange}
+              error = {formik.errors.dob ? true : false}
             />
 
             <Button type="submit" fullWidth variant="contained" color="primary" sx={{mt: 1, mb: 2, p: 1.5}}>

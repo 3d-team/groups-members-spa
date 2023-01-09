@@ -16,6 +16,9 @@ const useStyles = makeStyles(theme => ({
     flex: 1,
     textTransform: 'none',
   },
+  validationMessage: {
+    color: "red"
+  },
 }));
 
 export default useStyles;

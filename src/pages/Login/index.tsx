@@ -18,6 +18,7 @@ import {Link} from 'react-router-dom';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {FacebookLogo, GoogleLogo} from '@/assets/svgs';
 import useStyles from './styles';
+import * as Yup from 'yup';
 
 import axios from 'axios';
 
@@ -51,6 +52,14 @@ const Login = () => {
 
   const formik = useFormik({
     initialValues,
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email format")
+        .required("Required!"),
+      password: Yup.string()
+        .min(8, "Minimum 8 characters")
+        .required("Required!"),
+    }),
     onSubmit: values => {
       formik.setValues(initialValues);
       submitLogin(values);
@@ -92,6 +101,8 @@ const Login = () => {
               autoFocus
               value={formik.values.email}
               onChange={formik.handleChange}
+              error = {formik.errors.email ? true : false}
+              helperText={(formik.errors.email && formik.touched.email)? formik.errors.email: ''}
             />
             <TextField
               margin="normal"
@@ -104,6 +115,8 @@ const Login = () => {
               autoComplete="current-password"
               value={formik.values.password}
               onChange={formik.handleChange}
+              error = {formik.errors.password ? true : false}
+              helperText={(formik.errors.password && formik.touched.password)? formik.errors.password: ''}
             />
             <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
             <Button type="submit" fullWidth variant="contained" color="primary" sx={{mt: 3, mb: 2, p: 2}}>
@@ -111,7 +124,7 @@ const Login = () => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link to={'/'}>Forgot password?</Link>
+                <Link to={'/forgotpassword'}>Forgot password?</Link>
               </Grid>
               <Grid item>
                 <Link to={'/register'}>{"Don't have an account? Sign Up"}</Link>
