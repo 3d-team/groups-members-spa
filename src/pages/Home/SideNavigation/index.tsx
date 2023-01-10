@@ -32,9 +32,9 @@ const SideNavigation = ({onPressNav, activeNav}: Props) => {
   return (
     <div className={styles.navContainer}>
       <div>
-        {NAV_OPTIONS.map((item, index) => {
+        {NAV_OPTIONS.map((item, index: number) => {
           return (
-            <div className={clsx(styles.navItem, index === activeNav && styles.navActive)} onClick={() => onPressNav(index)}>
+            <div key={index} className={clsx(styles.navItem, index === activeNav && styles.navActive)} onClick={() => onPressNav(index)}>
               <NavIcon type={item.type} />
               <span>{item.displayName}</span>
             </div>

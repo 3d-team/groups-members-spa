@@ -39,6 +39,7 @@ const Login = () => {
   }, []);
 
   const submitLogin = (values: any) => {
+    console.log(values);
     const payload = {
       email: values.email,
       password: values.password,

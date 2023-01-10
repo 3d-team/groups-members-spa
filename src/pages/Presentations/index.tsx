@@ -48,8 +48,8 @@ export default function Presentations() {
         </CenterContainer>
       ) : (
         <Grid container direction="row" justifyContent="flex-start" alignItems="center" px={5} py={2}>
-          {presentations.map((item: any) => (
-            <div key={item.uuid}>
+          {presentations.map((item: any, index: number) => (
+            <div key={index}>
               <PresentationCard
                 hostId={item.hostId}
                 name={item.name}
