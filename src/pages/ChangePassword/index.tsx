@@ -17,10 +17,12 @@ import axios from 'axios';
 import {authActions} from '@/redux/feature/auth/slice';
 import {Link} from 'react-router-dom';
 import * as Yup from 'yup';
+import UserApi from '@/api/userApi';
 
 const ChangePassword = () => {
   const navigate = useNavigate();
   const theme = createTheme();
+  const dispatcher = useAppDispatch();
 
   const initialValues = useMemo(() => {
     return {
@@ -31,19 +33,15 @@ const ChangePassword = () => {
   }, []);
 
   const submitChange = async (values: any) => {
-    // await axios
-    //   .post('http://localhost:8080/api/changepassword', {
-    //     email: values.email,
-    //     password: values.password,
-    //     newPassword: values.newPassword
-    //   })
-    //   .then(response => (response.status))
-    //   .catch(console.log);
-
-    alert('Change password successfully!');
-    setTimeout(() => {
-      navigate('/');
-    }, 700);
+    const data = {
+      oldPassword: values.password,
+      newPassword: values.newPassword
+    };
+    const response = await UserApi.changePassword(data);
+    console.log(response);
+    alert('Change password successfully. Please login again!');
+    dispatcher(authActions.logout());
+    navigate('/');
   }
 
   const formik = useFormik({

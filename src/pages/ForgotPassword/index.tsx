@@ -32,14 +32,16 @@ const ForgotPassword = () => {
   }, []);
 
   const submitForgot = async (values: any) => {
-    // await axios
-    //   .post('http://localhost:8080/api/requestPasswordReset', {
-    //     email: values.email,
-    //   })
-    //   .then(response => {
-
-    //   })
-    //   .catch((err) => console.error(err)); 
+    const response = await axios.post(
+            "http://localhost:8080/api/reset-password", 
+            values.email, 
+            {
+              headers: {
+                "Content-Type": "text/plain",
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+              }
+          }
+        );
 
     alert('Password change request has been sent!');
     setTimeout(() => {

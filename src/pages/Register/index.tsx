@@ -36,22 +36,17 @@ const Register = () => {
   }, []);
 
   const submitLogin = async (values: any) => {
-    let userId = '';
-    await axios
+    const userId = await axios
       .post('http://localhost:8080/api/register', {
         email: values.email,
         password: values.password,
         retype: values.password,
         studentId: values.studentId,
         fullName: values.fullName,
-      })
-      .then(response => (userId = response.data))
-      .catch(console.log);
+      });
 
     alert('Register successfully!');
-    setTimeout(() => {
-      navigate('/');
-    }, 700);
+    navigate('/');
   };
 
   const formik = useFormik({

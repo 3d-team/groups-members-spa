@@ -13,6 +13,16 @@ class UserApi {
     const url = `/api/profile`;
     return axiosClient.get(url);
   }
+
+  static async resetPassword() {
+    const url = `/api/reset-password`;
+    return axiosClient.post(url);
+  }
+
+  static async changePassword(data: any) {
+    const url = `/api/change-password`;
+    return axiosClient.post(url, data);
+  }
 }
 
 export default UserApi;
