@@ -19,10 +19,10 @@ import Header from '@/components/Header/Header';
 
 export default function Class() {
   const sampleData: ClassModel = {
-    uuid: '12',
-    name: '19PTUDWNC',
-    ownerId: 'Nguyen Huy Khanh',
-    subject: 'Phát triển ứng dụng web nâng cao',
+    uuid: '',
+    name: '',
+    ownerId: '',
+    subject: '',
     description: '',
     coOwnerIds: [],
     memberIds: [],

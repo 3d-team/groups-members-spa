@@ -20,6 +20,8 @@ import {FacebookLogo, GoogleLogo} from '@/assets/svgs';
 import useStyles from './styles';
 
 import axios from 'axios';
+import { UserActions } from '@/redux/feature/user/slice';
+import { UserModel } from '@/models/user';
 
 const theme = createTheme();
 // import theme from '@/theme';
@@ -42,11 +44,27 @@ const Login = () => {
     };
     axios
       .post('http://localhost:8080/api/login', payload)
-      .then(response => {
+      .then(async (response) => {
+        const token = response.data;
+        const axiosClient = axios.create({
+          baseURL: 'http://localhost:8080/',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+        });
+        const url = `/api/profile`;
+        const profile = await axiosClient.get(url);
+        console.log(profile.data);
+
+        dispatcher(UserActions.updateProfileUser(profile.data));
         dispatcher(authActions.setToken(response.data));
         dispatcher(authActions.loginSucceed());
       })
-      .catch(console.log);
+      .catch(error => {
+        console.log(error);
+        alert("Đăng nhập thất bại.");
+      });
   };
 
   const formik = useFormik({

@@ -34,6 +34,11 @@ class PresentationApi {
     const url = `/api/presentations/${id}/share`;
     return axiosClient.post(url);
   }
+
+  static async voting(presentationId: string, data: any) {
+    const url = `/api/presentations/${presentationId}/voting`;
+    return axiosClient.post(url, data);
+  }
 }
 
 export default PresentationApi;
