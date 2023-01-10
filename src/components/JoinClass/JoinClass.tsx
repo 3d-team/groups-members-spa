@@ -5,6 +5,8 @@ import { Avatar, Button, Dialog, Slide, TextField } from "@mui/material";
 import { TransitionProps } from '@mui/material/transitions';
 import { Close } from "@mui/icons-material";
 import "./style.css";
+import ClassApi from "@/api/classApi";
+import { useNavigate } from "react-router-dom";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -20,17 +22,18 @@ interface Props {
 }
 
 const JoinClass = ({hideOnClick}: Props) => {
+  const navigate = useNavigate();
   const loggedInUser = useAppSelector(state => state.user.data);
 
-  const [classCode, setClassCode] = useState("");
+  const [classCode, setClassCode] = useState<string>("");
   const [error, setError] = useState();
 
   const dispatcher = useAppDispatch();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-
-    //Call backend
+    const response = await ClassApi.joinClass(classCode);
+    navigate(`/class/${classCode}`);
     hideOnClick();
   };
 

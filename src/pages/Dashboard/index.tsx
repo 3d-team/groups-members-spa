@@ -18,6 +18,7 @@ export default function Dashboard() {
 
   const fetchClasses = async () => {
     const response = await ClassApi.all();
+    console.log(response);
     dispatcher(ClassActions.setClassList(response));
     setLoading(false);
   };
@@ -46,7 +47,11 @@ export default function Dashboard() {
         <Grid container direction="row" justifyContent="flex-start" alignItems="center" px={5} py={2}>
           {classes.map((item: any, index: number) => (
             <div key={index}>
-              <ClassCard creatorName={item.ownerId} name={item.name} subjectName={item.subject} uuid={item.uuid} />
+              <ClassCard 
+                  creatorId={item.ownerId} 
+                  name={item.name} 
+                  subjectName={item.subject} 
+                  uuid={item.uuid} />
             </div>
           ))}
         </Grid>

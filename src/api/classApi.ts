@@ -34,6 +34,11 @@ class ClassApi {
     const url = `/api/groups/${id}`;
     return axiosClient.delete(url);
   }
+
+  static async joinClass(id: string) {
+    const url = `/api/groups/${id}/joining`;
+    return axiosClient.post(url);
+  }
 }
 
 export default ClassApi;

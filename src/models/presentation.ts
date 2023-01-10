@@ -1,3 +1,5 @@
+import {v4 as uuidv4} from 'uuid';
+
 export type TemplatePage = 'default' | 'multiple-choice';
 export type ChartType = 'pie-chart' | 'bar-chart';
 export interface SlideModel {
@@ -22,9 +24,9 @@ export const MockMultipleChoice: MultipleChoiceModel = {
   backgroundImage: '',
   paragraph: '',
   options: [
-    {uuid: '', name: '', value: 0},
-    {uuid: '', name: '', value: 0},
-    {uuid: '', name: '', value: 0},
+    {uuid: uuidv4(), name: '', value: 0},
+    {uuid: uuidv4(), name: '', value: 0},
+    {uuid: uuidv4(), name: '', value: 0},
   ],
 };
 

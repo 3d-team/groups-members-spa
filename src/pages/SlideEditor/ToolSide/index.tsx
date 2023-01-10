@@ -4,6 +4,7 @@ import {BarChart, DoneAll, PieChart, RemoveCircleOutline} from '@mui/icons-mater
 import clsx from 'clsx';
 import React, {useEffect, useState} from 'react';
 import styles from './styles.module.css';
+import {v4 as uuidv4} from 'uuid';
 
 interface Props {
   onChangeChart: (type: ChartType) => void;
@@ -87,7 +88,7 @@ const ToolSide = ({onChangeChart, selectedType = 'bar-chart', onSubmitData, curr
     setData(prev => {
       return {
         ...prev,
-        options: [...prev.options, {uuid: '', name: '', value: 0}],
+        options: [...prev.options, {uuid: uuidv4(), name: '', value: 0}],
       };
     });
   };

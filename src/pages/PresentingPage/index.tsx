@@ -28,26 +28,24 @@ export default function PresentingPage() {
       slides: [
         {
           type: 'multiple-choice',
-          title: 'Who is the best football player in the world?',
+          title: '',
           backgroundImage: '',
           paragraph: '',
           options: [
-            {uuid: '1', name: 'Cristio Ronaldo', value: 7},
-            {uuid: '2', name: 'Leo Messi', value: 7},
-            {uuid: '3', name: 'Pele', value: 10},
-            {uuid: '4', name: 'Mbappe', value: 6},
+            {uuid: uuidv4(), name: '', value: 0},
+            {uuid: uuidv4(), name: '', value: 0},
+            {uuid: uuidv4(), name: '', value: 0},
           ],
         },
         {
           type: 'multiple-choice',
-          title: 'Who is the best singer in Viet Nam?',
+          title: '',
           backgroundImage: '',
           paragraph: '',
           options: [
-            {uuid: '1', name: 'Đan Trường', value: 11},
-            {uuid: '2', name: 'Cẩm Ly', value: 7},
-            {uuid: '3', name: 'Mỹ Tâm', value: 10},
-            {uuid: '4', name: 'Sơn Tùng MTP', value: 6},
+            {uuid: uuidv4(), name: '', value: 0},
+            {uuid: uuidv4(), name: '', value: 0},
+            {uuid: uuidv4(), name: '', value: 0},
           ],
         },
       ],
@@ -96,11 +94,18 @@ export default function PresentingPage() {
   const [clientId, setClientId] = useState<string>('');
   const [client, setClient] = useState<any>(null);
   const [socket, setSocket] = useState<any>(null);
+  const [session, setSession] = useState<any>({});
   const messageReceiver = async (payload: any) => {
     const metadata: string = payload.metadata;
     const presentationMetadata: string = String.fromCharCode('presentation:update'.length) + 'presentation:update';
     const chatMetadata: string = String.fromCharCode('chat:update'.length) + 'chat:update';
     if (metadata == presentationMetadata) {
+      const session = payload.data.session;
+
+      console.log(session.slides);
+      if (!payload.data.presentation) {
+        return;
+      }
       setPresentation(payload.data.presentation);
     } else if (metadata == chatMetadata) {
       const profile: any = await UserApi.getProfile();
@@ -213,7 +218,9 @@ export default function PresentingPage() {
       <div className={styles.arrowBtn} onClick={decreasePage}>
         <ChevronLeft sx={{fontSize: 50, color: '#fff'}} />
       </div>
-      <SlideShow data={presentation.slides[currentSlideIndex]} type={'bar-chart'} />
+      <SlideShow 
+          data={presentation.slides[currentSlideIndex]} 
+          type={'bar-chart'} />
       <div className={styles.arrowBtn} onClick={increasePage}>
         <ChevronRight sx={{fontSize: 50, color: '#fff'}} />
       </div>

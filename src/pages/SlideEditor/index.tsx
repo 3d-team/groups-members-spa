@@ -24,8 +24,8 @@ const defaultPage: MultipleChoiceModel = {
   paragraph: '',
   backgroundImage: '',
   options: [
-    {uuid: '', name: 'Yes', value: 0},
-    {uuid: '', name: 'No', value: 0},
+    {uuid: '1', name: 'Yes', value: 0},
+    {uuid: '2', name: 'No', value: 0},
   ],
 };
 
@@ -35,8 +35,8 @@ const multipleChoicePage: MultipleChoiceModel = {
   paragraph: '',
   backgroundImage: '',
   options: [
-    {uuid: '', name: 'Yes', value: 1},
-    {uuid: '', name: 'No', value: 2},
+    {uuid: '1', name: 'Yes', value: 1},
+    {uuid: '2', name: 'No', value: 2},
   ],
 };
 
@@ -56,7 +56,7 @@ const SlideEditor = () => {
   const [clientId, setClientId] = useState<string>('');
   const [presentation, setPresentation] = useState<PresentationModel>(MOCK_PRESENTATION_MODEL);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const [listPage, setListPage] = useState<MultipleChoiceModel[]>(presentation.slides);
+  const [listPage, setListPage] = useState<MultipleChoiceModel[]>([]);
   const [typeChart, setTypeChart] = useState<ChartType>('bar-chart');
   const navigate = useNavigate();
 
@@ -64,7 +64,11 @@ const SlideEditor = () => {
   const [client, setClient] = useState<any>(null);
   const [socket, setSocket] = useState<any>(null);
   const messageReceiver = (payload: any) => {
+    if (!payload.data.presentation) {
+      return;
+    }
     setPresentation(payload.data.presentation);
+    setListPage(payload.data.presentation.slides);
     console.log(payload);
   };
   const createClient = (id: string) => {
@@ -188,12 +192,15 @@ const SlideEditor = () => {
     dispatcher(PresentationThunks.saveAllSlides(payload));
   };
 
-  const onPresent = () => {
-    PresentationApi.share(String(presentationId)).then(console.log);
+  const onPresent = async () => {
+    const response = await PresentationApi.share(String(presentationId));
+    console.log(response);
     navigate(`/presenting/${presentation.uuid}`);
   };
 
-  const onShare = () => {
+  const onShare = async () => {
+    const response = await PresentationApi.share(String(presentationId));
+    console.log(response);
     window.open(`http://localhost:3000/presentation-voting/${presentation.uuid}`);
   };
 

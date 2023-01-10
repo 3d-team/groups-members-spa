@@ -6,15 +6,15 @@ import styles from './styles.module.css';
 
 interface Props {
   data: MultipleChoiceModel;
-  onChooseOption: (prevIndex: number, newIndex: number) => void;
+  onChooseOption: (prevIndex: number, newIndex: number, uuid: string) => void;
   slideIndex: number;
 }
 
 export default function SlideOption({data, onChooseOption, slideIndex}: Props) {
   const [choosedIndex, setChoosedIndex] = useState<number>(-1);
 
-  const onPressRadioBtn = (newIndex: number) => {
-    onChooseOption(choosedIndex, newIndex);
+  const onPressRadioBtn = (newIndex: number, optionId: string) => {
+    onChooseOption(choosedIndex, newIndex, optionId);
     setChoosedIndex(newIndex);
   };
 
@@ -30,7 +30,7 @@ export default function SlideOption({data, onChooseOption, slideIndex}: Props) {
           if (!item.name) return;
           return (
             <div className={styles.optionCtn}>
-              <button className={styles.radioCustom} onClick={() => onPressRadioBtn(index)}>
+              <button className={styles.radioCustom} onClick={() => onPressRadioBtn(index, item.uuid)}>
                 {index === choosedIndex && <Check sx={{color: '#fff'}} />}
               </button>
               <p>{item.name}</p>
