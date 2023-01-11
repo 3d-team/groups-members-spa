@@ -39,6 +39,11 @@ class PresentationApi {
     const url = `/api/presentations/${presentationId}/voting`;
     return axiosClient.post(url, data);
   }
+
+  static async delete(presentationId: string) {
+    const url = `/api/presentations/${presentationId}/delete`;
+    return axiosClient.post(url);
+  }
 }
 
 export default PresentationApi;

@@ -28,6 +28,14 @@ const saveAllSlides = createAsyncThunk('Presentation/saveAllSlides', async (payl
   return payload.slides;
 });
 
+const deletePresentation = createAsyncThunk('Presentation/deletePresentation', async (payload: {presentationId: string}) => {
+  console.log('@DUKE___createAsyncThunk_deletePresentation: ', payload.presentationId);
+  const response = await PresentationApi.delete(payload.presentationId)
+  console.log('@DUKE___Delete Response: ', response);
+  
+  return payload.presentationId;
+});
+
 export const PresentationExtraReducers = (builder: any) => {
   builder
     .addCase(getPresentationById.pending, (state: PresentationState) => {
@@ -59,18 +67,10 @@ export const PresentationExtraReducers = (builder: any) => {
     })
     .addCase(saveAllSlides.fulfilled, (state: PresentationState, action: PayloadAction<MultipleChoiceModel[]>) => {
       state.data.slides = action.payload;
+    })
+    .addCase(deletePresentation.fulfilled, (state: PresentationState, action: PayloadAction<any>) => {
+      state.presentationList = state.presentationList.filter(item => item.uuid !== action.payload);
     });
-  // .addCase(addPresentation.pending, (state: PresentationState) => {
-  //   state.status = 'loading';
-  // })
-  // .addCase(addPresentation.fulfilled, (state: PresentationState, action: any) => {
-  //   state.status = 'idle';
-
-  //   // state.PresentationList = [...state.PresentationList, ...action.payload];
-  // })
-  // .addCase(addPresentation.rejected, (state: PresentationState) => {
-  //   state.status = 'loading';
-  // });
 };
 
 const PresentationThunks = {
@@ -78,6 +78,7 @@ const PresentationThunks = {
   getAllPresentations,
   getAllSlides,
   saveAllSlides,
+  deletePresentation,
 };
 
 export default PresentationThunks;

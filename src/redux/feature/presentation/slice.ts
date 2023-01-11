@@ -27,6 +27,9 @@ export const PresentationSlice = createSlice({
     setPresentationList: (state, action: PayloadAction<any>) => {
       state.presentationList = action.payload;
     },
+    // deletePresentation: (state, action: PayloadAction<number>) => {
+    //   state.presentationList = state.presentationList.filter((item, index)=> index !== action.payload)
+    // }
   },
 
   extraReducers: PresentationExtraReducers,

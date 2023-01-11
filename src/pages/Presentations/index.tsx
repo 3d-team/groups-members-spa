@@ -16,14 +16,19 @@ export default function Presentations() {
   // State - Variable ////////////////////////
   const dispatcher = useDispatch<AppDispatch>();
   const [loading, setLoading] = useState<boolean>(false);
-  const presentations = useAppSelector(state => state.presentation.presentationList);
-  const numberOfSlideInPresentation = 1;
+  const presentations: any = useAppSelector(state => state.presentation.presentationList);
+  const token = useAppSelector(state => state.auth.token);
 
   // Function ////////////////////////
   const fetchPresentations = async () => {
     const response = await PresentationApi.all();
     dispatcher(PresentationActions.setPresentationList(response));
     setLoading(false);
+  };
+
+  const deletePresentation = (presentationId: string) => {
+
+    dispatcher(PresentationThunks.deletePresentation({presentationId}));
   };
 
   // Side Effect ////////////////////////
@@ -57,6 +62,7 @@ export default function Presentations() {
                 uuid={item.uuid}
                 createdTime={item.createDate}
                 modifiedTime={item.modifiedDate}
+                deletePresentation={() => deletePresentation(item.uuid)}
               />
             </div>
             //name, numberSlide, ownerId, createdTime, modifiedTime, uuid
